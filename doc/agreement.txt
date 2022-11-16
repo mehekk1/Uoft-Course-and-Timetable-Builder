@@ -1,1 +1,15 @@
-OEIODNOIEN
+GROUP MEMBERS:
+Ashwin Mallik - Scrum Master
+Vedat Alp Goktepe
+Sohil Chanana
+Ansh Aneel
+Alex Zeng
+
+PRIMARY METHOD OF COMMUNICATION: Discord
+
+DAILY STANDUP MEETING TIME: 10 PM EST
+
+PROJECT VERSION CONTROL LOCATION: GitHub
+
+RELEVANT THINGS:
+Jira Board - https://team-16686233700320.atlassian.net/jira/software/projects/PROJ/boards/1
