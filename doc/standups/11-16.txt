@@ -1,1 +1,64 @@
-hdUIH
+Ansh Aneel:
+
+  What have you done since yesterday?
+	  - Group dissusion and activity started today.
+
+  What are you planning on doing today?
+	  - Assisting in creation of Github repository.
+    - Creating a Jira account and navigating through the basics of Jira.
+    - Discuss and brainstorm possible ideas for app UI and implementation.
+
+  Any impediments or stumbling blocks?
+	  - No impediments faced yet.
+
+Alex Zeng:
+
+   What have you done since yesterday?
+	  - Group dissusion and activity started today.
+
+  What are you planning on doing today?
+	  - Assisting in creation of Github repository.
+    - Creating a Jira account and navigating through the basics of Jira.
+    - Discuss and brainstorm possible ideas for app UI and implementation.
+
+  Any impediments or stumbling blocks?
+	  - No impediments faced yet.
+
+Sohil Chanana:
+
+  What have you done since yesterday?
+	  - Group dissusion and activity started today.
+
+  What are you planning on doing today?
+	  - Assisting in creation of Github repository.
+    - Creating a Jira account and navigating through the basics of Jira.
+    - Discuss and brainstorm possible ideas for app UI and implementation.
+
+  Any impediments or stumbling blocks?
+	  - No impediments faced yet.
+
+Vedat Goktepe:
+
+  What have you done since yesterday?
+	  - Group dissusion and activity started today.
+
+  What are you planning on doing today?
+	  - Assisting in creation of Github repository.
+    - Creating a Jira account and navigating through the basics of Jira.
+    - Discuss and brainstorm possible ideas for app UI and implementation.
+
+  Any impediments or stumbling blocks?
+	  - No impediments faced yet.
+
+Ashwin Mallik:
+
+  What have you done since yesterday?
+	  - Group dissusion and activity started today.
+
+  What are you planning on doing today?
+	  - Assisting in creation of Github repository.
+    - Creating a Jira account and navigating through the basics of Jira.
+    - Discuss and brainstorm possible ideas for app UI and implementation.
+
+  Any impediments or stumbling blocks?
+	  - No impediments faced yet.
