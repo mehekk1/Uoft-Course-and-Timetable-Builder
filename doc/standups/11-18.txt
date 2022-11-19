@@ -1,0 +1,59 @@
+*Note day of CSCB36 Midterm, so a bit more doable tasks*
+
+Ansh Aneel:
+
+  What have you done since yesterday?
+	  - Thought of possible UI implementations.
+    - Learned more about Jira.
+    
+  What are you planning on doing today?
+    - Get more familiar with Android Studio 
+
+  Any impediments or stumbling blocks?
+	  - No impediments faced yet.
+
+Alex Zeng:
+
+   What have you done since yesterday?
+      - Thought of possible design of app.
+      - Learned more Android Studio.
+
+  What are you planning on doing today?
+    - Get more familiar with Android Studio 
+
+  Any impediments or stumbling blocks?
+	  - No impediments faced yet.
+
+Sohil Chanana:
+
+  What have you done since yesterday?
+	  - Learned more about Jira.
+    - Learned and got familiar more Android Studio.
+
+  What are you planning on doing today?
+    - Get more familiar with Android Studio 
+
+  Any impediments or stumbling blocks?
+	  - No impediments faced yet.
+
+Vedat Goktepe:
+
+  What have you done since yesterday?
+      - Got to know of the basics of Firebase and Jira.
+
+  What are you planning on doing today?
+    - Get more familiar with Android Studio 
+
+  Any impediments or stumbling blocks?
+	  - No impediments faced yet.
+
+Ashwin Mallik:
+
+  What have you done since yesterday?
+      - Looked through different API implementations.
+      
+  What are you planning on doing today?
+    - Get more familiar with Android Studio 
+
+  Any impediments or stumbling blocks?
+	  - No impediments faced yet.
