@@ -1,0 +1,55 @@
+Ansh Aneel:
+
+  What have you done since yesterday?
+	  - Created possible design for home page.
+    
+  What are you planning on doing today?
+    - Continue to work on design
+
+  Any impediments or stumbling blocks?
+	  - No impediments faced yet.
+
+Alex Zeng:
+
+   What have you done since yesterday?
+      - Used Figma to have an overall design of app.
+
+  What are you planning on doing today?
+    - Continue to use Figma for possible pages design.
+
+  Any impediments or stumbling blocks?
+	  - No impediments faced yet.
+
+Sohil Chanana:
+
+  What have you done since yesterday?
+	  - Used Figma to have an overall design of app.
+
+  What are you planning on doing today?
+    - Work on possible home page design.
+
+  Any impediments or stumbling blocks?
+	  - No impediments faced yet.
+
+Vedat Goktepe:
+
+  What have you done since yesterday?
+      - Used Figma to have an overall design of app.
+
+  What are you planning on doing today?
+    - Work on possible home page design. 
+
+  Any impediments or stumbling blocks?
+	  - No impediments faced yet.
+
+Ashwin Mallik:
+
+  What have you done since yesterday?
+      - Learned the Google Calender API.
+      - Firebase set up.
+      
+  What are you planning on doing today?
+    - Using figma to continue app design.
+
+  Any impediments or stumbling blocks?
+	  - No impediments faced yet.
