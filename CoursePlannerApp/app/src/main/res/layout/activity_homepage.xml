@@ -2,6 +2,23 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/HomePage"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	tools:context=".HomePageActivity"/>
+	tools:context=".HomePageActivity">
+
+	<TextView
+		android:id="@+id/header"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="56dp"
+		android:fontFamily="@font/montserrat_bold"
+		android:gravity="center|top"
+		android:text="@string/HomePage_Header"
+		android:textColor="#1C375B"
+		android:textSize="32sp"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintHorizontal_bias="0.496"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
