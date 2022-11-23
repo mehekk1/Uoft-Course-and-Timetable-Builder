@@ -1,3 +1,4 @@
 <resources>
 	<string name="app_name">CoursePlannerApp</string>
+	<string name="HomePage_Header">Course Planner</string>
 </resources>
