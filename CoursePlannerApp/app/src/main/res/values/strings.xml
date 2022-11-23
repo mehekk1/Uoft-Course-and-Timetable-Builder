@@ -1,4 +1,6 @@
 <resources>
 	<string name="app_name">CoursePlannerApp</string>
-	<string name="HomePage_Header">Course Planner</string>
+	<string name="home_page_Header">Course Planner</string>
+	<string name="home_page_summary">All your <u>Course Planning</u> in One Place</string>
+
 </resources>
