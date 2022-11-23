@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Course Planner - App</string>
+    <string name="app_summary">All your <u>Course Planning</u> in One Place</string>
+    <string name="app_summary_part_two">Efficient and Organized solutions for all your course planning needs</string>
+    <string name="student_btn">STUDENT</string>
+    <string name="Admin_btn">Admin</string>
+
+</resources>

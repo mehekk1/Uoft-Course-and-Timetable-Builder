@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/Home_Page"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/Course_Planner_Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/montserrat_extrabold"
+        android:text="Course Planner"
+        android:textColor="#1C375B"
+        android:textSize="32sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/Uoft_Logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Course_Planner_Title"
+        app:srcCompat="@drawable/Uoft_Logo" />
+
+    <TextView
+        android:id="@+id/Course_Planner_Summary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="200sp"
+        android:fontFamily="@font/inter_medium"
+        android:gravity="center"
+        android:text="@string/app_summary_part_two"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="530dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/Home_Sentence_Part_One"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="300sp"
+        android:fontFamily="@font/inter_semibold"
+        android:gravity="center"
+        android:text="@string/app_summary"
+        android:textColor="#000000"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toTopOf="@+id/Course_Planner_Summary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Uoft_Logo" />
+
+    <Button
+        android:id="@+id/Student_Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="105dp"
+        android:layout_marginBottom="48dp"
+        android:width="150sp"
+        android:backgroundTint="#1C375B"
+        android:text="@string/student_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/Course_Planner_Summary" />
+
+    <Button
+        android:id="@+id/Admin_Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="105dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="48dp"
+        android:width="150sp"
+        android:backgroundTint="#1C375B"
+        android:text="@string/Admin_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.967"
+        app:layout_constraintStart_toEndOf="@+id/Student_Button"
+        app:layout_constraintTop_toTopOf="@+id/Course_Planner_Summary" />
+</androidx.constraintlayout.widget.ConstraintLayout>
