@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "432413900157",
+    "project_id": "b07-course-planner",
+    "storage_bucket": "b07-course-planner.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:432413900157:android:83e7bd809c5ab480992014",
+        "android_client_info": {
+          "package_name": "com.example.courseplannerapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "432413900157-divi4h2bnh8nmknikhp216bojhf495bp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmTts5QDZV1Gym0DNC88qnlU261_u2WuQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "432413900157-divi4h2bnh8nmknikhp216bojhf495bp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
