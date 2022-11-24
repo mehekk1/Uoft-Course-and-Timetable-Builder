@@ -5,5 +5,6 @@
 
 	<string name="timeline_header">Timeline</string>
 	<string name="timeline_generate">Generate</string>
+	<string name="timeline_future_header">Add Future Courses</string>
 
 </resources>

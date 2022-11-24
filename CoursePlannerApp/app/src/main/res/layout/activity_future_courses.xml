@@ -6,4 +6,18 @@
 	android:layout_height="match_parent"
 	tools:context=".FutureCoursesActivity">
 
+	<TextView
+		android:id="@+id/future_course_header"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="48dp"
+		android:fontFamily="@font/montserrat_bold"
+		android:gravity="center|top"
+		android:text="@string/timeline_future_header"
+		android:textColor="@color/uoft_dark"
+		android:textSize="32sp"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintHorizontal_bias="0.498"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
