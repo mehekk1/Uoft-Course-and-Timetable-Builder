@@ -3,4 +3,7 @@
 	<string name="home_page_Header">Course Planner</string>
 	<string name="home_page_summary">All your <u>Course Planning</u> in One Place</string>
 
+	<string name="timeline_header">Timeline</string>
+	<string name="timeline_generate">Generate</string>
+
 </resources>

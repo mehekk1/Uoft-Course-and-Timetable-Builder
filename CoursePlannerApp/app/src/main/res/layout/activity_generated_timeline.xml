@@ -7,4 +7,36 @@
 	android:layout_height="match_parent"
 	tools:context=".GeneratedTimelineActivity">
 
+	<TextView
+		android:id="@+id/header"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="48dp"
+		android:fontFamily="@font/montserrat_bold"
+		android:gravity="center|top"
+		android:text="@string/timeline_header"
+		android:textColor="@color/uoft_dark"
+		android:textSize="32sp"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintHorizontal_bias="0.498"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent" />
+
+	<Button
+		android:id="@+id/button"
+		style="@android:style/Widget.Button"
+		android:layout_width="155dp"
+		android:layout_height="60dp"
+		android:layout_marginBottom="92dp"
+		android:background="@color/uoft_dark"
+		android:fontFamily="@font/inter_semibold"
+		android:text="@string/timeline_generate"
+		android:textColor="#FFFFFF"
+		android:textSize="24sp"
+		app:backgroundTint="@color/uoft_dark"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintHorizontal_bias="0.498"
+		app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
