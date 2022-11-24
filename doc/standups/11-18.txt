@@ -2,11 +2,11 @@
 
 Ansh Aneel:
 
-  What have you done since yesterday?
+  What have you done since today?
 	  - Thought of possible UI implementations.
     - Learned more about Jira.
     
-  What are you planning on doing today?
+  What are you planning on doing tomorrow?
     - Get more familiar with Android Studio 
 
   Any impediments or stumbling blocks?
@@ -14,11 +14,11 @@ Ansh Aneel:
 
 Alex Zeng:
 
-   What have you done since yesterday?
+   What have you done since today?
       - Thought of possible design of app.
       - Learned more Android Studio.
 
-  What are you planning on doing today?
+  What are you planning on doing tomorrow?
     - Get more familiar with Android Studio 
 
   Any impediments or stumbling blocks?
@@ -26,7 +26,7 @@ Alex Zeng:
 
 Sohil Chanana:
 
-  What have you done since yesterday?
+  What have you done since today?
 	  - Learned more about Jira.
     - Learned and got familiar more Android Studio.
 
@@ -38,10 +38,10 @@ Sohil Chanana:
 
 Vedat Goktepe:
 
-  What have you done since yesterday?
+  What have you done since today?
       - Got to know of the basics of Firebase and Jira.
 
-  What are you planning on doing today?
+  What are you planning on doing tomorrow?
     - Get more familiar with Android Studio 
 
   Any impediments or stumbling blocks?
@@ -49,10 +49,10 @@ Vedat Goktepe:
 
 Ashwin Mallik:
 
-  What have you done since yesterday?
+  What have you done since today?
       - Looked through different API implementations.
       
-  What are you planning on doing today?
+  What are you planning on doing tomorrow?
     - Get more familiar with Android Studio 
 
   Any impediments or stumbling blocks?
