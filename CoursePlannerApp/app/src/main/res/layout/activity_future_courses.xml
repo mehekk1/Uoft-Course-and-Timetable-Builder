@@ -27,7 +27,7 @@
 		android:layout_marginTop="28dp"
 		android:fontFamily="@font/montserrat_bold"
 		android:gravity="center|top"
-		android:text="@string/timeline_future_added"
+		android:text="@string/future_course_added"
 		android:textColor="@color/uoft_dark"
 		android:textSize="28sp"
 		app:layout_constraintEnd_toEndOf="parent"
@@ -39,13 +39,13 @@
 		android:id="@+id/future_add_button"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:text="@string/future_add_text"
+		android:text="@string/future_generate_text"
 		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
+		app:layout_constraintTop_toBottomOf="@+id/added_courses_view" />
 
-	<SearchView
+	<android.widget.SearchView
 		android:id="@+id/future_search_bar"
 		android:layout_width="match_parent"
 		android:layout_height="48dp"
@@ -57,8 +57,16 @@
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toBottomOf="@+id/future_course_header" />
 
+	<androidx.recyclerview.widget.RecyclerView
+		android:id="@+id/search_bar_items"
+		android:layout_width="match_parent"
+		android:layout_height="320dp"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/future_search_bar" />
+
 	<ScrollView
-		android:id="@+id/scrollView2"
+		android:id="@+id/added_courses_view"
 		android:layout_width="match_parent"
 		android:layout_height="240dp"
 		android:layout_marginTop="24dp"
@@ -67,10 +75,25 @@
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toBottomOf="@+id/future_added_text">
 
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:orientation="vertical" />
+		<HorizontalScrollView
+			android:id="@+id/added_courses_horizontal"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content">
+
+			<RelativeLayout
+				android:id="@+id/added_courses_layout"
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent"
+				android:layout_gravity="center"
+				android:orientation="vertical">
+
+				<TableLayout
+					android:id="@+id/added_courses_table"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_centerHorizontal="true"></TableLayout>
+			</RelativeLayout>
+		</HorizontalScrollView>
 	</ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
