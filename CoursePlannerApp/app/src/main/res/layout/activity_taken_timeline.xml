@@ -2,9 +2,101 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
-	android:id="@+id/TakenTimeline"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	tools:context=".TakenTimelineActivity">
 
+	<TextView
+		android:id="@+id/textview_first"
+		android:layout_width="265dp"
+		android:layout_height="172dp"
+		android:text="@string/hello_first_fragment"
+		android:textAlignment="center"
+		android:textColor="#1C375B"
+		android:textSize="34sp"
+		android:textStyle="bold"
+		app:layout_constraintBottom_toTopOf="@id/scrollView1"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent" />
+
+	<TextView
+		android:id="@+id/textView"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="Enter a course code to make changes:"
+		android:textColor="@color/black"
+		android:textSize="18sp"
+		android:textStyle="bold"
+		app:layout_constraintBottom_toTopOf="@+id/course_text"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/scrollView1" />
+
+	<Button
+		android:id="@+id/button_first"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:backgroundTint="#1C375B"
+		android:onClick="addCourse"
+		android:text="ADD COURSE"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toStartOf="@id/button_second"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@id/course_text" />
+
+	<Button
+		android:id="@+id/button_second"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:backgroundTint="#1C375B"
+		android:onClick="addCourse"
+		android:text="Remove course"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toEndOf="@id/button_first"
+		app:layout_constraintTop_toBottomOf="@id/course_text" />
+
+	<EditText
+		android:id="@+id/course_text"
+		android:layout_width="match_parent"
+		android:layout_height="48dp"
+		android:hint="Enter Course Code"
+		app:layout_constraintBottom_toTopOf="@+id/button_first"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintHorizontal_bias="1.0"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+	<ScrollView
+		android:id="@+id/scrollView1"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentLeft="true"
+		android:background="@color/white"
+		app:layout_constraintBottom_toTopOf="@+id/textView"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@id/textview_first">
+
+		<HorizontalScrollView
+			android:id="@+id/hscrll1"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content">
+
+			<RelativeLayout
+				android:id="@+id/RelativeLayout1"
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent"
+				android:layout_gravity="center"
+				android:orientation="vertical">
+
+				<TableLayout
+					android:id="@+id/table_main"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_centerHorizontal="true"></TableLayout>
+			</RelativeLayout>
+		</HorizontalScrollView>
+	</ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
