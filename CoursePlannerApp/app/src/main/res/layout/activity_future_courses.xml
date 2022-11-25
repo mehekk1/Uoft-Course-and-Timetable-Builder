@@ -10,14 +10,67 @@
 		android:id="@+id/future_course_header"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_marginTop="48dp"
+		android:layout_marginTop="36dp"
 		android:fontFamily="@font/montserrat_bold"
 		android:gravity="center|top"
 		android:text="@string/timeline_future_header"
 		android:textColor="@color/uoft_dark"
 		android:textSize="32sp"
 		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintHorizontal_bias="0.498"
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toTopOf="parent" />
+
+	<TextView
+		android:id="@+id/future_added_text"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="28dp"
+		android:fontFamily="@font/montserrat_bold"
+		android:gravity="center|top"
+		android:text="@string/timeline_future_added"
+		android:textColor="@color/uoft_dark"
+		android:textSize="28sp"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintHorizontal_bias="0.497"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/future_search_bar" />
+
+	<Button
+		android:id="@+id/future_add_button"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/future_add_text"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
+
+	<SearchView
+		android:id="@+id/future_search_bar"
+		android:layout_width="match_parent"
+		android:layout_height="48dp"
+		android:layout_marginTop="48dp"
+		android:background="@drawable/search_bar_bg"
+		android:iconifiedByDefault="false"
+		android:queryHint="Search For A Course"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/future_course_header" />
+
+	<ScrollView
+		android:id="@+id/scrollView2"
+		android:layout_width="match_parent"
+		android:layout_height="240dp"
+		android:layout_marginTop="24dp"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintHorizontal_bias="0.488"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/future_added_text">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical" />
+	</ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
