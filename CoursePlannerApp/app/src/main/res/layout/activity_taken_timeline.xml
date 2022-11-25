@@ -8,10 +8,10 @@
 
 	<TextView
 		android:id="@+id/textview_first"
-		android:layout_width="265dp"
-		android:layout_height="172dp"
+		android:layout_width="359dp"
+		android:layout_height="88dp"
 		android:layout_marginTop="16dp"
-		android:text="Here are the courses you have taken so far!"
+		android:text="Welcome to your taken courses page!"
 		android:textAlignment="center"
 		android:textColor="#1C375B"
 		android:textSize="34sp"
@@ -24,6 +24,7 @@
 		android:id="@+id/textView"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		android:layout_marginTop="8dp"
 		android:text="Enter a course code to make changes:"
 		android:textColor="@color/black"
 		android:textSize="18sp"
@@ -67,13 +68,12 @@
 	<ScrollView
 		android:id="@+id/scrollView1"
 		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
+		android:layout_height="440dp"
 		android:layout_alignParentLeft="true"
-		android:layout_marginTop="8dp"
 		android:background="@color/white"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toBottomOf="@id/button_second">
+		app:layout_constraintTop_toBottomOf="@+id/textView2">
 
 		<HorizontalScrollView
 			android:id="@+id/hscrll1"
@@ -95,4 +95,18 @@
 			</RelativeLayout>
 		</HorizontalScrollView>
 	</ScrollView>
+
+	<TextView
+		android:id="@+id/textView2"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="4dp"
+		android:text="Here are the courses you have taken!"
+		android:textColor="#1C375B"
+		android:textSize="22sp"
+		android:textStyle="bold"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/button_second"
+		tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>
