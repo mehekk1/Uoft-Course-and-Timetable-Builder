@@ -1,9 +1,9 @@
 Ansh Aneel:
 
-  What have you done since yesterday?
+  What have you done since today?
 	  - Finalized Figma Design for Student.
     
-  What are you planning on doing today?
+  What are you planning on doing tomorrow?
     - Working on login page and Welcome page for app.
 
   Any impediments or stumbling blocks?
@@ -11,10 +11,10 @@ Ansh Aneel:
 
 Alex Zeng:
 
-   What have you done since yesterday?
+   What have you done since today?
       - Finalized Figma Design for Student.
 
-  What are you planning on doing today?
+  What are you planning on doing tomorrow?
     - Working on representing student course data for previous taken courses.
     - Working on add courses button.
 
@@ -23,10 +23,10 @@ Alex Zeng:
 
 Sohil Chanana:
 
-  What have you done since yesterday?
+  What have you done since today?
 	  - Finalized Figma Design for Student.
 
-  What are you planning on doing today?
+  What are you planning on doing tomorrow?
     - Working on timetable generator.
     - Researching possible search button feature.
 
@@ -35,10 +35,10 @@ Sohil Chanana:
 
 Vedat Goktepe:
 
-  What have you done since yesterday?
+  What have you done since today?
     - Finalized Figma Design for Student.
 
-  What are you planning on doing today?
+  What are you planning on doing tomorrow?
     - Working on timetable generator.
     - Researching possible search button feature.
 
@@ -47,10 +47,10 @@ Vedat Goktepe:
 
 Ashwin Mallik:
 
-  What have you done since yesterday?
+  What have you done since today?
     - Finalized Figma Design for Student.
       
-  What are you planning on doing today?
+  What are you planning on doing tomorrow?
       - Working on homepage and login page for Student.
       - Helping with previous student courses being displayed.
 

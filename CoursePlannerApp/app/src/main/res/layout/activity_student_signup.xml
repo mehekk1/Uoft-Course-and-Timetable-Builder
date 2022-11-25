@@ -5,6 +5,4 @@
 	android:id="@+id/StudentSignup"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	tools:context=".StudentSignupActivity">
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+	tools:context=".StudentSignupActivity"/>

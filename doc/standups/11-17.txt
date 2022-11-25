@@ -2,12 +2,12 @@
 
 Ansh Aneel:
 
-  What have you done since yesterday?
+  What have you done since today?
 	  - Assisted in creation of Github repository.
     - Created a Jira account and navigated through the basics of Jira.
     - Discussed and brainstormed possible ideas for app UI and implementation.
     
-  What are you planning on doing today?
+  What are you planning on doing tomorrow?
     - Continue to think of possible UI implementations.
     - Learn more about Jira.
 
@@ -16,12 +16,12 @@ Ansh Aneel:
 
 Alex Zeng:
 
-   What have you done since yesterday?
+   What have you done since today?
       - Assisted in creation of Github repository.
       - Created a Jira account and navigated through the basics of Jira.
       - Discussed and brainstormed possible ideas for app UI and implementation.
 
-  What are you planning on doing today?
+  What are you planning on doing tomorrow?
 	  - Thinking of possible design and features of the app.
     - Look through more of the basics of Android Studio development.
 
@@ -30,13 +30,13 @@ Alex Zeng:
 
 Sohil Chanana:
 
-  What have you done since yesterday?
+  What have you done since today?
 	  - Assisted in creation of Github repository.
     - Created a Jira account and navigated through the basics of Jira.
     - Discussed and brainstormed possible ideas for app UI and implementation.
 
-  What are you planning on doing today?
-	  - Research more about Jira.
+  What are you planning on doing tomorrow?
+    - Research more about Jira.
     - Get familar more with Android Studio.
 
   Any impediments or stumbling blocks?
@@ -44,12 +44,12 @@ Sohil Chanana:
 
 Vedat Goktepe:
 
-  What have you done since yesterday?
+  What have you done since today?
       - Assisted in creation of Github repository.
       - Created a Jira account and navigated through the basics of Jira.
       - Discussed and brainstormed possible ideas for app UI and implementation.
 
-  What are you planning on doing today?
+  What are you planning on doing tomorrow?
 	  - Learning and getting more familar with FireBase.
     - Learning more about the potentials of Jira.
 
@@ -58,12 +58,12 @@ Vedat Goktepe:
 
 Ashwin Mallik:
 
-  What have you done since yesterday?
+  What have you done since today?
       - Assisted in creation of Github repository.
       - Created a Jira account and navigated through the basics of Jira.
       - Discussed and brainstormed possible ideas for app UI and implementation.
       
-  What are you planning on doing today?
+  What are you planning on doing tomorrow?
 	  - Researching potential API's that could be helpful for the app.
     - Trying to get familar with Android Studio development.
 
