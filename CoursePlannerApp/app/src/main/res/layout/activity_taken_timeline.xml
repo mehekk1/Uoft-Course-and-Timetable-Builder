@@ -10,12 +10,12 @@
 		android:id="@+id/textview_first"
 		android:layout_width="265dp"
 		android:layout_height="172dp"
-		android:text="@string/hello_first_fragment"
+		android:layout_marginTop="16dp"
+		android:text="Here are the courses you have taken so far!"
 		android:textAlignment="center"
 		android:textColor="#1C375B"
 		android:textSize="34sp"
 		android:textStyle="bold"
-		app:layout_constraintBottom_toTopOf="@id/scrollView1"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toTopOf="parent" />
@@ -28,10 +28,9 @@
 		android:textColor="@color/black"
 		android:textSize="18sp"
 		android:textStyle="bold"
-		app:layout_constraintBottom_toTopOf="@+id/course_text"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toBottomOf="@+id/scrollView1" />
+		app:layout_constraintTop_toBottomOf="@+id/textview_first" />
 
 	<Button
 		android:id="@+id/button_first"
@@ -40,7 +39,6 @@
 		android:backgroundTint="#1C375B"
 		android:onClick="addCourse"
 		android:text="ADD COURSE"
-		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintEnd_toStartOf="@id/button_second"
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toBottomOf="@id/course_text" />
@@ -52,7 +50,6 @@
 		android:backgroundTint="#1C375B"
 		android:onClick="addCourse"
 		android:text="Remove course"
-		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toEndOf="@id/button_first"
 		app:layout_constraintTop_toBottomOf="@id/course_text" />
@@ -62,7 +59,6 @@
 		android:layout_width="match_parent"
 		android:layout_height="48dp"
 		android:hint="Enter Course Code"
-		app:layout_constraintBottom_toTopOf="@+id/button_first"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintHorizontal_bias="1.0"
 		app:layout_constraintStart_toStartOf="parent"
@@ -73,11 +69,11 @@
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
 		android:layout_alignParentLeft="true"
+		android:layout_marginTop="8dp"
 		android:background="@color/white"
-		app:layout_constraintBottom_toTopOf="@+id/textView"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toBottomOf="@id/textview_first">
+		app:layout_constraintTop_toBottomOf="@id/button_second">
 
 		<HorizontalScrollView
 			android:id="@+id/hscrll1"
