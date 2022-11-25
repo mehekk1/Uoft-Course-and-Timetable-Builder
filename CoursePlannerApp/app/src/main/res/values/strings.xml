@@ -5,9 +5,12 @@
 
 	<string name="timeline_header">Timeline</string>
 	<string name="timeline_generate">Generate</string>
-	<string name="timeline_future_header">Add Courses You Want To Take</string>
-	<string name="timeline_future_added">Added Courses</string>
-	<string name="future_add_text">Add Course</string>
+	<string name="timeline_addmore">Add More Courses</string>
+	<string name="timeline_future_header">Add Future Courses</string>
+
+	<string name="future_course_header">Add Courses You Want To Take</string>
+	<string name="future_course_added">Added Courses</string>
+	<string name="future_generate_text">Generate Timetable</string>
 	<string name="filler_text">Filler Text</string>
 	<string name="course_code">Course Code</string>
 	<string name="course_name">Course Name</string>
