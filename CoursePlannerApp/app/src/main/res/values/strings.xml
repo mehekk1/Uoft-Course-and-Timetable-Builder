@@ -1,10 +1,18 @@
 <resources>
-	<string name="app_name">CoursePlannerApp</string>
-	<string name="home_page_Header">Course Planner</string>
-	<string name="home_page_summary">All your <u>Course Planning</u> in One Place</string>
-	<string name="home_page_jingle">Efficient and Organized solutions for all your course planning needs</string>
-	<string name="home_page_img_description">logo</string>
-	<string name="home_page_login_btn">LOGIN</string>
-	<string name="home_page_register_btn">REGISTER</string>
+    <string name="app_name">CoursePlannerApp</string>
+    <string name="home_page_Header">Course Planner</string>
+    <string name="home_page_summary">All your <u>Course Planning</u> in One Place</string>
+    <string name="home_page_jingle">Efficient and Organized solutions for all your course planning needs</string>
+    <string name="home_page_img_description">logo</string>
+    <string name="home_page_login_btn">LOGIN</string>
+    <string name="home_page_register_btn">REGISTER</string>
+
+    <string name="welcome_page_user_header_msg">WELCOME USERNAME</string>
+    <string name="welcome_page_img_description">student logo</string>
+    <string name="welcome_page_app_description">Explore our various courses, view your taken courses or generate a timetable!</string>
+    <string name="welcome_page_courses_btn">COURSES</string>
+    <string name="welcome_page_previous_btn">MY COURSES</string>
+    <string name="welcome_page_future_btn">TIMELINE</string>
+
 
 </resources>
