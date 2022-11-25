@@ -1,6 +1,9 @@
 package com.example.courseplannerapp;
 
+import static com.example.courseplannerapp.R.color.black;
+
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -146,14 +149,20 @@ public class TakenTimelineActivity extends AppCompatActivity {
             tv0.setText("You have taken " + 1 + " course!");
         else
             tv0.setText("You have taken " + num + " courses!");
-        tv0.setTextSize(24);
+        tv0.setTextSize(28);
+        tv0.setTextColor(getResources().getColor(black));
+        tv0.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        tv0.setTypeface(null, Typeface.BOLD);
         tbrow0.addView(tv0);
         stk.addView(tbrow0);
         for(String c:courses){
             TableRow tbrow = new TableRow(context);
             TextView tv1 = new TextView(context);
+            tv1.setTextColor(getResources().getColor(black));
             tv1.setText(c);
-            tv0.setTextSize(18);
+            tv1.setTextSize(20);
+            tv1.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            tv1.setTypeface(null, Typeface.BOLD);
             tbrow.addView(tv1);
             stk.addView(tbrow);
         }
