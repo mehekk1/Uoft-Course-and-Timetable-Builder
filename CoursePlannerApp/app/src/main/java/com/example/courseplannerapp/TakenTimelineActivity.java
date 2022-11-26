@@ -38,6 +38,7 @@ public class TakenTimelineActivity extends AppCompatActivity {
     Button b2;
     EditText e;
     Context context;
+    String student;
 
 
     @Override
@@ -50,14 +51,14 @@ public class TakenTimelineActivity extends AppCompatActivity {
         e = findViewById(R.id.course_text);
         db = FirebaseDatabase.getInstance();
         courses = new ArrayList<String>();
+        student = "alex_zeng";
         init();
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                db = FirebaseDatabase.getInstance();
                 course = e.getText().toString().toUpperCase();
-                reference = db.getReference("courses");
-                reference.child(course).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                reference = db.getReference("Students");
+                reference.child(student).child("taken_list").child(course).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DataSnapshot> task) {
                         if(task.isSuccessful()){
@@ -68,7 +69,7 @@ public class TakenTimelineActivity extends AppCompatActivity {
                                 Toast.makeText(context, course + " already exists", Toast.LENGTH_SHORT).show();
                             }
                             else {
-                                reference.child(course).setValue(course);
+                                reference.child(student).child("taken_list").child(course).setValue(course);
                                 Toast.makeText(context, course+ " Added", Toast.LENGTH_SHORT).show();
                             }
                         } else{
@@ -83,8 +84,8 @@ public class TakenTimelineActivity extends AppCompatActivity {
             public void onClick(View view) {
                 db = FirebaseDatabase.getInstance();
                 course = e.getText().toString().toUpperCase();
-                reference = db.getReference("courses");
-                reference.child(course).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                reference = db.getReference("Students");
+                reference.child(student).child("taken_list").child(course).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DataSnapshot> task) {
                         if (task.isSuccessful()) {
@@ -92,7 +93,7 @@ public class TakenTimelineActivity extends AppCompatActivity {
                                 Toast.makeText(context, course + "Please enter a course code", Toast.LENGTH_SHORT).show();
                             }
                             else if (task.getResult().exists()) {
-                                reference.child(course).removeValue();
+                                reference.child(student).child("taken_list").child(course).removeValue();
                                 Toast.makeText(context, course + " Removed", Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(context, course + " Not In List", Toast.LENGTH_SHORT).show();
@@ -104,8 +105,8 @@ public class TakenTimelineActivity extends AppCompatActivity {
                 });
             }
         });
-        reference = db.getReference("courses");
-        reference.orderByKey().addChildEventListener(new ChildEventListener() {
+        reference = db.getReference("Students");
+        reference.child(student).child("taken_list").orderByKey().addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 courses.add(snapshot.getValue().toString());
