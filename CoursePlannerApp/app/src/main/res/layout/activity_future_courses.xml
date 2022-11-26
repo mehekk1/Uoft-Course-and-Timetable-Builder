@@ -10,13 +10,14 @@
 		android:id="@+id/future_course_header"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_marginTop="36dp"
+		android:layout_marginTop="24dp"
 		android:fontFamily="@font/montserrat_bold"
 		android:gravity="center|top"
 		android:text="@string/timeline_future_header"
 		android:textColor="@color/uoft_dark"
 		android:textSize="32sp"
 		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintHorizontal_bias="0.494"
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,16 +25,15 @@
 		android:id="@+id/future_added_text"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_marginTop="28dp"
+		android:layout_marginTop="24dp"
 		android:fontFamily="@font/montserrat_bold"
 		android:gravity="center|top"
 		android:text="@string/future_course_added"
 		android:textColor="@color/uoft_dark"
 		android:textSize="28sp"
 		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintHorizontal_bias="0.497"
 		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toBottomOf="@+id/future_search_bar" />
+		app:layout_constraintTop_toBottomOf="@+id/search_items_view" />
 
 	<Button
 		android:id="@+id/future_add_button"
@@ -49,18 +49,19 @@
 		android:id="@+id/future_search_bar"
 		android:layout_width="match_parent"
 		android:layout_height="48dp"
-		android:layout_marginTop="48dp"
+		android:layout_marginTop="24dp"
 		android:background="@drawable/search_bar_bg"
 		android:iconifiedByDefault="false"
 		android:queryHint="Search For A Course"
 		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintHorizontal_bias="0.0"
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toBottomOf="@+id/future_course_header" />
 
 	<androidx.recyclerview.widget.RecyclerView
-		android:id="@+id/search_bar_items"
-		android:layout_width="match_parent"
-		android:layout_height="320dp"
+		android:id="@+id/search_items_view"
+		android:layout_width="315dp"
+		android:layout_height="120dp"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toBottomOf="@+id/future_search_bar" />

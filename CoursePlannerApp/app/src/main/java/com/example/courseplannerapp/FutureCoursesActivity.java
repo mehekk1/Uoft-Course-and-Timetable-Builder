@@ -3,13 +3,14 @@ package com.example.courseplannerapp;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.SearchView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -23,92 +24,177 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.sql.Array;
 import java.util.ArrayList;
 
 public class FutureCoursesActivity extends AppCompatActivity {
 
     FirebaseDatabase db;
-    DatabaseReference reference;
-    String course;
-    ArrayList<String> courses;
+    DatabaseReference referenceSel;
+    DatabaseReference referenceUnsel;
+    ArrayList<CourseSearchItem> coursesAll;
+    ArrayList<String> coursesSelected;
 
-    Button b;
-    Button b2;
-    ArrayList<Button> buttons;
-    EditText e;
+    ArrayList<CourseSearchItem> coursesShown;
+
     Context context;
+
+    RecyclerView rvSearch;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_taken_timeline);
+        setContentView(R.layout.activity_future_courses);
+
         context = this.getApplicationContext();
-        b = findViewById(R.id.button_first);
-        b2 = findViewById(R.id.button_second);
-        e = findViewById(R.id.course_text);
         db = FirebaseDatabase.getInstance();
-        courses = new ArrayList<String>();
-        init();
-        b.setOnClickListener(new View.OnClickListener() {
+        coursesAll = new ArrayList<CourseSearchItem>();
+        coursesSelected = new ArrayList<String>();
+
+        rvSearch = findViewById(R.id.search_items_view);
+        CourseSearchItemAdapter searchAdapter = new CourseSearchItemAdapter(context, coursesAll);
+        rvSearch.setAdapter(searchAdapter);
+        rvSearch.setLayoutManager(new LinearLayoutManager(this));
+
+        coursesShown = new ArrayList<CourseSearchItem>();
+        filterList("");
+
+        SearchView searchView = findViewById(R.id.future_search_bar);
+        searchView.clearFocus();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public void onClick(View view) {
-                db = FirebaseDatabase.getInstance();
-                course = e.getText().toString().toUpperCase();
-                reference = db.getReference("courses");
-                reference.child(course).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterList(newText);
+                return true;
+            }
+        });
+
+        initAdded();
+
+        ItemClickSupport.addTo(rvSearch).setOnItemClickListener(
+                new ItemClickSupport.OnItemClickListener() {
                     @Override
-                    public void onComplete(@NonNull Task<DataSnapshot> task) {
-                        if(task.isSuccessful()){
-                            if(e.getText().toString().isEmpty()){
-                                Toast.makeText(context, course + "Please enter a course code", Toast.LENGTH_SHORT).show();
-                            }
-                            else if (task.getResult().exists()){
-                                Toast.makeText(context, course + " already exists", Toast.LENGTH_SHORT).show();
+                    public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                        searchView.clearFocus();
+                        if (position != RecyclerView.NO_POSITION) {
+                            CourseSearchItem course = coursesShown.get(position);
+                            String courseCode;
+                            courseCode = course.getCode();
+
+                            if (course.getSelected() == false) {
+                                //Remove from unselected data
+                                referenceUnsel = db.getReference("coursesUnselected");
+                                referenceUnsel.child(courseCode).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                        if (task.isSuccessful()) {
+                                            referenceUnsel.child(courseCode).removeValue();
+                                        } else {
+                                            Toast.makeText(context, "An error has occurred", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
+
+                                //Add to selected data
+                                referenceSel = db.getReference("coursesSelected");
+                                referenceSel.child(courseCode).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                        if (task.isSuccessful()) {
+                                            referenceSel.child(courseCode).setValue(courseCode);
+                                        } else {
+                                            Toast.makeText(context, "An error has occurred", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
                             }
                             else {
-                                reference.child(course).setValue(course);
-                                Toast.makeText(context, course+ " Added", Toast.LENGTH_SHORT).show();
+                                //Remove from selected data
+                                referenceSel = db.getReference("coursesSelected");
+                                referenceSel.child(courseCode).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                        if (task.isSuccessful()) {
+                                            referenceSel.child(courseCode).removeValue();
+                                        } else {
+                                            Toast.makeText(context, "An error has occurred", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
+
+                                //Add to unselected data
+                                referenceUnsel = db.getReference("coursesUnselected");
+                                referenceUnsel.child(courseCode).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                        if (task.isSuccessful()) {
+                                            referenceUnsel.child(courseCode).setValue(courseCode);
+                                        } else {
+                                            Toast.makeText(context, "An error has occurred", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
                             }
-                        } else{
-                            Toast.makeText(context, "An error has occurred", Toast.LENGTH_SHORT).show();
                         }
                     }
-                });
-            }
-        });
-        b2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                db = FirebaseDatabase.getInstance();
-                course = e.getText().toString().toUpperCase();
-                reference = db.getReference("courses");
-                reference.child(course).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DataSnapshot> task) {
-                        if (task.isSuccessful()) {
-                            if(e.getText().toString().isEmpty()){
-                                Toast.makeText(context, course + "Please enter a course code", Toast.LENGTH_SHORT).show();
-                            }
-                            else if (task.getResult().exists()) {
-                                reference.child(course).removeValue();
-                                Toast.makeText(context, course + " Removed", Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(context, course + " Not In List", Toast.LENGTH_SHORT).show();
-                            }
-                        } else {
-                            Toast.makeText(context, "An error has occurred", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-            }
-        });
-        reference = db.getReference("courses");
-        reference.orderByKey().addChildEventListener(new ChildEventListener() {
+                }
+        );
+
+        referenceUnsel = db.getReference("coursesUnselected");
+        referenceUnsel.orderByKey().addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                courses.add(snapshot.getValue().toString());
-                init();
+                coursesAll.add(coursesSelected.size(), new CourseSearchItem(snapshot.getValue().toString(), false));
+                filterList(((SearchView)findViewById(R.id.future_search_bar)).getQuery().toString());
+                CourseSearchItemAdapter searchAdapter = new CourseSearchItemAdapter(context, coursesShown);
+                rvSearch.setAdapter(searchAdapter);
+
+                initAdded();
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {}
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+                for(int i = 0; i < coursesAll.size(); i++) {
+                    CourseSearchItem currentCourse = coursesAll.get(i);
+                    if(currentCourse.getCode().equals(snapshot.getValue().toString())) {
+                        coursesAll.remove(i);
+                        break;
+                    }
+                }
+                filterList(((SearchView)findViewById(R.id.future_search_bar)).getQuery().toString());
+                CourseSearchItemAdapter searchAdapter = new CourseSearchItemAdapter(context, coursesShown);
+                rvSearch.setAdapter(searchAdapter);
+
+                initAdded();
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {}
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {}
+        });
+
+        referenceSel = db.getReference("coursesSelected");
+        referenceSel.orderByKey().addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                coursesAll.add(0, new CourseSearchItem(snapshot.getValue().toString(), true));
+                filterList(((SearchView)findViewById(R.id.future_search_bar)).getQuery().toString());
+                CourseSearchItemAdapter searchAdapter = new CourseSearchItemAdapter(context, coursesShown);
+                rvSearch.setAdapter(searchAdapter);
+
+                coursesSelected.add(snapshot.getValue().toString());
+                initAdded();
             }
 
             @Override
@@ -118,8 +204,19 @@ public class FutureCoursesActivity extends AppCompatActivity {
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-                courses.remove(snapshot.getValue().toString());
-                init();
+                for(int i = 0; i < coursesAll.size(); i++) {
+                    CourseSearchItem currentCourse = coursesAll.get(i);
+                    if(currentCourse.getCode().equals(snapshot.getValue().toString())) {
+                        coursesAll.remove(i);
+                        break;
+                    }
+                }
+                filterList(((SearchView)findViewById(R.id.future_search_bar)).getQuery().toString());
+                CourseSearchItemAdapter searchAdapter = new CourseSearchItemAdapter(context, coursesShown);
+                rvSearch.setAdapter(searchAdapter);
+
+                coursesSelected.remove(snapshot.getValue().toString());
+                initAdded();
             }
 
             @Override
@@ -134,30 +231,33 @@ public class FutureCoursesActivity extends AppCompatActivity {
         });
     }
 
-    public void init(){
-        TableLayout stk = findViewById(R.id.added_courses_table);
-        int count = stk.getChildCount();
+    public void initAdded(){
+        TableLayout act = findViewById(R.id.added_courses_table);
+        int count = act.getChildCount();
         for (int i = 0; i < count; i++) {
-            View child = stk.getChildAt(i);
+            View child = act.getChildAt(i);
             if (child instanceof TableRow) ((ViewGroup) child).removeAllViews();
         }
-        TableRow tbrow0 = new TableRow(context);
-        TextView tv0 = new TextView(context);
-        int num = courses.size();
-        if(num==1)
-            tv0.setText("You have taken " + 1 + " course!");
-        else
-            tv0.setText("You have taken " + num + " courses!");
-        tv0.setTextSize(24);
-        tbrow0.addView(tv0);
-        stk.addView(tbrow0);
-        for(String c:courses){
+
+        for(String c:coursesSelected){
             TableRow tbrow = new TableRow(context);
             TextView tv1 = new TextView(context);
             tv1.setText(c);
-            tv0.setTextSize(18);
+            tv1.setTextSize(18);
             tbrow.addView(tv1);
-            stk.addView(tbrow);
+            act.addView(tbrow);
         }
+    }
+    
+    public void filterList(String text) {
+        coursesShown = new ArrayList<>();
+        for(CourseSearchItem course : coursesAll) {
+            if(course.getCode().toLowerCase().contains(text.toLowerCase())) {
+                coursesShown.add(course);
+            }
+        }
+
+        CourseSearchItemAdapter searchAdapter = new CourseSearchItemAdapter(context, coursesShown);
+        rvSearch.setAdapter(searchAdapter);
     }
 }
