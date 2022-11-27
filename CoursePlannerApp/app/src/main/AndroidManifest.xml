@@ -12,7 +12,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CoursePlannerApp"
         tools:targetApi="31">
-        <activity android:name=".FutureCoursesActivity"
+        <activity
+            android:name=".AdminAddCourse"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".AdminWelcomeActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".FutureCoursesActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -55,12 +75,9 @@
         </activity>
         <activity
             android:name=".HomepageActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:exported="false">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

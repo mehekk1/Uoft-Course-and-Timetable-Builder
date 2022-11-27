@@ -27,7 +27,7 @@
 		android:layout_marginTop="28dp"
 		android:fontFamily="@font/montserrat_bold"
 		android:gravity="center|top"
-		android:text="@string/timeline_future_added"
+		android:text="@string/timeline_addmore"
 		android:textColor="@color/uoft_dark"
 		android:textSize="28sp"
 		app:layout_constraintEnd_toEndOf="parent"
@@ -39,13 +39,13 @@
 		android:id="@+id/future_add_button"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:text="@string/future_add_text"
+		android:text="@string/timeline_generate"
 		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
 
-	<SearchView
+	<android.widget.SearchView
 		android:id="@+id/future_search_bar"
 		android:layout_width="match_parent"
 		android:layout_height="48dp"
