@@ -15,7 +15,7 @@
 		android:fontFamily="@font/montserrat_bold"
 		android:gravity="center|top"
 		android:text="@string/home_page_Header"
-		android:textColor="#1C375B"
+		android:textColor="@color/uoft_dark"
 		android:textSize="32sp"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintHorizontal_bias="0.496"
