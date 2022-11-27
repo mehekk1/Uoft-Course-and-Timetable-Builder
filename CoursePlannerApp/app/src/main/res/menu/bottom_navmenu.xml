@@ -6,9 +6,9 @@
         android:id="@+id/nav_home"/>
     <item android:title="Timeline"
         android:icon="@drawable/ic_baseline_library_books_24"
-        android:id="@+id/timeline"/>
+        android:id="@+id/nav_timeline"/>
     <item android:title="Add"
         android:icon="@drawable/ic_baseline_menu_book_24"
-        android:id="@+id/add_menu"/>
+        android:id="@+id/nav_add_menu"/>
 
 </menu>
