@@ -27,7 +27,7 @@ public class StudentWelcomeActivity extends AppCompatActivity{
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
-                switch(id){
+                switch (id) {
                     case R.id.nav_home:
                         break;
                     case R.id.nav_timeline:
@@ -42,32 +42,14 @@ public class StudentWelcomeActivity extends AppCompatActivity{
         });
 
     }
-
-    public void openTimelinePage(){
+    public void openTimelinePage () {
         Intent intent = new Intent(this, GeneratedTimelineActivity.class);
         startActivity(intent);
     }
 
-    public void openTakenTimelinePage(){
+    public void openTakenTimelinePage () {
         Intent intent = new Intent(this, TakenTimelineActivity.class);
         startActivity(intent);
     }
-
-
-//    private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
-//        @Override
-//        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//            androidx.fragment.app.Fragment selectedFragment = null;
-//
-//            switch (item.getItemId()){
-//                case R.id.nav_home:
-//                    selectedFragment = new androidx.fragment.app.Fragment();
-//                    break;
-//            }
-//
-//            getSupportFragmentManager().beginTransaction().replace((R.id.fragment_container, selectedFragment));
-//            return true;
-//        }
-//    };
 
 }
