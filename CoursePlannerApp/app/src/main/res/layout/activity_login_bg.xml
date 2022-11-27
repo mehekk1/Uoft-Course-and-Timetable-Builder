@@ -38,6 +38,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/circle" />
 
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabTextColor="#1C375B"
+        app:tabIndicatorColor="#6F8197"
+        app:layout_constraintBottom_toBottomOf="@+id/circle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Header" />
+
+
+
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="149dp"

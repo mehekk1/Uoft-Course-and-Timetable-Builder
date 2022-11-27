@@ -6,8 +6,8 @@
     <string name="home_page_img_description">logo</string>
     <string name="home_page_login_btn">LOGIN</string>
     <string name="home_page_register_btn">REGISTER</string>
-    <string name="email">  Email</string>
-    <string name="password">  Password</string>
+    <string name="email">  Email </string>
+    <string name="password">  Password  </string>
     <string name="password_confirmation">  Confirm Password</string>
     <string-array name="Users">
         <item>Admin</item>
