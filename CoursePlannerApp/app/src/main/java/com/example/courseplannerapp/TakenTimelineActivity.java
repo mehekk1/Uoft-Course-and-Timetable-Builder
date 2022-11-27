@@ -32,6 +32,7 @@ public class TakenTimelineActivity extends AppCompatActivity {
 
     FirebaseDatabase db;
     DatabaseReference reference;
+    DatabaseReference sec_ref;
     String course;
     ArrayList<String> courses;
     Button b;
@@ -58,6 +59,7 @@ public class TakenTimelineActivity extends AppCompatActivity {
             public void onClick(View view) {
                 course = e.getText().toString().toUpperCase();
                 reference = db.getReference("Students");
+                sec_ref = db.getReference("Courses");
                 reference.child(student).child("taken_list").child(course).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -69,8 +71,17 @@ public class TakenTimelineActivity extends AppCompatActivity {
                                 Toast.makeText(context, course + " already exists", Toast.LENGTH_SHORT).show();
                             }
                             else {
-                                reference.child(student).child("taken_list").child(course).setValue(course);
-                                Toast.makeText(context, course+ " Added", Toast.LENGTH_SHORT).show();
+                                sec_ref.child(course).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DataSnapshot> task2) {
+                                        if (task2.getResult().exists()){
+                                            reference.child(student).child("taken_list").child(course).setValue(course);
+                                            Toast.makeText(context, course+ " Added", Toast.LENGTH_SHORT).show();
+                                        }
+                                        else
+                                            Toast.makeText(context, "This course does not exist, please try again", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
                             }
                         } else{
                             Toast.makeText(context, "An error has occurred", Toast.LENGTH_SHORT).show();
