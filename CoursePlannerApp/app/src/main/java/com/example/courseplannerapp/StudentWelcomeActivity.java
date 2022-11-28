@@ -16,12 +16,14 @@ import com.google.android.material.navigation.NavigationBarView;
 
 public class StudentWelcomeActivity extends AppCompatActivity{
 
+    private BottomNavigationView bottomNav;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_welcome);
 
-        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation_view);
+        bottomNav = findViewById(R.id.bottom_navigation_view);
 
         bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -42,12 +44,12 @@ public class StudentWelcomeActivity extends AppCompatActivity{
         });
 
     }
-    public void openTimelinePage () {
-        Intent intent = new Intent(this, GeneratedTimelineActivity.class);
+    private void openTimelinePage () {
+        Intent intent = new Intent(this, FutureCoursesActivity.class);
         startActivity(intent);
     }
 
-    public void openTakenTimelinePage () {
+    private void openTakenTimelinePage () {
         Intent intent = new Intent(this, TakenTimelineActivity.class);
         startActivity(intent);
     }

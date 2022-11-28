@@ -6,6 +6,21 @@
 	android:layout_height="match_parent"
 	tools:context=".FutureCoursesActivity">
 
+
+	<com.google.android.material.bottomnavigation.BottomNavigationView
+		android:id="@+id/bottom_navigation_view"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		android:background="?android:attr/windowBackground"
+		app:menu="@menu/bottom_navmenu"
+		app:backgroundTint="@color/uoft_dark"
+		app:itemIconTint="@color/white"
+		app:itemTextColor="@color/white">
+	</com.google.android.material.bottomnavigation.BottomNavigationView>
+
 	<TextView
 		android:id="@+id/future_course_header"
 		android:layout_width="wrap_content"
@@ -43,7 +58,8 @@
 		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toBottomOf="@+id/added_courses_view" />
+		app:layout_constraintTop_toBottomOf="@+id/added_courses_view"
+		app:layout_constraintVertical_bias="0.555" />
 
 	<android.widget.SearchView
 		android:id="@+id/future_search_bar"
@@ -69,7 +85,7 @@
 	<ScrollView
 		android:id="@+id/added_courses_view"
 		android:layout_width="match_parent"
-		android:layout_height="240dp"
+		android:layout_height="270dp"
 		android:layout_marginTop="24dp"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintHorizontal_bias="0.488"

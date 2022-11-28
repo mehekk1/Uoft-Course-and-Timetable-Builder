@@ -7,7 +7,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
@@ -18,6 +20,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,6 +32,8 @@ import java.sql.Array;
 import java.util.ArrayList;
 
 public class FutureCoursesActivity extends AppCompatActivity {
+
+    private BottomNavigationView bottomNav;
 
     FirebaseDatabase db;
     DatabaseReference referenceSel;
@@ -46,6 +52,26 @@ public class FutureCoursesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_future_courses);
+
+        bottomNav = findViewById(R.id.bottom_navigation_view);
+        bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                switch (id) {
+                    case R.id.nav_home:
+                        openWelocomePage();
+                        break;
+                    case R.id.nav_timeline:
+                        break;
+                    case R.id.nav_add_menu:
+                        openTakenTimelinePage();
+                        break;
+                }
+                return true;
+            }
+        });
+
 
         context = this.getApplicationContext();
         db = FirebaseDatabase.getInstance();
@@ -260,4 +286,15 @@ public class FutureCoursesActivity extends AppCompatActivity {
         CourseSearchItemAdapter searchAdapter = new CourseSearchItemAdapter(context, coursesShown);
         rvSearch.setAdapter(searchAdapter);
     }
+
+    private void openWelocomePage () {
+        Intent intent = new Intent(this, StudentWelcomeActivity.class);
+        startActivity(intent);
+    }
+
+    private void openTakenTimelinePage () {
+        Intent intent = new Intent(this, TakenTimelineActivity.class);
+        startActivity(intent);
+    }
+
 }
