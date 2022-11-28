@@ -52,7 +52,7 @@ public class TakenTimelineActivity extends AppCompatActivity {
         e = findViewById(R.id.course_text);
         db = FirebaseDatabase.getInstance();
         courses = new ArrayList<String>();
-        student = "alex_zeng";
+        student = "charles";
         init();
         b.setOnClickListener(new View.OnClickListener() {
             @Override
