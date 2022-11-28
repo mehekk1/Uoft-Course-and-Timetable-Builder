@@ -13,6 +13,7 @@
         android:background="@drawable/textfield_styling"
         android:fontFamily="@font/montserrat"
         android:hint="  Email"
+        android:imeOptions="actionDone"
         android:inputType="textEmailAddress"
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,18 +25,15 @@
         android:layout_width="170dp"
         android:layout_height="47dp"
         android:layout_gravity="start"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="64dp"
+        android:layout_marginTop="180dp"
         android:background="@drawable/button_styling"
         android:fontFamily="@font/montserrat"
         android:text="@string/common_signin_button_text"
         app:backgroundTint="#1C375B"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password"
-        app:layout_constraintVertical_bias="0.461" />
+        app:layout_constraintTop_toBottomOf="@+id/password" />
 
     <EditText
         android:id="@+id/password"

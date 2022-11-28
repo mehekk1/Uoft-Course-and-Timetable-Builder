@@ -52,5 +52,8 @@ public class LoginActivity extends AppCompatActivity {
                 tabLayout.selectTab(tabLayout.getTabAt(position));
             }
         });
+
+
+
     }
 }
