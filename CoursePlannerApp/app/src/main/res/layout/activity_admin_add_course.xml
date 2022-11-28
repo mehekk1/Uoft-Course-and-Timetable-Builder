@@ -31,7 +31,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/admin_add_course_header"
-        app:layout_constraintVertical_bias="0.175" />
+        app:layout_constraintVertical_bias="0.589" />
 
     <ImageView
         android:id="@+id/admin_welcome_page_uoft_logo"
@@ -51,7 +51,10 @@
         android:background="@drawable/input"
         android:hint="@string/admin_add_course_code"
         android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:textColor="@color/black"
         android:textColorHint="@color/uoft_light"
+        android:inputType="textCapCharacters"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.49"
@@ -65,12 +68,74 @@
         android:layout_height="50dp"
         android:background="@drawable/input"
         android:hint="@string/admin_add_course_name"
+        android:inputType="textCapSentences|textAutoComplete"
         android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:textColor="@color/black"
         android:textColorHint="@color/uoft_light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/admin_add_course_code"
-        app:layout_constraintVertical_bias="0.104" />
+        app:layout_constraintVertical_bias="0.036" />
+
+    <Switch
+        android:theme="@style/Theme.MyTheme"
+        android:id="@+id/winter_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:text="@string/admin_add_winter_switch"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/summer_switch"
+        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintStart_toEndOf="@+id/fall_switch"
+        app:layout_constraintTop_toBottomOf="@+id/admin_add_course_name"
+        app:layout_constraintVertical_bias="0.164" />
+
+    <Switch
+        android:theme="@style/Theme.MyTheme"
+        android:id="@+id/fall_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:minHeight="48dp"
+        android:text="@string/admin_add_fall_switch"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/admin_add_course_name"
+        app:layout_constraintVertical_bias="0.164" />
+
+    <Switch
+        android:theme="@style/Theme.MyTheme"
+        android:id="@+id/summer_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="48dp"
+        android:minHeight="48dp"
+        android:text="@string/admin_add_summer_switch"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/admin_add_course_name"
+        app:layout_constraintVertical_bias="0.164" />
+
+    <TextView
+        android:id="@+id/admin_add_choose_offerings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="@string/admin_add_when_offered"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/winter_switch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/admin_add_course_name"
+        app:layout_constraintVertical_bias="0.529" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
