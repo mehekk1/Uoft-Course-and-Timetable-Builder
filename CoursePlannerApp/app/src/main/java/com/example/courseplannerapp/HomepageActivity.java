@@ -39,12 +39,12 @@ public class HomepageActivity extends AppCompatActivity {
 
     }
 
-    public void openLoginPage() {
+    private void openLoginPage() {
         Intent intent = new Intent(this, StudentLoginActivity.class);
         startActivity(intent);
     }
 
-    public void openRegisterPage(){
+    private void openRegisterPage(){
         Intent intent = new Intent(this, StudentSignupActivity.class);
         startActivity(intent);
     }

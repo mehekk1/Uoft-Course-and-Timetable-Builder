@@ -22,17 +22,17 @@
 
 	</com.google.android.material.bottomnavigation.BottomNavigationView>
 
-	<FrameLayout
-		android:id="@+id/fragment_container"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
+<!--	<FrameLayout-->
+<!--		android:id="@+id/fragment_container"-->
+<!--		android:layout_width="match_parent"-->
+<!--		android:layout_height="match_parent"-->
 
-		app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_view"
-		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toTopOf="parent">
-
-	</FrameLayout>
+<!--		app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_view"-->
+<!--		app:layout_constraintEnd_toEndOf="parent"-->
+<!--		app:layout_constraintStart_toStartOf="parent"-->
+<!--		app:layout_constraintTop_toTopOf="parent">-->
+<!--		-->
+<!--	</FrameLayout>-->
 
 	<ImageView
 		android:id="@+id/welcome_page_icon"
@@ -84,5 +84,19 @@
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintTop_toTopOf="parent"
 		app:srcCompat="@drawable/uoft" />
+
+	<Button
+		android:id="@+id/courses_btn"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:width="150sp"
+		android:text="@string/welcome_page_courses_btn"
+		app:cornerRadius="20sp"
+		app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_view"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintHorizontal_bias="0.498"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/welcome_app_description"
+		app:layout_constraintVertical_bias="0.448" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

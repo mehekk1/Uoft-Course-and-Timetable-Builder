@@ -11,9 +11,6 @@
     <string name="welcome_page_img_description">student logo</string>
     <string name="welcome_page_app_description">Explore our various courses, view your taken courses or generate a timetable!</string>
     <string name="welcome_page_courses_btn">COURSES</string>
-    <string name="welcome_page_previous_btn">MY COURSES</string>
-    <string name="welcome_page_future_btn">TIMELINE</string>
-
 
 	<string name="timeline_header">Timeline</string>
 	<string name="timeline_generate">Generate</string>
