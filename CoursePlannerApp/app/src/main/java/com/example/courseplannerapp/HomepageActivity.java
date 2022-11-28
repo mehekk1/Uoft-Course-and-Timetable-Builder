@@ -11,7 +11,6 @@ public class HomepageActivity extends AppCompatActivity {
 
     //fields
     private Button btnLogin;
-    private Button btnRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +19,6 @@ public class HomepageActivity extends AppCompatActivity {
 
         //change of pages
         btnLogin = (Button) findViewById(R.id.home_login_btn);
-        btnRegister = (Button) findViewById(R.id.home_register_btn);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -28,24 +26,10 @@ public class HomepageActivity extends AppCompatActivity {
                 openLoginPage();
             }
         });
-
-        btnRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openRegisterPage();
-            }
-        });
-
-
     }
 
     public void openLoginPage() {
-        Intent intent = new Intent(this, StudentLoginActivity.class);
-        startActivity(intent);
-    }
-
-    public void openRegisterPage(){
-        Intent intent = new Intent(this, StudentSignupActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
 }

@@ -12,7 +12,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CoursePlannerApp"
         tools:targetApi="31">
-        <activity android:name=".FutureCoursesActivity"
+
+        <activity
+            android:name=".FutureCoursesActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ConfirmSignupActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
