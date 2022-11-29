@@ -9,6 +9,7 @@
     <string name="welcome_page_user_header_msg">WELCOME USERNAME</string>
     <string name="welcome_page_img_description">student logo</string>
     <string name="welcome_page_app_description">Explore our various courses, view your taken courses or generate a timetable!</string>
+    <string name="welcome_page_card_home"></string>
     <string name="welcome_page_courses_btn">COURSES</string>
     <string name="home_page_login_btn">Get Started</string>
     <string name="home_page_register_btn">REGISTER</string>
