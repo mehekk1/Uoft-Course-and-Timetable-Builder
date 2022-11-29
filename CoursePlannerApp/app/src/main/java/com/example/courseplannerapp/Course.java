@@ -5,17 +5,21 @@ import java.util.List;
 public class Course {
     String name;
     String code;
-    List<String> offerings;
-    List<Course> pre_reqs;
+    boolean fall;
+    boolean winter;
+    boolean summer;
+    List<Course> prereqs;
 
     public Course() {
     }
 
-    public Course(String name, String code, List<String> offerings, List<Course> pre_reqs) {
+    public Course(String name, String code, boolean fall, boolean winter, boolean summer, List<Course> prereqs) {
         this.name = name;
         this.code = code;
-        this.offerings = offerings;
-        this.pre_reqs = pre_reqs;
+        this.fall = fall;
+        this.winter = winter;
+        this.summer = summer;
+        this.prereqs = prereqs;
     }
 
     public String getName() {
@@ -34,19 +38,35 @@ public class Course {
         this.code = code;
     }
 
-    public List<String> getOfferings() {
-        return offerings;
+    public boolean isFall() {
+        return fall;
     }
 
-    public void setOfferings(List<String> offerings) {
-        this.offerings = offerings;
+    public void setFall(boolean fall) {
+        this.fall = fall;
     }
 
-    public List<Course> getPre_reqs() {
-        return pre_reqs;
+    public boolean isWinter() {
+        return winter;
     }
 
-    public void setPre_reqs(List<Course> pre_reqs) {
-        this.pre_reqs = pre_reqs;
+    public void setWinter(boolean winter) {
+        this.winter = winter;
+    }
+
+    public boolean isSummer() {
+        return summer;
+    }
+
+    public void setSummer(boolean summer) {
+        this.summer = summer;
+    }
+
+    public List<Course> getPrereqs() {
+        return prereqs;
+    }
+
+    public void setPrereqs(List<Course> prereqs) {
+        this.prereqs = prereqs;
     }
 }

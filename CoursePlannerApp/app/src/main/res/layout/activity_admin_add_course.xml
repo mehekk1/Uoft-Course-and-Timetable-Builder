@@ -5,7 +5,7 @@
     android:background="@color/activity_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AdminAddCourse">
+    tools:context=".AdminAddCourseActivity">
     <TextView
         android:id="@+id/admin_add_course_header"
         android:layout_width="wrap_content"
@@ -50,17 +50,18 @@
         android:layout_height="50dp"
         android:background="@drawable/input"
         android:hint="@string/admin_add_course_code"
+        android:inputType="textCapCharacters"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:textColor="@color/black"
         android:textColorHint="@color/uoft_light"
-        android:inputType="textCapCharacters"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/admin_add_course_header"
-        app:layout_constraintVertical_bias="0.112" />
+        app:layout_constraintVertical_bias="0.112"
+        tools:ignore="TextContrastCheck" />
 
     <EditText
         android:id="@+id/admin_add_course_name"
@@ -78,7 +79,8 @@
         app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/admin_add_course_code"
-        app:layout_constraintVertical_bias="0.036" />
+        app:layout_constraintVertical_bias="0.036"
+        tools:ignore="TextContrastCheck" />
 
     <Switch
         android:theme="@style/Theme.MyTheme"
@@ -93,7 +95,8 @@
         app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toEndOf="@+id/fall_switch"
         app:layout_constraintTop_toBottomOf="@+id/admin_add_course_name"
-        app:layout_constraintVertical_bias="0.164" />
+        app:layout_constraintVertical_bias="0.164"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     <Switch
         android:theme="@style/Theme.MyTheme"
@@ -107,7 +110,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/admin_add_course_name"
-        app:layout_constraintVertical_bias="0.164" />
+        app:layout_constraintVertical_bias="0.164"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     <Switch
         android:theme="@style/Theme.MyTheme"
@@ -121,7 +125,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/admin_add_course_name"
-        app:layout_constraintVertical_bias="0.164" />
+        app:layout_constraintVertical_bias="0.164"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     <TextView
         android:id="@+id/admin_add_choose_offerings"
@@ -137,5 +142,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/admin_add_course_name"
         app:layout_constraintVertical_bias="0.529" />
+
+    <Button
+        android:id="@+id/admin_add_course_btn"
+        android:layout_width="153dp"
+        android:layout_height="66dp"
+        android:layout_marginBottom="44dp"
+        android:width="120sp"
+        android:backgroundTint="@color/uoft_dark"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/admin_add_course_btn"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:cornerRadius="50sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.515"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

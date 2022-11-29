@@ -33,5 +33,6 @@
     <string name="admin_add_winter_switch">Winter</string>
     <string name="admin_add_fall_switch">Fall</string>
     <string name="admin_add_summer_switch">Summer</string>
+    <string name="admin_add_course_btn">Add Course</string>
 
 </resources>

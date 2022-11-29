@@ -16,8 +16,8 @@ public class AdminWelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_welcome);
 
-        admin_welcome_add_courses_btn = (Button) findViewById(R.id.admin_welcome_add_btn);
-        admin_welcome_edit_courses_btn = (Button) findViewById(R.id.admin_welcome_edit_btn);
+        admin_welcome_add_courses_btn = findViewById(R.id.admin_welcome_add_btn);
+        admin_welcome_edit_courses_btn = findViewById(R.id.admin_welcome_edit_btn);
 
         admin_welcome_add_courses_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,7 +35,7 @@ public class AdminWelcomeActivity extends AppCompatActivity {
 
     }
     public void openAddCoursePage(){
-        Intent intent = new Intent(this,AdminAddCourse.class);
+        Intent intent = new Intent(this,AdminAddCourseActivity.class);
         startActivity(intent);
     }
     public void openEditCoursePage(){
