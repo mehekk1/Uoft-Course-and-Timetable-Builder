@@ -27,7 +27,6 @@ public class StudentWelcomeActivity extends AppCompatActivity{
     private CardView settingsCard;
     private CardView logoutCard;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,7 +115,7 @@ public class StudentWelcomeActivity extends AppCompatActivity{
     }
 
     private void goToLoginPage(){
-        Intent intent = new Intent(this, StudentLoginActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
 
@@ -124,6 +123,5 @@ public class StudentWelcomeActivity extends AppCompatActivity{
         Intent intent = new Intent(this, UserSettingsActivity.class);
         startActivity(intent);
     }
-
 
 }
