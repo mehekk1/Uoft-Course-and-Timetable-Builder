@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/activity_background"
+    android:layout_height="match_parent"
+    tools:context=".AdminWelcomeActivity">
+
+    <Button
+        android:id="@+id/admin_welcome_add_btn"
+        android:layout_width="153dp"
+        android:layout_height="66dp"
+        android:width="120sp"
+        android:backgroundTint="@color/uoft_dark"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/admin_welcome_add_btn"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        app:cornerRadius="50sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.883"
+        app:layout_constraintStart_toEndOf="@id/admin_welcome_edit_btn"
+        app:layout_constraintTop_toBottomOf="@+id/admin_welcome_app_description"
+        app:layout_constraintVertical_bias="0.4" />
+
+    <Button
+        android:id="@+id/admin_welcome_edit_btn"
+        android:layout_width="153dp"
+        android:layout_height="66dp"
+        android:width="120sp"
+        android:backgroundTint="@color/uoft_dark"
+        android:fontFamily="sans-serif-black"
+        android:textColor="@color/white"
+        android:text="@string/admin_welcome_edit_btn"
+        android:textSize="16sp"
+        app:cornerRadius="250sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/admin_welcome_add_btn"
+        app:layout_constraintHorizontal_bias="0.274"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/admin_welcome_app_description"
+        app:layout_constraintVertical_bias="0.40" />
+
+    <ImageView
+        android:id="@+id/admin_welcome_icon"
+        android:layout_width="269dp"
+        android:layout_height="247dp"
+        android:layout_marginTop="44dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/admin_welcome_user_msg"
+        android:contentDescription="@string/admin_welcome_img_description"
+        app:srcCompat="@drawable/admin_icon" />
+
+    <TextView
+        android:id="@+id/admin_welcome_user_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="76dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="@string/admin_welcome_header"
+        android:textColor="@color/uoft_dark"
+        android:textSize="32sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/admin_welcome_app_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:width="200sp"
+        android:fontFamily="@font/inter_semibold"
+        android:gravity="center"
+        android:text="@string/admin_welcome_description"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/admin_welcome_icon" />
+
+    <ImageView
+        android:id="@+id/admin_welcome_page_uoft_logo"
+        android:layout_width="73dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        android:contentDescription="@string/home_page_img_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/uoft" />
+</androidx.constraintlayout.widget.ConstraintLayout>
