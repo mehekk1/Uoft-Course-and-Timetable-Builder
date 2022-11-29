@@ -48,6 +48,7 @@
 	>
 
 		<androidx.cardview.widget.CardView
+			android:id="@+id/homeWidget"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_row="0"
@@ -86,6 +87,7 @@
 		</androidx.cardview.widget.CardView>
 
 		<androidx.cardview.widget.CardView
+			android:id="@+id/libraryWidget"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_row="0"
@@ -124,6 +126,7 @@
 		</androidx.cardview.widget.CardView>
 
 		<androidx.cardview.widget.CardView
+			android:id="@+id/courseWidget"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_row="1"
@@ -162,6 +165,7 @@
 		</androidx.cardview.widget.CardView>
 
 		<androidx.cardview.widget.CardView
+			android:id="@+id/timelineWidget"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_row="1"
@@ -200,6 +204,7 @@
 		</androidx.cardview.widget.CardView>
 
 		<androidx.cardview.widget.CardView
+			android:id="@+id/settingsWidget"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_row="2"
@@ -238,6 +243,7 @@
 		</androidx.cardview.widget.CardView>
 
 		<androidx.cardview.widget.CardView
+			android:id="@+id/logoutWidget"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_row="2"
