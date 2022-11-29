@@ -66,7 +66,12 @@ public class StudentWelcomeActivity extends AppCompatActivity{
             }
         });
 
-//      Settings
+        settingsCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openSettingsPage();
+            }
+        });
 
         logoutCard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,6 +117,11 @@ public class StudentWelcomeActivity extends AppCompatActivity{
 
     private void goToLoginPage(){
         Intent intent = new Intent(this, StudentLoginActivity.class);
+        startActivity(intent);
+    }
+
+    private void openSettingsPage(){
+        Intent intent = new Intent(this, UserSettingsActivity.class);
         startActivity(intent);
     }
 
