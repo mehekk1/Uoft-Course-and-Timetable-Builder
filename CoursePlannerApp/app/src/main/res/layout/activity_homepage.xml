@@ -15,7 +15,7 @@
 		android:fontFamily="@font/montserrat_bold"
 		android:gravity="center|top"
 		android:text="@string/home_page_Header"
-		android:textColor="#1C375B"
+		android:textColor="@color/uoft_dark"
 		android:textSize="32sp"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintHorizontal_bias="0.496"
@@ -66,31 +66,16 @@
 
 	<Button
 		android:id="@+id/home_login_btn"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_marginStart="48dp"
+		android:layout_width="161dp"
+		android:layout_height="55dp"
 		android:layout_marginTop="41dp"
 		android:width="150sp"
 		android:backgroundTint="#1C375B"
 		android:text="@string/home_page_login_btn"
 		app:cornerRadius="20sp"
 		app:layout_constraintBottom_toBottomOf="parent"
-		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toBottomOf="@+id/home_jing"
-		app:layout_constraintVertical_bias="0.0" />
-
-	<Button
-		android:id="@+id/home_register_btn"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_marginTop="41dp"
-		android:layout_marginEnd="44dp"
-		android:width="150sp"
-		android:backgroundTint="#1C375B"
-		android:text="@string/home_page_register_btn"
-		app:cornerRadius="20sp"
-		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toBottomOf="@+id/home_jing"
 		app:layout_constraintVertical_bias="0.0" />
 
