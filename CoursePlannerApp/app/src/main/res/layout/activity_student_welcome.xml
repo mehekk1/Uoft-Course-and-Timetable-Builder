@@ -7,4 +7,96 @@
 	android:layout_height="match_parent"
 	tools:context=".StudentWelcomeActivity">
 
+	<com.google.android.material.bottomnavigation.BottomNavigationView
+		android:id="@+id/bottom_navigation_view"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		android:background="?android:attr/windowBackground"
+		app:menu="@menu/bottom_navmenu"
+		app:backgroundTint="@color/uoft_dark"
+		app:itemIconTint="@color/white"
+		app:itemTextColor="@color/white">
+
+	</com.google.android.material.bottomnavigation.BottomNavigationView>
+
+<!--	<FrameLayout-->
+<!--		android:id="@+id/fragment_container"-->
+<!--		android:layout_width="match_parent"-->
+<!--		android:layout_height="match_parent"-->
+
+<!--		app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_view"-->
+<!--		app:layout_constraintEnd_toEndOf="parent"-->
+<!--		app:layout_constraintStart_toStartOf="parent"-->
+<!--		app:layout_constraintTop_toTopOf="parent">-->
+<!--		-->
+<!--	</FrameLayout>-->
+
+	<ImageView
+		android:id="@+id/welcome_page_icon"
+		android:layout_width="343dp"
+		android:layout_height="315dp"
+		android:layout_marginTop="16dp"
+		android:contentDescription="@string/welcome_page_img_description"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/welcome_user_msg"
+		app:srcCompat="@drawable/student_icon" />
+
+	<TextView
+		android:id="@+id/welcome_user_msg"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="88dp"
+		android:fontFamily="@font/montserrat_bold"
+		android:text="@string/welcome_page_user_header_msg"
+		android:textColor="@color/uoft_dark"
+		android:textSize="32sp"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent" />
+
+	<TextView
+		android:id="@+id/welcome_app_description"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="16dp"
+		android:width="200sp"
+		android:fontFamily="@font/inter_semibold"
+		android:gravity="center"
+		android:text="@string/welcome_page_app_description"
+		android:textColor="#000000"
+		android:textSize="18sp"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintHorizontal_bias="0.497"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/welcome_page_icon" />
+
+	<ImageView
+		android:id="@+id/welcome_page_uft_logo"
+		android:layout_width="73dp"
+		android:layout_height="59dp"
+		android:layout_marginTop="4dp"
+		android:layout_marginEnd="4dp"
+		android:contentDescription="@string/home_page_img_description"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintTop_toTopOf="parent"
+		app:srcCompat="@drawable/uoft" />
+
+	<Button
+		android:id="@+id/courses_btn"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:width="150sp"
+		android:text="@string/welcome_page_courses_btn"
+		app:cornerRadius="20sp"
+		app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_view"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintHorizontal_bias="0.498"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/welcome_app_description"
+		app:layout_constraintVertical_bias="0.448" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

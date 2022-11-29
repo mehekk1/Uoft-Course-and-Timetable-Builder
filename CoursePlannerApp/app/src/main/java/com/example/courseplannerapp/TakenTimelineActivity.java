@@ -5,6 +5,7 @@ import static com.example.courseplannerapp.R.color.black;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -179,4 +180,5 @@ public class TakenTimelineActivity extends AppCompatActivity {
             stk.addView(tbrow);
         }
     }
+
 }

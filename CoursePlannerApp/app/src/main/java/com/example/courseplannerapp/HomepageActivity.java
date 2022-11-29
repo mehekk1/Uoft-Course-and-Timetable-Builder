@@ -28,8 +28,12 @@ public class HomepageActivity extends AppCompatActivity {
         });
     }
 
-    public void openLoginPage() {
-        Intent intent = new Intent(this, LoginActivity.class);
+    private void openLoginPage() {
+        Intent intent = new Intent(this, StudentLoginActivity.class);
         startActivity(intent);
+    }
+
+    private void openRegisterPage(){
+        Intent intent = new Intent(this, StudentSignupActivity.class);
     }
 }
