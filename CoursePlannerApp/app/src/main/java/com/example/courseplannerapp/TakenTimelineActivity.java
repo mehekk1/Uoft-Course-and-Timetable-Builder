@@ -1,7 +1,11 @@
 package com.example.courseplannerapp;
 
+import static com.example.courseplannerapp.R.color.black;
+
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -29,12 +33,14 @@ public class TakenTimelineActivity extends AppCompatActivity {
 
     FirebaseDatabase db;
     DatabaseReference reference;
+    DatabaseReference sec_ref;
     String course;
     ArrayList<String> courses;
     Button b;
     Button b2;
     EditText e;
     Context context;
+    String student;
 
 
     @Override
@@ -47,14 +53,15 @@ public class TakenTimelineActivity extends AppCompatActivity {
         e = findViewById(R.id.course_text);
         db = FirebaseDatabase.getInstance();
         courses = new ArrayList<String>();
+        student = "charles";
         init();
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                db = FirebaseDatabase.getInstance();
                 course = e.getText().toString().toUpperCase();
-                reference = db.getReference("courses");
-                reference.child(course).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                reference = db.getReference("Students");
+                sec_ref = db.getReference("Courses");
+                reference.child(student).child("taken_list").child(course).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DataSnapshot> task) {
                         if(task.isSuccessful()){
@@ -65,8 +72,17 @@ public class TakenTimelineActivity extends AppCompatActivity {
                                 Toast.makeText(context, course + " already exists", Toast.LENGTH_SHORT).show();
                             }
                             else {
-                                reference.child(course).setValue(course);
-                                Toast.makeText(context, course+ " Added", Toast.LENGTH_SHORT).show();
+                                sec_ref.child(course).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DataSnapshot> task2) {
+                                        if (task2.getResult().exists()){
+                                            reference.child(student).child("taken_list").child(course).setValue(course);
+                                            Toast.makeText(context, course+ " Added", Toast.LENGTH_SHORT).show();
+                                        }
+                                        else
+                                            Toast.makeText(context, "This course does not exist, please try again", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
                             }
                         } else{
                             Toast.makeText(context, "An error has occurred", Toast.LENGTH_SHORT).show();
@@ -80,8 +96,8 @@ public class TakenTimelineActivity extends AppCompatActivity {
             public void onClick(View view) {
                 db = FirebaseDatabase.getInstance();
                 course = e.getText().toString().toUpperCase();
-                reference = db.getReference("courses");
-                reference.child(course).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                reference = db.getReference("Students");
+                reference.child(student).child("taken_list").child(course).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DataSnapshot> task) {
                         if (task.isSuccessful()) {
@@ -89,7 +105,7 @@ public class TakenTimelineActivity extends AppCompatActivity {
                                 Toast.makeText(context, course + "Please enter a course code", Toast.LENGTH_SHORT).show();
                             }
                             else if (task.getResult().exists()) {
-                                reference.child(course).removeValue();
+                                reference.child(student).child("taken_list").child(course).removeValue();
                                 Toast.makeText(context, course + " Removed", Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(context, course + " Not In List", Toast.LENGTH_SHORT).show();
@@ -101,8 +117,8 @@ public class TakenTimelineActivity extends AppCompatActivity {
                 });
             }
         });
-        reference = db.getReference("courses");
-        reference.orderByKey().addChildEventListener(new ChildEventListener() {
+        reference = db.getReference("Students");
+        reference.child(student).child("taken_list").orderByKey().addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 courses.add(snapshot.getValue().toString());
@@ -146,16 +162,23 @@ public class TakenTimelineActivity extends AppCompatActivity {
             tv0.setText("You have taken " + 1 + " course!");
         else
             tv0.setText("You have taken " + num + " courses!");
-        tv0.setTextSize(24);
+        tv0.setTextSize(28);
+        tv0.setTextColor(getResources().getColor(black));
+        tv0.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        tv0.setTypeface(null, Typeface.BOLD);
         tbrow0.addView(tv0);
         stk.addView(tbrow0);
         for(String c:courses){
             TableRow tbrow = new TableRow(context);
             TextView tv1 = new TextView(context);
+            tv1.setTextColor(getResources().getColor(black));
             tv1.setText(c);
-            tv0.setTextSize(18);
+            tv1.setTextSize(20);
+            tv1.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            tv1.setTypeface(null, Typeface.BOLD);
             tbrow.addView(tv1);
             stk.addView(tbrow);
         }
     }
+
 }

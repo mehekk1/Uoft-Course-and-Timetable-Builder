@@ -11,6 +11,7 @@
 		android:layout_width="359dp"
 		android:layout_height="88dp"
 		android:layout_marginTop="16dp"
+		android:fontFamily="@font/montserrat_bold"
 		android:text="Welcome to your taken courses page!"
 		android:textAlignment="center"
 		android:textColor="#1C375B"
@@ -24,7 +25,9 @@
 		android:id="@+id/textView"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		android:layout_marginStart="8dp"
 		android:layout_marginTop="8dp"
+		android:fontFamily="@font/montserrat_bold"
 		android:text="Enter a course code to make changes:"
 		android:textColor="@color/black"
 		android:textSize="18sp"
@@ -67,18 +70,23 @@
 
 	<ScrollView
 		android:id="@+id/scrollView1"
-		android:layout_width="fill_parent"
+		android:layout_width="380dp"
 		android:layout_height="440dp"
 		android:layout_alignParentLeft="true"
-		android:background="@color/white"
+		android:layout_marginStart="16dp"
+		android:layout_marginTop="8dp"
+		android:layout_marginEnd="16dp"
+		android:background="@drawable/stroke_bg"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toBottomOf="@+id/textView2">
 
 		<HorizontalScrollView
 			android:id="@+id/hscrll1"
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content">
+			android:layout_width="match_parent"
+			android:layout_height="fill_parent"
+			android:layout_marginStart="16dp"
+			android:layout_marginEnd="16dp">
 
 			<RelativeLayout
 				android:id="@+id/RelativeLayout1"
@@ -88,6 +96,8 @@
 				android:orientation="vertical">
 
 				<TableLayout
+					android:layout_marginTop="10dp"
+					android:layout_marginBottom="10dp"
 					android:id="@+id/table_main"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
@@ -101,6 +111,7 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="4dp"
+		android:fontFamily="@font/montserrat_bold"
 		android:text="Here are the courses you have taken!"
 		android:textColor="#1C375B"
 		android:textSize="22sp"
@@ -109,4 +120,16 @@
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toBottomOf="@+id/button_second"
 		tools:ignore="MissingConstraints" />
+
+	<TextView
+		android:id="@+id/textView3"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="8dp"
+		android:fontFamily="@font/montserrat_bold"
+		android:text="Don't forget to scroll to view more!"
+		android:textColor="#1C375B"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/scrollView1" />
 </androidx.constraintlayout.widget.ConstraintLayout>

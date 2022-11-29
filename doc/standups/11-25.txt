@@ -1,0 +1,63 @@
+Ansh Aneel:
+
+  What have you done since today?
+	  - Worked on login page.
+    - Worked on signup page.
+    
+  What are you planning on doing tomorrow?
+    - Will work on the login page.
+    - Will work on the signup page.
+
+  Any impediments or stumbling blocks?
+	  - Android studio having gradle issues, but now has been fixed.
+
+Alex Zeng:
+
+   What have you done since today?
+    -restructured design for taken courses page, 
+    -successfully created scrollview to display taken courses
+    -finalized dynamic displaying table for courses
+
+  What are you planning on doing tomorrow?
+      - Finish taken courses page.
+
+  Any impediments or stumbling blocks?
+	  - No impediments faced yet.
+
+Sohil Chanana:
+
+  What have you done since today?
+	  - Worked on timeline generator.
+
+  What are you planning on doing tomorrow?
+    - Work on possible admin material to have easier testing for student view.
+
+  Any impediments or stumbling blocks?
+    - No impediments faced yet.
+    
+Vedat Goktepe:
+
+  What have you done since today?
+    - Finalized design of pre-timetable-generation page.
+    - Wrote base functionality of displaying added courses.
+    
+  What are you planning on doing tomorrow?
+    - Try to finish pre-timetable-generation page.
+
+  Any impediments or stumbling blocks?
+	  - No impediments faced yet.
+
+Ashwin Mallik:
+
+  What have you done since today?
+    - Finished signup confirmation page.
+    - Finished welcome home page for student.
+    - Started navigation of app through drop down menu bar.
+      
+  What are you planning on doing tomorrow?
+      - Finish navigation of app through drop down menu bar.
+      - Look at possibility of adding view all courses page.
+      - See if I can assist anyone else.
+
+  Any impediments or stumbling blocks?
+	  - No impediments faced yet.

@@ -6,17 +6,33 @@
 	android:layout_height="match_parent"
 	tools:context=".FutureCoursesActivity">
 
+
+	<com.google.android.material.bottomnavigation.BottomNavigationView
+		android:id="@+id/bottom_navigation_view"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		android:background="?android:attr/windowBackground"
+		app:menu="@menu/bottom_navmenu"
+		app:backgroundTint="@color/uoft_dark"
+		app:itemIconTint="@color/white"
+		app:itemTextColor="@color/white">
+	</com.google.android.material.bottomnavigation.BottomNavigationView>
+
 	<TextView
 		android:id="@+id/future_course_header"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_marginTop="36dp"
+		android:layout_marginTop="24dp"
 		android:fontFamily="@font/montserrat_bold"
 		android:gravity="center|top"
 		android:text="@string/timeline_future_header"
 		android:textColor="@color/uoft_dark"
 		android:textSize="32sp"
 		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintHorizontal_bias="0.494"
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,53 +40,76 @@
 		android:id="@+id/future_added_text"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_marginTop="28dp"
+		android:layout_marginTop="24dp"
 		android:fontFamily="@font/montserrat_bold"
 		android:gravity="center|top"
-		android:text="@string/timeline_addmore"
+		android:text="@string/future_course_added"
 		android:textColor="@color/uoft_dark"
 		android:textSize="28sp"
 		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintHorizontal_bias="0.497"
 		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toBottomOf="@+id/future_search_bar" />
+		app:layout_constraintTop_toBottomOf="@+id/search_items_view" />
 
 	<Button
 		android:id="@+id/future_add_button"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:text="@string/timeline_generate"
+		android:text="@string/future_generate_text"
 		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
+		app:layout_constraintTop_toBottomOf="@+id/added_courses_view" />
 
 	<android.widget.SearchView
 		android:id="@+id/future_search_bar"
 		android:layout_width="match_parent"
 		android:layout_height="48dp"
-		android:layout_marginTop="48dp"
+		android:layout_marginTop="24dp"
 		android:background="@drawable/search_bar_bg"
 		android:iconifiedByDefault="false"
 		android:queryHint="Search For A Course"
 		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintHorizontal_bias="0.0"
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toBottomOf="@+id/future_course_header" />
 
+	<androidx.recyclerview.widget.RecyclerView
+		android:id="@+id/search_items_view"
+		android:layout_width="315dp"
+		android:layout_height="120dp"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/future_search_bar" />
+
 	<ScrollView
-		android:id="@+id/scrollView2"
+		android:id="@+id/added_courses_view"
 		android:layout_width="match_parent"
-		android:layout_height="240dp"
+		android:layout_height="270dp"
 		android:layout_marginTop="24dp"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintHorizontal_bias="0.488"
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toBottomOf="@+id/future_added_text">
 
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:orientation="vertical" />
+		<HorizontalScrollView
+			android:id="@+id/added_courses_horizontal"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content">
+
+			<RelativeLayout
+				android:id="@+id/added_courses_layout"
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent"
+				android:layout_gravity="center"
+				android:orientation="vertical">
+
+				<TableLayout
+					android:id="@+id/added_courses_table"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_centerHorizontal="true"></TableLayout>
+			</RelativeLayout>
+		</HorizontalScrollView>
 	</ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

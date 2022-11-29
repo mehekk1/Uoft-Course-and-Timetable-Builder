@@ -1,0 +1,59 @@
+Ansh Aneel:
+
+  What have you done since today?
+	  - Worked on developing generating timeline algo.
+    - Continued login and signup page.
+    
+  What are you planning on doing tomorrow?
+    - Continue to work on developing generating timeline algo.
+    - Work on connecting the database to login and signup page.
+
+  Any impediments or stumbling blocks?
+	  - None.
+
+Alex Zeng:
+
+   What have you done since today?
+    - Developed the main functionality and design for view all courses page 
+    - Refactored taken course list to adapt new database structure
+
+  What are you planning on doing tomorrow?
+      - Continue to work on view all courses page.
+
+  Any impediments or stumbling blocks?
+	  - No impediments faced yet.
+
+Sohil Chanana:
+
+  What have you done since today?
+	  - Worked on adding courses section for admin.
+    - Designed admin section.
+    
+  What are you planning on doing tomorrow?
+    - Worked on adding and removing courses section for admin.
+
+  Any impediments or stumbling blocks?
+    - No impediments faced yet.
+    
+Vedat Goktepe:
+
+  What have you done since today?
+    - Finished pre-timetable generation page.
+    
+  What are you planning on doing tomorrow?
+    - Refactor code for new database implementation.
+
+  Any impediments or stumbling blocks?
+	  - No impediments faced yet.
+
+Ashwin Mallik:
+
+  What have you done since today?
+    - Created navigation bar in app to circulate through fragments.
+      
+  What are you planning on doing tomorrow?
+    - Try to edit and advance UI for student view.
+    - Work on UI for admin view.
+
+  Any impediments or stumbling blocks?
+	  - No impediments faced yet.
