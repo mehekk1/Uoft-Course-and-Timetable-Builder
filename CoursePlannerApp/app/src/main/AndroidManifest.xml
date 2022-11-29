@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CoursePlannerApp"
         tools:targetApi="31">
+
         <activity
             android:name=".UserSettingsActivity"
             android:exported="false">
@@ -33,6 +34,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
         <activity
             android:name=".ConfirmSignupActivity"
             android:exported="false">
@@ -57,6 +59,7 @@
         <activity
             android:name=".TakenTimelineActivity"
             android:exported="false">
+
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -84,14 +87,21 @@
         <activity
             android:name=".HomepageActivity"
             android:exported="false">
+
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
 
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
+        <activity
+            android:name=".ViewAllCoursesActivity"
+            android:exported="false">
+
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
     </application>
 
 </manifest>

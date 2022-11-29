@@ -49,7 +49,12 @@ public class StudentWelcomeActivity extends AppCompatActivity{
             }
         });
 
-//      Library
+        libraryCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openViewAllCoursesPage();
+            }
+        });
 
         courseCard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,6 +111,11 @@ public class StudentWelcomeActivity extends AppCompatActivity{
 
     private void openTimelinePage () {
         Intent intent = new Intent(this, FutureCoursesActivity.class);
+        startActivity(intent);
+    }
+
+    private void openViewAllCoursesPage(){
+        Intent intent = new Intent(this, ViewAllCoursesActivity.class);
         startActivity(intent);
     }
 
