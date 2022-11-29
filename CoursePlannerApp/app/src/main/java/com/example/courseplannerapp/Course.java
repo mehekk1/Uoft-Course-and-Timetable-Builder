@@ -22,6 +22,14 @@ public class Course {
         this.prereqs = prereqs;
     }
 
+    public Course(String name, String code, boolean fall, boolean winter, boolean summer) {
+        this.name = name;
+        this.code = code;
+        this.fall = fall;
+        this.winter = winter;
+        this.summer = summer;
+    }
+
     public String getName() {
         return name;
     }
