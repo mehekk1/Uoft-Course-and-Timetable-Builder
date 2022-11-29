@@ -13,7 +13,7 @@
         android:theme="@style/Theme.CoursePlannerApp"
         tools:targetApi="31">
         <activity
-            android:name=".AdminAddCourse"
+            android:name=".AdminAddCourseActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

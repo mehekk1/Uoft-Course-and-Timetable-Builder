@@ -39,7 +39,7 @@ public class AdminAddCourseActivity extends AppCompatActivity {
                 code = binding.adminAddCourseCode.getText().toString().toUpperCase();
                 name = binding.adminAddCourseName.getText().toString();
                 fall = binding.fallSwitch.isChecked();
-                winter = binding.winterSwitch.isActivated();
+                winter = binding.winterSwitch.isChecked();
                 summer = binding.summerSwitch.isChecked();
 
                 if (!code.isEmpty() && !name.isEmpty() && (fall||winter||summer)){
