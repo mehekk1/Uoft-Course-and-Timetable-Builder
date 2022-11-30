@@ -12,7 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CoursePlannerApp"
         tools:targetApi="31">
-
+        <activity
+            android:name=".AdminEditCoursesActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".UserSettingsActivity"
             android:exported="false">
@@ -34,9 +40,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
         <activity
-
             android:name=".AdminAddCourseActivity"
             android:exported="false">
             <meta-data
@@ -51,13 +55,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".FutureCoursesActivity"
-            android:exported="false">
+
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -86,7 +84,6 @@
         <activity
             android:name=".TakenTimelineActivity"
             android:exported="false">
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -94,11 +91,6 @@
         <activity
             android:name=".StudentWelcomeActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
             <meta-data
                 android:name="android.app.lib_name"
@@ -118,16 +110,13 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
         <activity
             android:name=".ViewAllCoursesActivity"
             android:exported="false">
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
     </application>
 
 </manifest>

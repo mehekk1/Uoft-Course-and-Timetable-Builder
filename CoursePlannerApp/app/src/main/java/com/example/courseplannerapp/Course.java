@@ -30,6 +30,11 @@ public class Course {
         this.summer = summer;
     }
 
+    public Course(String name, String code){
+        this.name = name;
+        this.code = code;
+    }
+
     public String getName() {
         return name;
     }
