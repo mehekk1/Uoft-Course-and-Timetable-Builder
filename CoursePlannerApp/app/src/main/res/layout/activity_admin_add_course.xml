@@ -158,6 +158,31 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.515"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchRecycle"
+        app:layout_constraintVertical_bias="0.926" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/searchRecycle"
+        android:layout_width="203dp"
+        android:layout_height="102dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchView" />
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchView"
+        android:layout_width="240dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="16dp"
+        app:iconifiedByDefault="false"
+        android:textColorHint="@color/uoft_light"
+        android:textColor="@color/black"
+        app:queryHint="Add Prerequisites"
+        android:background="@drawable/input"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/winter_switch" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
