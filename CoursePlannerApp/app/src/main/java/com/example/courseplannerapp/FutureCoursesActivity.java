@@ -60,7 +60,7 @@ public class FutureCoursesActivity extends AppCompatActivity {
                 int id = item.getItemId();
                 switch (id) {
                     case R.id.nav_home:
-                        openWelocomePage();
+                        openWelcomePage();
                         break;
                     case R.id.nav_timeline:
                         break;
@@ -133,6 +133,9 @@ public class FutureCoursesActivity extends AppCompatActivity {
                                     public void onComplete(@NonNull Task<DataSnapshot> task) {
                                         if (task.isSuccessful()) {
                                             referenceSel.child(courseCode).setValue(courseCode);
+                                            System.out.println("****************************");
+                                            System.out.println(task.toString());
+                                            System.out.println("****************************");
                                         } else {
                                             Toast.makeText(context, "An error has occurred", Toast.LENGTH_SHORT).show();
                                         }
@@ -286,7 +289,7 @@ public class FutureCoursesActivity extends AppCompatActivity {
         rvSearch.setAdapter(searchAdapter);
     }
 
-    private void openWelocomePage () {
+    private void openWelcomePage () {
         Intent intent = new Intent(this, StudentWelcomeActivity.class);
         startActivity(intent);
     }
