@@ -133,9 +133,7 @@ public class FutureCoursesActivity extends AppCompatActivity {
                                     public void onComplete(@NonNull Task<DataSnapshot> task) {
                                         if (task.isSuccessful()) {
                                             referenceSel.child(courseCode).setValue(courseCode);
-                                            System.out.println("****************************");
                                             System.out.println(task.toString());
-                                            System.out.println("****************************");
                                         } else {
                                             Toast.makeText(context, "An error has occurred", Toast.LENGTH_SHORT).show();
                                         }
