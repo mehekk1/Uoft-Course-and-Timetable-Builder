@@ -21,4 +21,3 @@ public class CourseSearchItem {
         this.selected = selected;
     }
 }
-
