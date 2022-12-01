@@ -1,11 +1,16 @@
 package com.example.courseplannerapp;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -20,38 +25,45 @@ public class AdminEditCoursesActivity extends AppCompatActivity {
     ArrayList<Course> editableCourses = new ArrayList<>();
     FirebaseDatabase mDatabase;
     DatabaseReference mReferenceCourses;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_edit_courses);
+        context = this.getApplicationContext();
 
-    }
-
-    public interface dataStatus{
-        void DataIsLoaded(List<Course> courses, List<String> keys);
-        void DataIsInserted();
-        void DataIsUpdated();
-        void DataIsdeleted();
-    }
-
-    private void setUpCourses(final dataStatus data){
         mDatabase = FirebaseDatabase.getInstance();
-        mReferenceCourses = mDatabase.getReference("Courses");
+        mReferenceCourses = mDatabase.getReference("CoursesTestVedat");
 
-        mReferenceCourses.addValueEventListener(new ValueEventListener() {
+        RecyclerView recyclerView = findViewById(R.id.adminEditRecyclerView);
+        AdminEditCoursesAdapterRecyclerView adapter = new AdminEditCoursesAdapterRecyclerView(context, editableCourses);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+
+
+        //        GET DATA
+        mReferenceCourses.orderByKey().addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//              Every time some update has happened onDataChange method is activated
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                Course course = snapshot.getValue(Course.class);
+                editableCourses.add(course);
+                AdminEditCoursesAdapterRecyclerView adapter = new AdminEditCoursesAdapterRecyclerView(context, editableCourses);
+                recyclerView.setAdapter(adapter);
+            }
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
-                editableCourses.clear();
-                List<String> keys = new ArrayList<>();
-                for(DataSnapshot keyNode : snapshot.getChildren()){
-                    keys.add(keyNode.getKey());
-                    Course course = keyNode.getValue(Course.class);
-                    editableCourses.add(course);
-                }
-                data.DataIsLoaded(editableCourses, keys);
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
             }
 
             @Override
@@ -60,5 +72,9 @@ public class AdminEditCoursesActivity extends AppCompatActivity {
             }
         });
 
+
     }
+
+
+
 }
