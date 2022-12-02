@@ -42,7 +42,7 @@ public class Course {
         this.offerings = offerings;
     }
 
-    public List<String> setPrereqs() {
+    public List<String> getPrereqs() {
         return prereqs;
     }
 
