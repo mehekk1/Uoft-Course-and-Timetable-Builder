@@ -44,11 +44,11 @@ public class CourseSearchItemAdapter extends RecyclerView.Adapter<CourseSearchIt
         CourseSearchItem course = courses.get(position);
 
         holder.codeTextView.setText(course.getCode());
-        if (course.getSelected() == false) {
+        if (!course.getSelected()) {
             holder.codeTextView.setBackgroundResource(R.color.white);
         }
         else {
-            holder.codeTextView.setBackgroundResource(R.color.purple_200);
+            holder.codeTextView.setBackgroundResource(R.color.uoft_dark);
         }
 
 
