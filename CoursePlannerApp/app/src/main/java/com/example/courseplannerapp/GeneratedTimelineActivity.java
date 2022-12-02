@@ -12,6 +12,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class GeneratedTimelineActivity extends AppCompatActivity {
 
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference reference;
 
 
@@ -19,7 +20,9 @@ public class GeneratedTimelineActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_generated_timeline);
-        reference = FirebaseDatabase.getInstance().getReference();
+
+        reference = database.getReference("coursesSelected");
+
     }
 
 }

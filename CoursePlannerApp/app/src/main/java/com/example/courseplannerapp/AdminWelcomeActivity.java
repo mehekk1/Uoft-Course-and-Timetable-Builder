@@ -77,7 +77,7 @@ public class AdminWelcomeActivity extends AppCompatActivity {
         libraryAdminCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openViewAllCoursesPage();
+                System.out.println("Remove");
             }
         });
 
@@ -91,7 +91,7 @@ public class AdminWelcomeActivity extends AppCompatActivity {
         editAdminCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Open admin page
+                openEditCoursesPage();
             }
         });
 
@@ -115,8 +115,10 @@ public class AdminWelcomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+
     private void openEditCoursesPage(){
-        System.out.println("page needs to be created");
+        Intent intent = new Intent(this, AdminEditCoursesActivity.class);
+        startActivity(intent);
     }
 
     private void goToLink(String link){
@@ -124,10 +126,6 @@ public class AdminWelcomeActivity extends AppCompatActivity {
         startActivity(new Intent(Intent.ACTION_VIEW, url));
     }
 
-    private void openViewAllCoursesPage(){
-        Intent intent = new Intent(this, ViewAllCoursesActivity.class);
-        startActivity(intent);
-    }
 
     private void openAdminAddCoursesPage(){
         Intent intent = new Intent(this, AdminAddCourseActivity.class);
