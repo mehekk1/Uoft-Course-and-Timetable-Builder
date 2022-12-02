@@ -64,4 +64,6 @@
     <string name="admin_add_course_widget_text">+COURSE</string>
     <string name="admin_edit_course_widget_text">EDIT</string>
 
+    <string name="admin_edit_intro">Click a course to edit!</string>
+
 </resources>
