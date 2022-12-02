@@ -1,73 +1,214 @@
-//package com.example.courseplannerapp;
-//
-//import androidx.annotation.NonNull;
-//import androidx.appcompat.app.AppCompatActivity;
-//
-//import android.os.Bundle;
-//import android.view.View;
-//import android.widget.CompoundButton;
-//import android.widget.Toast;
-//
-//import com.example.courseplannerapp.databinding.ActivityAdminAddCourseBinding;
-//import com.google.android.gms.tasks.OnCompleteListener;
-//import com.google.android.gms.tasks.Task;
-//import com.google.firebase.database.DatabaseReference;
-//import com.google.firebase.database.FirebaseDatabase;
-//
-//import java.util.List;
-//import java.util.Locale;
-//
-//public class AdminAddCourseActivity extends AppCompatActivity {
-//    ActivityAdminAddCourseBinding binding;
-//    String code, name;
-//    boolean fall, winter, summer;
-//    List<Course> prereqs;
-//    FirebaseDatabase database;
-//    DatabaseReference ref;
-//
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        binding = ActivityAdminAddCourseBinding.inflate(getLayoutInflater());
-//        setContentView(binding.getRoot());
-//
-//        binding.adminAddCourseBtn.setOnClickListener((new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                code = binding.adminAddCourseCode.getText().toString().toUpperCase();
-//                name = binding.adminAddCourseName.getText().toString();
+package com.example.courseplannerapp;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.Context;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.Toast;
+
+import com.example.courseplannerapp.databinding.ActivityAdminAddCourseBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
+public class AdminAddCourseActivity extends AppCompatActivity {
+    ActivityAdminAddCourseBinding binding;
+    String code, name;
+    //boolean fall, winter, summer;
+    ArrayList<Boolean> offerings;
+    ArrayList<String> prereqs;
+    FirebaseDatabase database;
+    DatabaseReference ref;
+    ArrayList<CourseSearchItem> prereq_search;
+    RecyclerView rvs;
+    Context context;
+    ArrayList<CourseSearchItem> courseFilter;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        binding = ActivityAdminAddCourseBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        context = this.getApplicationContext();
+        rvs = binding.searchRecycle;
+        database = FirebaseDatabase.getInstance();
+        prereq_search = new ArrayList<CourseSearchItem>();
+        CourseSearchItemAdapter searchAdapter = new CourseSearchItemAdapter(context, prereq_search);
+        rvs.setAdapter((searchAdapter));
+        rvs.setLayoutManager(new LinearLayoutManager(this));
+
+        filterList("");
+        SearchView sv = binding.searchView;
+        sv.clearFocus();
+        sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterList(newText);
+                return true;
+            }
+        });
+
+        ItemClickSupport.addTo(rvs).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                if (position != RecyclerView.NO_POSITION){
+                    CourseSearchItem csi = courseFilter.get(position);
+                    String courseCode = csi.getCode();
+                    if (csi.getSelected() == false){
+                        for (int i = 0; i < prereq_search.size(); i++) {
+                            CourseSearchItem currentCourse = prereq_search.get(i);
+                            if (currentCourse.getCode().equals(courseCode)){
+                                prereq_search.remove(i);
+                                break;
+                            }
+                        }
+                        prereq_search.add(0, new CourseSearchItem(courseCode, true));
+                    }
+                    else{
+                        for (int i = 0; i < prereq_search.size(); i++) {
+                            CourseSearchItem currentCourse = prereq_search.get(i);
+                            if (currentCourse.getCode().equals(courseCode)){
+                                prereq_search.remove(i);
+                                break;
+                            }
+                        }
+                        prereq_search.add(prereq_search.size(), new CourseSearchItem(courseCode, false));
+                    }
+                    filterList(binding.searchView.getQuery().toString());
+                    CourseSearchItemAdapter searchAdapter = new CourseSearchItemAdapter(context, courseFilter);
+                    rvs.setAdapter((searchAdapter));
+                }
+
+
+            }
+        });
+        binding.adminAddCourseBtn.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                code = binding.adminAddCourseCode.getText().toString().toUpperCase();
+                name = binding.adminAddCourseName.getText().toString();
 //                fall = binding.fallSwitch.isChecked();
 //                winter = binding.winterSwitch.isChecked();
 //                summer = binding.summerSwitch.isChecked();
-//
-//                if (!code.isEmpty() && !name.isEmpty() && (fall||winter||summer)){
-//                    Course course = new Course(name, code, fall, winter, summer);
-//                    database = FirebaseDatabase.getInstance();
-//
-//                    ref = database.getReference("AdminCourses");
-//                    ref.child(code).setValue(course).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                        @Override
-//                        public void onComplete(@NonNull Task<Void> task) {
-//
-//                            binding.adminAddCourseName.setText("");
-//                            binding.adminAddCourseCode.setText("");
-//                            binding.fallSwitch.setChecked(false);
-//                            binding.winterSwitch.setChecked(false);
-//                            binding.summerSwitch.setChecked(false);
-//                            Toast.makeText(AdminAddCourseActivity.this, "Successfully Added Course", Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
-//
-//                }
-//                else if (!code.isEmpty() && !name.isEmpty() && !(fall||winter||summer)){
-//                    Toast.makeText(AdminAddCourseActivity.this, "You Must Choose At Least 1 Offering", Toast.LENGTH_SHORT).show();
-//                }
-//                else{
-//                    Toast.makeText(AdminAddCourseActivity.this, "You Must Fill all Fields", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        }));
-//    }
-//}
+                offerings = new ArrayList<Boolean>();
+                offerings.add(0, Boolean.valueOf(binding.winterSwitch.isChecked()));
+                offerings.add(1, Boolean.valueOf(binding.summerSwitch.isChecked()));
+                offerings.add(2, Boolean.valueOf(binding.fallSwitch.isChecked()));
+                prereqs = new ArrayList<String>();
+                int i = 0;
+                while (prereq_search.get(i).getSelected()){
+                    prereqs.add(prereq_search.get(i).getCode());
+                    i++;
+                }
+
+
+                if (!code.isEmpty() && !name.isEmpty() && (offerings.get(0)||offerings.get(1)||offerings.get(2))){
+                    Course course = new Course(name, code, offerings, prereqs);
+
+
+                    ref = database.getReference("AdminCourses");
+                    ref.child(code).setValue(course).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                            binding.adminAddCourseName.setText("");
+                            binding.adminAddCourseCode.setText("");
+                            binding.fallSwitch.setChecked(false);
+                            binding.winterSwitch.setChecked(false);
+                            binding.summerSwitch.setChecked(false);
+                            int i = 0;
+                            while (prereq_search.get(i).getSelected()){
+                                prereq_search.get(i).setSelected(false);
+                                i++;
+                            }
+                            filterList(binding.searchView.getQuery().toString());
+                            CourseSearchItemAdapter searchAdapter = new CourseSearchItemAdapter(context, courseFilter);
+                            rvs.setAdapter((searchAdapter));
+                            Toast.makeText(AdminAddCourseActivity.this, "Successfully Added Course", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                }
+                else if (!code.isEmpty() && !name.isEmpty() && !(offerings.get(0)||offerings.get(1)||offerings.get(2))){
+                    Toast.makeText(AdminAddCourseActivity.this, "You Must Choose At Least 1 Offering", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(AdminAddCourseActivity.this, "You Must Fill all Fields", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }));
+        ref = database.getReference("AdminCourses");
+        ref.orderByKey().addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                prereq_search.add(prereq_search.size(),new CourseSearchItem(snapshot.getKey().toString(), false));
+                filterList(binding.searchView.getQuery().toString());
+                CourseSearchItemAdapter searchAdapter = new CourseSearchItemAdapter(context, courseFilter);
+                rvs.setAdapter((searchAdapter));
+
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+                for (int i = 0; i < prereq_search.size(); i++) {
+                    CourseSearchItem currentCourse = prereq_search.get(i);
+                    if (currentCourse.getCode().equals(snapshot.getKey().toString())){
+                        prereq_search.remove(i);
+                        break;
+                    }
+                }
+                filterList(binding.searchView.getQuery().toString());
+                CourseSearchItemAdapter searchAdapter = new CourseSearchItemAdapter(context, courseFilter);
+                rvs.setAdapter((searchAdapter));
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+    public void filterList(String text){
+        courseFilter = new ArrayList<CourseSearchItem>();
+        for (CourseSearchItem course:prereq_search){
+            if (course.getCode().toUpperCase().contains(text.toUpperCase())){
+                courseFilter.add(course);
+            }
+        }
+        CourseSearchItemAdapter searchAdapter = new CourseSearchItemAdapter(context, courseFilter);
+        rvs.setAdapter((searchAdapter));
+    }
+}
