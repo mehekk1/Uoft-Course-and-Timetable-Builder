@@ -97,7 +97,7 @@ public class AdminEditCoursesActivity extends AppCompatActivity{
     }
 
     private void openWelcomePage(){
-        Intent intent = new Intent(this, StudentWelcomeActivity.class);
+        Intent intent = new Intent(this, EditCourseActivity.class);
         startActivity(intent);
     }
 

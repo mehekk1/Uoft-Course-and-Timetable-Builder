@@ -3,6 +3,7 @@ package com.example.courseplannerapp;
 import java.util.List;
 
 public class Course {
+
     String name;
     String code;
     List<Boolean> offerings;
