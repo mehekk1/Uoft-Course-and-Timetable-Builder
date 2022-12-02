@@ -83,7 +83,6 @@ public class FutureCoursesActivity extends AppCompatActivity {
         rvSearch.setAdapter(searchAdapter);
         rvSearch.setLayoutManager(new LinearLayoutManager(this));
 
-        coursesShown = new ArrayList<CourseSearchItem>();
         filterList("");
 
         SearchView searchView = findViewById(R.id.future_search_bar);
@@ -276,7 +275,7 @@ public class FutureCoursesActivity extends AppCompatActivity {
     }
     
     public void filterList(String text) {
-        coursesShown = new ArrayList<>();
+        coursesShown = new ArrayList<CourseSearchItem>();
         for(CourseSearchItem course : coursesAll) {
             if(course.getCode().toLowerCase().contains(text.toLowerCase())) {
                 coursesShown.add(course);
