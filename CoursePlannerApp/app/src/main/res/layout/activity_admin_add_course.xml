@@ -164,7 +164,6 @@
         android:id="@+id/searchRecycle"
         android:layout_width="207dp"
         android:layout_height="126dp"
-        android:textAlignment="inherit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toStartOf="parent"
