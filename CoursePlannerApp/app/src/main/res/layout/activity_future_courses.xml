@@ -69,7 +69,6 @@
 		android:iconifiedByDefault="false"
 		android:queryHint="Search For A Course"
 		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintHorizontal_bias="0.0"
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toBottomOf="@+id/future_course_header" />
 

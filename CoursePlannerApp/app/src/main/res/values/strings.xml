@@ -13,6 +13,14 @@
     <string name="welcome_page_user_header_msg">WELCOME USERNAME</string>
     <string name="welcome_page_img_description">student logo</string>
     <string name="welcome_page_app_description">Explore our various courses, view your taken courses or generate a timetable!</string>
+    <string name="welcome_page_card_home">GITHUB</string>
+    <string name="welcome_page_card_library">LIBRARY</string>
+    <string name="welcome_page_card_taken">COURSES</string>
+    <string name="welcome_page_card_timeline">TIMELINE</string>
+    <string name="welcome_page_card_settings">SETTINGS</string>
+    <string name="welcome_page_card_logout">LOGOUT</string>
+
+
     <string name="welcome_page_courses_btn">COURSES</string>
     <string name="email">  Email </string>
     <string name="password">  Password  </string>
@@ -34,6 +42,11 @@
     <string name="course_code">Course Code</string>
     <string name="course_name">Course Name</string>
 
+
+    <string name="settings_page_username">USERNAME</string>
+    <string name="settings_page_go_back_home">HOME</string>
+    <string name="settings_page_username_desc_db">EMAIL: EMAIL FROM DB</string>
+    <string name="settings_password_text_desc_db">PASSWORD: PASSWORD FROM DB</string>
     <string name="admin_welcome_add_btn">Add Courses</string>
     <string name="admin_welcome_edit_btn">Edit Courses</string>
     <string name="admin_welcome_header">Welcome</string>
