@@ -147,7 +147,7 @@
         android:id="@+id/admin_add_course_btn"
         android:layout_width="153dp"
         android:layout_height="66dp"
-        android:layout_marginBottom="44dp"
+        android:layout_marginTop="140dp"
         android:width="120sp"
         android:backgroundTint="@color/uoft_dark"
         android:fontFamily="sans-serif-black"
@@ -155,17 +155,16 @@
         android:textColor="@color/white"
         android:textSize="16sp"
         app:cornerRadius="50sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.515"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchRecycle"
-        app:layout_constraintVertical_bias="0.926" />
+        app:layout_constraintTop_toBottomOf="@+id/searchView" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/searchRecycle"
         android:layout_width="203dp"
         android:layout_height="102dp"
+        android:textAlignment="inherit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toStartOf="parent"

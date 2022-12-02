@@ -73,7 +73,7 @@ public class AdminAddCourseActivity extends AppCompatActivity {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                 if (position != RecyclerView.NO_POSITION){
-                    CourseSearchItem csi = prereq_search.get(position);
+                    CourseSearchItem csi = courseFilter.get(position);
                     String courseCode = csi.getCode();
                     if (csi.getSelected() == false){
                         for (int i = 0; i < prereq_search.size(); i++) {
@@ -126,6 +126,14 @@ public class AdminAddCourseActivity extends AppCompatActivity {
                             binding.fallSwitch.setChecked(false);
                             binding.winterSwitch.setChecked(false);
                             binding.summerSwitch.setChecked(false);
+                            int i = 0;
+                            while (prereq_search.get(i).getSelected()){
+                                prereq_search.get(i).setSelected(false);
+                                i++;
+                            }
+                            filterList(binding.searchView.getQuery().toString());
+                            CourseSearchItemAdapter searchAdapter = new CourseSearchItemAdapter(context, courseFilter);
+                            rvs.setAdapter((searchAdapter));
                             Toast.makeText(AdminAddCourseActivity.this, "Successfully Added Course", Toast.LENGTH_SHORT).show();
                         }
                     });
@@ -143,7 +151,7 @@ public class AdminAddCourseActivity extends AppCompatActivity {
         ref.orderByKey().addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                prereq_search.add(0,new CourseSearchItem(snapshot.getKey().toString(), false));
+                prereq_search.add(prereq_search.size(),new CourseSearchItem(snapshot.getKey().toString(), false));
                 filterList(binding.searchView.getQuery().toString());
                 CourseSearchItemAdapter searchAdapter = new CourseSearchItemAdapter(context, courseFilter);
                 rvs.setAdapter((searchAdapter));
