@@ -1,0 +1,57 @@
+Ansh Aneel:
+
+  What have you done since today?
+	  - Worked on login functionality.
+    - Started testing for login and register.
+    
+  What are you planning on doing tomorrow?
+    - Try to finish login and register page.
+    - Try to finish testing.
+
+  Any impediments or stumbling blocks?
+	  - None.
+
+Alex Zeng:
+
+   What have you done since today?
+    - Explored recyling view.
+
+  What are you planning on doing tomorrow?
+    - Finish view all courses.
+
+  Any impediments or stumbling blocks?
+	  - Accidentally merged bug to main (now fixed with revert commit)
+
+Sohil Chanana:
+
+  What have you done since today?
+	  - Continue work on adding courses page.
+    
+  What are you planning on doing tomorrow?
+    - Try to finish add courses page.
+
+  Any impediments or stumbling blocks?
+    - Trying to recieve objects from firebase is having some difficulty.
+    
+Vedat Goktepe:
+
+  What have you done since today?
+    - Refactored more code for generated timeline cart.
+    - Helped debug code/Github issues for peers.
+    
+  What are you planning on doing tomorrow?
+    - Continue to work generated timeline features.
+
+  Any impediments or stumbling blocks?
+	  - No impediments faced yet.
+
+Ashwin Mallik:
+
+  What have you done since today?
+    - Finished design and functionality of viewing courses in edit courses.
+      
+  What are you planning on doing tomorrow?
+    - Finish admin edit courses page.
+
+  Any impediments or stumbling blocks?
+	  - No impediments faced yet.

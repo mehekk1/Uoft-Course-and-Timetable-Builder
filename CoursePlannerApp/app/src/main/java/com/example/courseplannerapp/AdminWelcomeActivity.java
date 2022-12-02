@@ -35,7 +35,7 @@ public class AdminWelcomeActivity extends AppCompatActivity {
 
     }
     public void openAddCoursePage(){
-        Intent intent = new Intent(this,AdminAddCourseActivity.class);
+        Intent intent = new Intent(this, AdminAddCourseActivity.class);
         startActivity(intent);
     }
     public void openEditCoursePage(){

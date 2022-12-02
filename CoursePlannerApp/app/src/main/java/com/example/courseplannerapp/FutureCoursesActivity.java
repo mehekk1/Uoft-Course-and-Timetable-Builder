@@ -124,19 +124,6 @@ public class FutureCoursesActivity extends AppCompatActivity {
                                     }
                                 });
 
-//                                //Remove from coursesList
-//                                for(int i = 0; i < coursesAll.size(); i++) {
-//                                    CourseSearchItem currentCourse = coursesAll.get(i);
-//                                    if(currentCourse.getCode().equals(courseCode)) {
-//                                        coursesAll.remove(i);
-//                                        break;
-//                                    }
-//                                }
-//                                //Re-add to coursesAll end of selected as selected
-//                                coursesAll.add(coursesSelected.size(), new CourseSearchItem(course.getCode(), true));
-//                                filterList(((SearchView)findViewById(R.id.future_search_bar)).getQuery().toString());
-//                                CourseSearchItemAdapter searchAdapter = new CourseSearchItemAdapter(context, coursesShown);
-//                                rvSearch.setAdapter(searchAdapter);
                             }
                             else {
                                 //Remove from selected data
