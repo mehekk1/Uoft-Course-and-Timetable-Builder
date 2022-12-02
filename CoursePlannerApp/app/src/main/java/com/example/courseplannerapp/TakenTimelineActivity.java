@@ -3,9 +3,11 @@ package com.example.courseplannerapp;
 import static com.example.courseplannerapp.R.color.black;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -21,6 +23,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -41,6 +45,7 @@ public class TakenTimelineActivity extends AppCompatActivity {
     EditText e;
     Context context;
     String student;
+    private BottomNavigationView bottomNav;
 
 
     @Override
@@ -55,6 +60,24 @@ public class TakenTimelineActivity extends AppCompatActivity {
         courses = new ArrayList<String>();
         student = "charles";
         init();
+        bottomNav = findViewById(R.id.bottom_view);
+        bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                switch (id) {
+                    case R.id.nav_home:
+                        openWelocomePage();
+                        break;
+                    case R.id.nav_timeline:
+                        openTimelinePage();
+                        break;
+                    case R.id.nav_add_menu:
+                        break;
+                }
+                return true;
+            }
+        });
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -181,4 +204,14 @@ public class TakenTimelineActivity extends AppCompatActivity {
         }
     }
 
+
+    private void openWelocomePage () {
+        Intent intent = new Intent(this, StudentWelcomeActivity.class);
+        startActivity(intent);
+    }
+
+    private void openTimelinePage () {
+        Intent intent = new Intent(this, FutureCoursesActivity.class);
+        startActivity(intent);
+    }
 }

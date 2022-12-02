@@ -17,6 +17,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,6 +31,7 @@ public class ViewAllCoursesActivity extends AppCompatActivity {
     FirebaseDatabase db;
     DatabaseReference reference;
     String offerings;
+    private BottomNavigationView bottomNav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,23 +64,25 @@ public class ViewAllCoursesActivity extends AppCompatActivity {
         tv2.setTypeface(null, Typeface.BOLD);
         tbrow0.addView(tv2);
         stk.addView(tbrow0);
-        reference = db.getReference("Courses");
+        reference = db.getReference("CoursesTestVedat");
         reference.orderByKey().addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 TableRow tbrow = new TableRow(context);
                 TextView t1v = new TextView(context);
-                String course = snapshot.child("code").getValue().toString();
+                String course = snapshot.getKey();
                 t1v.setText(course);
                 t1v.setTextColor(Color.BLACK);
                 t1v.setGravity(Gravity.CENTER);
                 tbrow.addView(t1v);
                 TextView t2v = new TextView(context);
+                t2v.setText("");
                 DatabaseReference offers = reference.child(course).child("offerings");
-                offers.addValueEventListener(new ValueEventListener() {
+                offers.child("Fall").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot2) {
-                        t2v.setText(snapshot2.getValue().toString());
+                        if((Boolean)snapshot2.getValue())
+                            t2v.setText(t2v.getText().toString() + "Fall, ");
                     }
 
                     @Override
@@ -86,15 +90,56 @@ public class ViewAllCoursesActivity extends AppCompatActivity {
 
                     }
                 });
+                offers.child("Winter").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot2) {
+                        if((Boolean)snapshot2.getValue())
+                            t2v.setText(t2v.getText().toString() + "Winter, ");
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+                offers.child("Summer").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot2) {
+                        if((Boolean)snapshot2.getValue())
+                            t2v.setText(t2v.getText().toString() + "Summer, ");
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+                String display = t2v.getText().toString();
+                t2v.setText(display);
                 t2v.setTextColor(Color.BLACK);
                 t2v.setGravity(Gravity.CENTER);
                 tbrow.addView(t2v);
                 TextView t3v = new TextView(context);
-                DatabaseReference prereqs = reference.child(course).child("prereqs");
-                prereqs.addValueEventListener(new ValueEventListener() {
+                reference.child(course).addValueEventListener(new ValueEventListener() {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot3) {
-                        t3v.setText(snapshot3.getValue().toString());
+                    public void onDataChange(@NonNull DataSnapshot snapshot5) {
+                        if(snapshot5.hasChild("prereqs")) {
+                            DatabaseReference prereqs = reference.child(course).child("prereqs");
+                            prereqs.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot3) {
+                                    t3v.setText(snapshot3.getValue().toString());
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
+                        }
+                        else{
+                            t3v.setText("None");
+                        }
                     }
 
                     @Override
@@ -102,6 +147,8 @@ public class ViewAllCoursesActivity extends AppCompatActivity {
 
                     }
                 });
+
+                t3v.setWidth(100);
                 t3v.setTextColor(Color.BLACK);
                 t3v.setGravity(Gravity.CENTER);
                 tbrow.addView(t3v);
