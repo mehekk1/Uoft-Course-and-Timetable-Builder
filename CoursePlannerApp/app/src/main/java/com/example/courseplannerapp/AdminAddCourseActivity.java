@@ -31,7 +31,7 @@ public class AdminAddCourseActivity extends AppCompatActivity {
     String code, name;
     //boolean fall, winter, summer;
     ArrayList<Boolean> offerings;
-    List<String> prereqs;
+    ArrayList<String> prereqs;
     FirebaseDatabase database;
     DatabaseReference ref;
     ArrayList<CourseSearchItem> prereq_search;
@@ -100,6 +100,7 @@ public class AdminAddCourseActivity extends AppCompatActivity {
                     rvs.setAdapter((searchAdapter));
                 }
 
+
             }
         });
         binding.adminAddCourseBtn.setOnClickListener((new View.OnClickListener() {
@@ -113,12 +114,18 @@ public class AdminAddCourseActivity extends AppCompatActivity {
 //                summer = binding.summerSwitch.isChecked();
                 offerings = new ArrayList<Boolean>();
                 offerings.add(0, Boolean.valueOf(binding.winterSwitch.isChecked()));
-                offerings.add(1, Boolean.valueOf(binding.fallSwitch.isChecked()));
-                offerings.add(2, Boolean.valueOf(binding.summerSwitch.isChecked()));
+                offerings.add(1, Boolean.valueOf(binding.summerSwitch.isChecked()));
+                offerings.add(2, Boolean.valueOf(binding.fallSwitch.isChecked()));
+                prereqs = new ArrayList<String>();
+                int i = 0;
+                while (prereq_search.get(i).getSelected()){
+                    prereqs.add(prereq_search.get(i).getCode());
+                    i++;
+                }
 
 
                 if (!code.isEmpty() && !name.isEmpty() && (offerings.get(0)||offerings.get(1)||offerings.get(2))){
-                    Course course = new Course(name, code, offerings);
+                    Course course = new Course(name, code, offerings, prereqs);
 
 
                     ref = database.getReference("AdminCourses");

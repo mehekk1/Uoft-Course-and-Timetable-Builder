@@ -97,11 +97,6 @@ public class Course {
         this.offerings = offerings;
         this.prereqs = prereqs;
     }
-    public Course(String name, String code, List<Boolean> offerings) {
-        this.name = name;
-        this.code = code;
-        this.offerings = offerings;
-    }
 
     public String getName() {
         return name;
@@ -127,7 +122,7 @@ public class Course {
         this.offerings = offerings;
     }
 
-    public List<String> setPrereqs() {
+    public List<String> getPrereqs() {
         return prereqs;
     }
 
