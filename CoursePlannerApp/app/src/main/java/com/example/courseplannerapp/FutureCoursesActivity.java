@@ -35,9 +35,9 @@ public class FutureCoursesActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNav;
 
-    FirebaseDatabase db;
-    DatabaseReference referenceSel;
-    DatabaseReference referenceUnsel;
+    FirebaseDatabase db = FirebaseDatabase.getInstance();;
+    DatabaseReference selectRef = db.getReference("vedat/coursesSelected");
+    DatabaseReference courseRef = db.getReference("CoursesTestVedat");
     ArrayList<CourseSearchItem> coursesAll;
     ArrayList<String> coursesSelected;
 
@@ -74,7 +74,6 @@ public class FutureCoursesActivity extends AppCompatActivity {
 
 
         context = this.getApplicationContext();
-        db = FirebaseDatabase.getInstance();
         coursesAll = new ArrayList<CourseSearchItem>();
         coursesSelected = new ArrayList<String>();
 
@@ -113,56 +112,39 @@ public class FutureCoursesActivity extends AppCompatActivity {
                             courseCode = course.getCode();
 
                             if (course.getSelected() == false) {
-                                //Remove from unselected data
-                                referenceUnsel = db.getReference("coursesUnselected");
-                                referenceUnsel.child(courseCode).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                //Add to selected data
+                                selectRef.child(courseCode).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                                     @Override
                                     public void onComplete(@NonNull Task<DataSnapshot> task) {
                                         if (task.isSuccessful()) {
-                                            referenceUnsel.child(courseCode).removeValue();
+                                            selectRef.child(courseCode).setValue(courseCode);
                                         } else {
                                             Toast.makeText(context, "An error has occurred", Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 });
 
-                                //Add to selected data
-                                referenceSel = db.getReference("coursesSelected");
-                                referenceSel.child(courseCode).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<DataSnapshot> task) {
-                                        if (task.isSuccessful()) {
-                                            referenceSel.child(courseCode).setValue(courseCode);
-                                            System.out.println("****************************");
-                                            System.out.println(task.toString());
-                                            System.out.println("****************************");
-                                        } else {
-                                            Toast.makeText(context, "An error has occurred", Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                });
+//                                //Remove from coursesList
+//                                for(int i = 0; i < coursesAll.size(); i++) {
+//                                    CourseSearchItem currentCourse = coursesAll.get(i);
+//                                    if(currentCourse.getCode().equals(courseCode)) {
+//                                        coursesAll.remove(i);
+//                                        break;
+//                                    }
+//                                }
+//                                //Re-add to coursesAll end of selected as selected
+//                                coursesAll.add(coursesSelected.size(), new CourseSearchItem(course.getCode(), true));
+//                                filterList(((SearchView)findViewById(R.id.future_search_bar)).getQuery().toString());
+//                                CourseSearchItemAdapter searchAdapter = new CourseSearchItemAdapter(context, coursesShown);
+//                                rvSearch.setAdapter(searchAdapter);
                             }
                             else {
                                 //Remove from selected data
-                                referenceSel = db.getReference("coursesSelected");
-                                referenceSel.child(courseCode).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                selectRef.child(courseCode).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                                     @Override
                                     public void onComplete(@NonNull Task<DataSnapshot> task) {
                                         if (task.isSuccessful()) {
-                                            referenceSel.child(courseCode).removeValue();
-                                        } else {
-                                            Toast.makeText(context, "An error has occurred", Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                });
-
-                                //Add to unselected data
-                                referenceUnsel = db.getReference("coursesUnselected");
-                                referenceUnsel.child(courseCode).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<DataSnapshot> task) {
-                                        if (task.isSuccessful()) {
-                                            referenceUnsel.child(courseCode).setValue(courseCode);
+                                            selectRef.child(courseCode).removeValue();
                                         } else {
                                             Toast.makeText(context, "An error has occurred", Toast.LENGTH_SHORT).show();
                                         }
@@ -174,16 +156,15 @@ public class FutureCoursesActivity extends AppCompatActivity {
                 }
         );
 
-        referenceUnsel = db.getReference("coursesUnselected");
-        referenceUnsel.orderByKey().addChildEventListener(new ChildEventListener() {
+        courseRef.orderByKey().addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                coursesAll.add(coursesSelected.size(), new CourseSearchItem(snapshot.getValue().toString(), false));
+                Course course = snapshot.getValue(Course.class);
+                coursesAll.add(coursesSelected.size(), new CourseSearchItem(course.getCode(), false));
+
                 filterList(((SearchView)findViewById(R.id.future_search_bar)).getQuery().toString());
                 CourseSearchItemAdapter searchAdapter = new CourseSearchItemAdapter(context, coursesShown);
                 rvSearch.setAdapter(searchAdapter);
-
-                initAdded();
             }
 
             @Override
@@ -191,17 +172,20 @@ public class FutureCoursesActivity extends AppCompatActivity {
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+                Course course = snapshot.getValue(Course.class);
                 for(int i = 0; i < coursesAll.size(); i++) {
                     CourseSearchItem currentCourse = coursesAll.get(i);
-                    if(currentCourse.getCode().equals(snapshot.getValue().toString())) {
+                    if(currentCourse.getCode().equals(course.getCode())) {
                         coursesAll.remove(i);
                         break;
                     }
                 }
+
                 filterList(((SearchView)findViewById(R.id.future_search_bar)).getQuery().toString());
                 CourseSearchItemAdapter searchAdapter = new CourseSearchItemAdapter(context, coursesShown);
                 rvSearch.setAdapter(searchAdapter);
 
+                coursesSelected.remove(snapshot.getValue().toString());
                 initAdded();
             }
 
@@ -212,11 +196,20 @@ public class FutureCoursesActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {}
         });
 
-        referenceSel = db.getReference("coursesSelected");
-        referenceSel.orderByKey().addChildEventListener(new ChildEventListener() {
+        selectRef.orderByKey().addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                coursesAll.add(0, new CourseSearchItem(snapshot.getValue().toString(), true));
+                //Remove from coursesList
+                for(int i = 0; i < coursesAll.size(); i++) {
+                    CourseSearchItem currentCourse = coursesAll.get(i);
+                    if(currentCourse.getCode().equals(snapshot.getValue().toString())) {
+                        coursesAll.remove(i);
+                        break;
+                    }
+                }
+                //Re-add to coursesAll end of selected as selected
+                coursesAll.add(coursesSelected.size(), new CourseSearchItem(snapshot.getValue().toString(), true));
+
                 filterList(((SearchView)findViewById(R.id.future_search_bar)).getQuery().toString());
                 CourseSearchItemAdapter searchAdapter = new CourseSearchItemAdapter(context, coursesShown);
                 rvSearch.setAdapter(searchAdapter);
@@ -232,6 +225,7 @@ public class FutureCoursesActivity extends AppCompatActivity {
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+                //Remove from coursesList
                 for(int i = 0; i < coursesAll.size(); i++) {
                     CourseSearchItem currentCourse = coursesAll.get(i);
                     if(currentCourse.getCode().equals(snapshot.getValue().toString())) {
@@ -239,6 +233,9 @@ public class FutureCoursesActivity extends AppCompatActivity {
                         break;
                     }
                 }
+                //Re-add to coursesAll end of selected as not selected
+                coursesAll.add(coursesSelected.size()-1, new CourseSearchItem(snapshot.getValue().toString(), false));
+
                 filterList(((SearchView)findViewById(R.id.future_search_bar)).getQuery().toString());
                 CourseSearchItemAdapter searchAdapter = new CourseSearchItemAdapter(context, coursesShown);
                 rvSearch.setAdapter(searchAdapter);

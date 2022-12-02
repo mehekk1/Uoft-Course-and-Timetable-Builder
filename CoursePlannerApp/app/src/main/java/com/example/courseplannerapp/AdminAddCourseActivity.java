@@ -43,22 +43,23 @@ public class AdminAddCourseActivity extends AppCompatActivity {
                 summer = binding.summerSwitch.isChecked();
 
                 if (!code.isEmpty() && !name.isEmpty() && (fall||winter||summer)){
-                    Course course = new Course(name, code, fall, winter, summer);
-                    database = FirebaseDatabase.getInstance();
-
-                    ref = database.getReference("AdminCourses");
-                    ref.child(code).setValue(course).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-
-                            binding.adminAddCourseName.setText("");
-                            binding.adminAddCourseCode.setText("");
-                            binding.fallSwitch.setChecked(false);
-                            binding.winterSwitch.setChecked(false);
-                            binding.summerSwitch.setChecked(false);
-                            Toast.makeText(AdminAddCourseActivity.this, "Successfully Added Course", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+//SOHILS SECTION SHOULD BE FIXED BY HIM
+//                    Course course = new Course(name, code, fall, winter, summer);
+//                    database = FirebaseDatabase.getInstance();
+//
+//                    ref = database.getReference("AdminCourses");
+//                    ref.child(code).setValue(course).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                        @Override
+//                        public void onComplete(@NonNull Task<Void> task) {
+//
+//                            binding.adminAddCourseName.setText("");
+//                            binding.adminAddCourseCode.setText("");
+//                            binding.fallSwitch.setChecked(false);
+//                            binding.winterSwitch.setChecked(false);
+//                            binding.summerSwitch.setChecked(false);
+//                            Toast.makeText(AdminAddCourseActivity.this, "Successfully Added Course", Toast.LENGTH_SHORT).show();
+//                        }
+//                    });
 
                 }
                 else if (!code.isEmpty() && !name.isEmpty() && !(fall||winter||summer)){
