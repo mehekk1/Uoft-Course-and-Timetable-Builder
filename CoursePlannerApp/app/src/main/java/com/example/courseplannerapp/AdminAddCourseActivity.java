@@ -29,8 +29,9 @@ import java.util.Locale;
 public class AdminAddCourseActivity extends AppCompatActivity {
     ActivityAdminAddCourseBinding binding;
     String code, name;
-    boolean fall, winter, summer;
-    List<Course> prereqs;
+    //boolean fall, winter, summer;
+    ArrayList<Boolean> offerings;
+    List<String> prereqs;
     FirebaseDatabase database;
     DatabaseReference ref;
     ArrayList<CourseSearchItem> prereq_search;
@@ -46,7 +47,6 @@ public class AdminAddCourseActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         context = this.getApplicationContext();
         rvs = binding.searchRecycle;
-
         database = FirebaseDatabase.getInstance();
         prereq_search = new ArrayList<CourseSearchItem>();
         CourseSearchItemAdapter searchAdapter = new CourseSearchItemAdapter(context, prereq_search);
@@ -108,12 +108,17 @@ public class AdminAddCourseActivity extends AppCompatActivity {
 
                 code = binding.adminAddCourseCode.getText().toString().toUpperCase();
                 name = binding.adminAddCourseName.getText().toString();
-                fall = binding.fallSwitch.isChecked();
-                winter = binding.winterSwitch.isChecked();
-                summer = binding.summerSwitch.isChecked();
+//                fall = binding.fallSwitch.isChecked();
+//                winter = binding.winterSwitch.isChecked();
+//                summer = binding.summerSwitch.isChecked();
+                offerings = new ArrayList<Boolean>();
+                offerings.add(0, Boolean.valueOf(binding.winterSwitch.isChecked()));
+                offerings.add(1, Boolean.valueOf(binding.fallSwitch.isChecked()));
+                offerings.add(2, Boolean.valueOf(binding.summerSwitch.isChecked()));
 
-                if (!code.isEmpty() && !name.isEmpty() && (fall||winter||summer)){
-                    Course course = new Course(name, code, fall, winter, summer);
+
+                if (!code.isEmpty() && !name.isEmpty() && (offerings.get(0)||offerings.get(1)||offerings.get(2))){
+                    Course course = new Course(name, code, offerings);
 
 
                     ref = database.getReference("AdminCourses");
@@ -139,7 +144,7 @@ public class AdminAddCourseActivity extends AppCompatActivity {
                     });
 
                 }
-                else if (!code.isEmpty() && !name.isEmpty() && !(fall||winter||summer)){
+                else if (!code.isEmpty() && !name.isEmpty() && !(offerings.get(0)||offerings.get(1)||offerings.get(2))){
                     Toast.makeText(AdminAddCourseActivity.this, "You Must Choose At Least 1 Offering", Toast.LENGTH_SHORT).show();
                 }
                 else{

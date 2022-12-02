@@ -162,8 +162,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/searchRecycle"
-        android:layout_width="203dp"
-        android:layout_height="102dp"
+        android:layout_width="207dp"
+        android:layout_height="126dp"
         android:textAlignment="inherit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.52"
