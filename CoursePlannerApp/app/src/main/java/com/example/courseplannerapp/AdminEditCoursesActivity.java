@@ -7,8 +7,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -20,7 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdminEditCoursesActivity extends AppCompatActivity {
+public class AdminEditCoursesActivity extends AppCompatActivity{
 
     ArrayList<Course> editableCourses = new ArrayList<>();
     FirebaseDatabase mDatabase;
@@ -33,13 +38,28 @@ public class AdminEditCoursesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin_edit_courses);
         context = this.getApplicationContext();
 
+        Window window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        int colorCodeDark = Color.parseColor("#FF000000");
+        window.setStatusBarColor(colorCodeDark);
+
         mDatabase = FirebaseDatabase.getInstance();
         mReferenceCourses = mDatabase.getReference("CoursesTestVedat");
 
         RecyclerView recyclerView = findViewById(R.id.adminEditRecyclerView);
-        AdminEditCoursesAdapterRecyclerView adapter = new AdminEditCoursesAdapterRecyclerView(context, editableCourses);
+        AdminEditCoursesAdapterRecyclerView adapter = new AdminEditCoursesAdapterRecyclerView(this, editableCourses);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
+
+//        Click listener for cards
+        ItemClickSupport.addTo(recyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                if(position != RecyclerView.NO_POSITION){
+                    openWelcomePage();
+                }
+            }
+        });
 
 
         //        GET DATA
@@ -50,6 +70,7 @@ public class AdminEditCoursesActivity extends AppCompatActivity {
                 editableCourses.add(course);
                 AdminEditCoursesAdapterRecyclerView adapter = new AdminEditCoursesAdapterRecyclerView(context, editableCourses);
                 recyclerView.setAdapter(adapter);
+
             }
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -75,6 +96,9 @@ public class AdminEditCoursesActivity extends AppCompatActivity {
 
     }
 
-
+    private void openWelcomePage(){
+        Intent intent = new Intent(this, StudentWelcomeActivity.class);
+        startActivity(intent);
+    }
 
 }

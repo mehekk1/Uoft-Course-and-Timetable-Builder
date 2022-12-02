@@ -62,6 +62,7 @@ public class AdminEditCoursesAdapterRecyclerView extends RecyclerView.Adapter<Ad
             imageView = itemView.findViewById(R.id.edit_card_img);
             imageView.setImageResource(R.drawable.uoft_logo_black);
 
+
         }
     }
 }
