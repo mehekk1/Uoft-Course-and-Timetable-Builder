@@ -53,6 +53,7 @@ public class LoginTabFragment extends Fragment {
                 fAuth.signInWithEmailAndPassword(email, pass).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
+
                         startActivity(new Intent(getActivity(), LoginActivity.class));
                     }
                 }).addOnFailureListener(new OnFailureListener() {
