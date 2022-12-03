@@ -56,7 +56,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".AdminWelcomeActivity"
+            android:name=".HomepageActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -118,7 +118,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".HomepageActivity"
+            android:name=".AdminWelcomeActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

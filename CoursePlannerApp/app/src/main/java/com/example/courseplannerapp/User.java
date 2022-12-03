@@ -15,6 +15,10 @@ public class User {
         taken_list = taken;
     }
 
+    public void changeStudent(boolean isStudent){
+        this.isStudent = isStudent;
+    }
+
     public boolean isStudent() {
         return isStudent;
     }

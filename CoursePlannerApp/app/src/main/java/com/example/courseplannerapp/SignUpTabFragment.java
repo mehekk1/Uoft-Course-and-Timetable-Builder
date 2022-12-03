@@ -1,5 +1,6 @@
 package com.example.courseplannerapp;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -32,8 +33,8 @@ public class SignUpTabFragment extends Fragment {
 
     EditText Email, Pass, ConfirmPass;
     Button Registerbtn;
-    RadioGroup radioGroup;
-    boolean isStudent = false;
+    RadioButton student, admin;
+    boolean isStudent;
     String email, password, confirm;
     FirebaseAuth fAuth;
     FirebaseDatabase database;
@@ -50,7 +51,8 @@ public class SignUpTabFragment extends Fragment {
         Pass = root.findViewById(R.id.password2);
         ConfirmPass = root.findViewById(R.id.password3);
         Registerbtn = root.findViewById(R.id.login_button);
-        radioGroup = root.findViewById(R.id.radioGroup);
+        student = root.findViewById(R.id.radioButtonStudent);
+        admin = root.findViewById(R.id.radioButtonAdmin);
         database = FirebaseDatabase.getInstance();
         mDatabase = database.getReference("Users");
         fAuth = FirebaseAuth.getInstance();
@@ -93,20 +95,23 @@ public class SignUpTabFragment extends Fragment {
                     @Override
                     public void onSuccess(AuthResult authResult) { // send the user to the log - in screen.
 
-                        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                            @Override
-                            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                                switch (checkedId) {
-                                    case R.id.radioButtonStudent:
-                                        isStudent = true;
-                                }
-                            }
-                        });
+                        if (student.isChecked()){
+                            isStudent = true;
+                        }
+                        else {
+                            isStudent = false;
+                        }
+
                         User user = new User(isStudent, new ArrayList<String>());
-                        String keyid = mDatabase.push().getKey();
+                        String keyid = fAuth.getInstance().getCurrentUser().getUid();
                         mDatabase.child(keyid).setValue(user);
 
-                        startActivity(new Intent(getActivity(), LoginActivity.class));
+                        if (isStudent){
+                            startActivity(new Intent(getActivity(), StudentWelcomeActivity.class));
+                        }
+                        else {
+                            startActivity(new Intent(getActivity(), AdminWelcomeActivity.class));
+                        }
                     }
 
                 }).addOnFailureListener(new OnFailureListener() {
