@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.database.ChildEventListener;
@@ -32,6 +34,12 @@ import com.google.firebase.database.GenericTypeIndicator;
 
 import java.sql.Array;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 public class FutureCoursesActivity extends AppCompatActivity {
 
@@ -48,7 +56,6 @@ public class FutureCoursesActivity extends AppCompatActivity {
     Context context;
 
     RecyclerView rvSearch;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,22 +81,28 @@ public class FutureCoursesActivity extends AppCompatActivity {
             }
         });
 
-
         context = this.getApplicationContext();
         coursesAll = new ArrayList<CourseSearchItem>();
+        coursesSelected = new ArrayList<String>();
 
+        //Set coursesSelected
         selectRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if(task.isSuccessful()) {
                     GenericTypeIndicator<ArrayList<String>> listType = new GenericTypeIndicator<ArrayList<String>>() {};
                     coursesSelected = task.getResult().getValue(listType);
+                    if(coursesSelected == null) {
+                        coursesSelected = new ArrayList<String>();
+                    }
+                    for(String code : coursesSelected) {
+                        coursesAll.add(new CourseSearchItem(code, true));
+                    }
                 }
-                if(coursesSelected == null) {coursesSelected = new ArrayList<String>();}
+
                 initAdded();
-                for(String code : coursesSelected) {
-                    coursesAll.add(new CourseSearchItem(code, true));
-                }
+                //Get rest of fill out rest of data
+                restOfDatabase();
             }
         });
 
@@ -169,13 +182,15 @@ public class FutureCoursesActivity extends AppCompatActivity {
                     }
                 }
         );
+    }
 
+    public void restOfDatabase() {
         courseRef.orderByKey().addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 Course course = snapshot.getValue(Course.class);
                 if(!coursesSelected.contains(course.getCode())) {
-                    coursesAll.add(coursesSelected.size(), new CourseSearchItem(course.getCode(), false));
+                    coursesAll.add(new CourseSearchItem(course.getCode(), false));
                 }
 
                 filterList(((SearchView)findViewById(R.id.future_search_bar)).getQuery().toString());
