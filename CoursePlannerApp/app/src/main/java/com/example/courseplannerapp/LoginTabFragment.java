@@ -1,6 +1,8 @@
 package com.example.courseplannerapp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +33,7 @@ public class LoginTabFragment extends Fragment {
     FirebaseAuth fAuth;
     FirebaseDatabase database;
     DatabaseReference mDatabase;
+    SharedPreferences sp;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -44,6 +47,9 @@ public class LoginTabFragment extends Fragment {
         Email = root.findViewById(R.id.username);
         Pass = root.findViewById(R.id.password);
         loginbtn = root.findViewById(R.id.login);
+        sp = getActivity().getSharedPreferences("save", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+
 
         loginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +74,9 @@ public class LoginTabFragment extends Fragment {
                         mDatabase.child(currentuser).child("student").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DataSnapshot> task) {
+
+                                editor.putString("UID",currentuser);
+                                editor.apply();
 
                                 boolean isStudent = task.getResult().getValue(Boolean.class);
                                 if (isStudent){

@@ -1,0 +1,61 @@
+Ansh Aneel:
+
+  What have you done since today?
+	  - Worked on login functionality.
+    - Started test cases
+    
+  What are you planning on doing tomorrow?
+    - Try to finish login and register page.
+    - Try to finish testing.
+
+  Any impediments or stumbling blocks?
+	  - Login page had a glitch (now fixed, glitch was with andriod studio).
+
+Alex Zeng:
+
+   What have you done since today?
+    - Developed prototype algo for generated timelime.
+    - Attemped to create code for generated timeline.
+
+  What are you planning on doing tomorrow?
+    - Try to help and finish generated timeline.
+
+  Any impediments or stumbling blocks?
+	  - Trying to find a wait function for async functions.
+
+Sohil Chanana:
+
+  What have you done since today?
+	  - Completed functionality for add courses.
+    - Added loading icon.
+    
+  What are you planning on doing tomorrow?
+    - Edit design and function for add courses.
+
+  Any impediments or stumbling blocks?
+    - No impediments faced yet.
+    
+Vedat Goktepe:
+
+  What have you done since today?
+    - Fixed bug with async data call.
+    - Refactored cart generator.
+    
+  What are you planning on doing tomorrow?
+    - Try to help and finish generated timeline section.
+
+  Any impediments or stumbling blocks?
+	  - No impediments faced yet.
+
+Ashwin Mallik:
+
+  What have you done since today?
+    - Finished Library section for students.
+    - Finished first section of edit courses section.
+      
+  What are you planning on doing tomorrow?
+    - Finish admin edit courses page.
+    - Help with generated timeline.
+
+  Any impediments or stumbling blocks?
+	  - No impediments faced yet.
