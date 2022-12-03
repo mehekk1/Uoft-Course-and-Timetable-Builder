@@ -27,6 +27,10 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 public class AdminEditCoursesActivity extends AppCompatActivity{
 
@@ -80,7 +84,7 @@ public class AdminEditCoursesActivity extends AppCompatActivity{
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                 if(position != RecyclerView.NO_POSITION){
-                    openWelcomePage();
+                    openEditPage();
                 }
             }
         });
@@ -127,6 +131,11 @@ public class AdminEditCoursesActivity extends AppCompatActivity{
 
     private void openAdminAddCoursesPage(){
         Intent intent = new Intent(this, AdminAddCourseActivity.class);
+        startActivity(intent);
+    }
+
+    public void openEditPage(){
+        Intent intent = new Intent(this, EditCourseActivity.class);
         startActivity(intent);
     }
 
