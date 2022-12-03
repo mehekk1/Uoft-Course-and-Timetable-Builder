@@ -137,10 +137,10 @@ public class GeneratedTimelineActivity extends AppCompatActivity {
                     int year = Integer.parseInt(latest.substring(0,4));
 
                     int earliest;
-                    if(latest.substring(5).equals("0")) {
+                    if(latest.substring(4).equals("0")) {
                         earliest = 1;
                     }
-                    else if(latest.substring(5).equals("1")) {
+                    else if(latest.substring(4).equals("1")) {
                         earliest = 2;
                     }
                     else {

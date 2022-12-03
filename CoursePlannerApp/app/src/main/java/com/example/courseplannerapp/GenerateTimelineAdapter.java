@@ -54,26 +54,51 @@ public class GenerateTimelineAdapter extends RecyclerView.Adapter<GenerateTimeli
         }
         holder.takeDateTV.setText(sem + " " + year);
 
-        int i = 0;
-        while(i < curCoursesToTake.size() && i < 6) {
-            holder.courses.get(i).setText(curCoursesToTake.get(i));
-            System.out.println(curCoursesToTake.get(i));
-            i++;
+        for(int i = 0; i < curCoursesToTake.size(); i++) {
+            TextView tv = new TextView(context);
+            tv.setId(i + 5);
+            holder.courses.add(tv);
+            holder.constraintLayout.addView(tv);
         }
-        i--;
 
         ConstraintSet constraintSet = new ConstraintSet();
         constraintSet.clone(holder.constraintLayout);
-        constraintSet.connect(holder.courses.get(i).getId(), ConstraintSet.BOTTOM, R.id.parent_layout, ConstraintSet.BOTTOM);
-        constraintSet.setMargin(holder.courses.get(i).getId(), ConstraintSet.BOTTOM, 8);
-        constraintSet.applyTo(holder.constraintLayout);
 
-        i++;
-        while(i < 6 || i < curCoursesToTake.size()) {
-            holder.courses.get(i).setVisibility(View.GONE);
-            i++;
+        if(curCoursesToTake.size() == 1) {
+            holder.courses.get(0).setText(curCoursesToTake.get(0));
+            constraintSet.connect(holder.courses.get(0).getId(), ConstraintSet.TOP, R.id.parent_layout, ConstraintSet.TOP);
+            constraintSet.setMargin(holder.courses.get(0).getId(), ConstraintSet.TOP, 8);
+            constraintSet.connect(holder.courses.get(0).getId(), ConstraintSet.BOTTOM, R.id.parent_layout, ConstraintSet.BOTTOM);
+            constraintSet.setMargin(holder.courses.get(0).getId(), ConstraintSet.BOTTOM, 8);
+            constraintSet.connect(holder.courses.get(0).getId(), ConstraintSet.END, R.id.parent_layout, ConstraintSet.END);
+            constraintSet.setMargin(holder.courses.get(0).getId(), ConstraintSet.END, 92);
+        }
+        else {
+            int i = 0;
+            while(i < curCoursesToTake.size()) {
+                if(i == 0) {
+                    constraintSet.connect(holder.courses.get(i).getId(), ConstraintSet.TOP, R.id.parent_layout, ConstraintSet.TOP);
+                    constraintSet.setMargin(holder.courses.get(i).getId(), ConstraintSet.TOP, 8);
+                    constraintSet.connect(holder.courses.get(i).getId(), ConstraintSet.BOTTOM, holder.courses.get(i+1).getId(), ConstraintSet.TOP);
+                }
+                else if(i == curCoursesToTake.size()-1) {
+                    constraintSet.connect(holder.courses.get(i).getId(), ConstraintSet.TOP, holder.courses.get(i-1).getId(), ConstraintSet.BOTTOM);
+                    constraintSet.connect(holder.courses.get(i).getId(), ConstraintSet.BOTTOM, R.id.parent_layout, ConstraintSet.BOTTOM);
+                    constraintSet.setMargin(holder.courses.get(i).getId(), ConstraintSet.BOTTOM, 8);
+                }
+                else {
+
+                    constraintSet.connect(holder.courses.get(i).getId(), ConstraintSet.TOP, holder.courses.get(i-1).getId(), ConstraintSet.BOTTOM);
+                    constraintSet.connect(holder.courses.get(i).getId(), ConstraintSet.BOTTOM, holder.courses.get(i+1).getId(), ConstraintSet.TOP);
+                }
+                holder.courses.get(i).setText(curCoursesToTake.get(i));
+                constraintSet.connect(holder.courses.get(i).getId(), ConstraintSet.END, R.id.parent_layout, ConstraintSet.END);
+                constraintSet.setMargin(holder.courses.get(i).getId(), ConstraintSet.END, 92);
+                i++;
+            }
         }
 
+        constraintSet.applyTo(holder.constraintLayout);
     }
 
     @Override
@@ -86,13 +111,10 @@ public class GenerateTimelineAdapter extends RecyclerView.Adapter<GenerateTimeli
         // for any view that will be set as you render a row
         public TextView takeDateTV;
 
-        public TextView course1;
-        public TextView course2;
-        public TextView course3;
-        public TextView course4;
-        public TextView course5;
-        public TextView course6;
         public ArrayList<TextView> courses;
+
+
+
         ConstraintLayout constraintLayout;
 
         // We also create a constructor that accepts the entire item row
@@ -104,20 +126,7 @@ public class GenerateTimelineAdapter extends RecyclerView.Adapter<GenerateTimeli
 
             takeDateTV = itemView.findViewById(R.id.year_and_sem);
 
-            course1 = itemView.findViewById(R.id.course1);
-            course2 = itemView.findViewById(R.id.course2);
-            course3 = itemView.findViewById(R.id.course3);
-            course4 = itemView.findViewById(R.id.course4);
-            course5 = itemView.findViewById(R.id.course5);
-            course6 = itemView.findViewById(R.id.course6);
-
-            courses = new ArrayList<TextView>();
-            courses.add(course1);
-            courses.add(course2);
-            courses.add(course3);
-            courses.add(course4);
-            courses.add(course5);
-            courses.add(course6);
+            courses = new ArrayList<TextView>(coursesToTake.size());
 
             constraintLayout = itemView.findViewById(R.id.parent_layout);
         }
