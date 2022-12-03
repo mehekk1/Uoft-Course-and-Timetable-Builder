@@ -65,5 +65,8 @@
     <string name="admin_edit_course_widget_text">EDIT</string>
 
     <string name="admin_edit_intro">Click a course to edit!</string>
+    <string name="admin_edit_page_factos">To confirm your edits press the edit button at the end</string>
+    <string name="confirm_edit">CONFIRM EDIT</string>
+    <string name="remove_course">REMOVE COURSE</string>
 
 </resources>
