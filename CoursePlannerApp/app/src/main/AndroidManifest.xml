@@ -58,7 +58,6 @@
         <activity
             android:name=".AdminWelcomeActivity"
             android:exported="false">
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -94,6 +93,7 @@
         <activity
             android:name=".TakenTimelineActivity"
             android:exported="false">
+
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -127,6 +127,13 @@
         </activity>
         <activity
             android:name=".ViewAllCoursesActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".GenerateTimelineSample"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
