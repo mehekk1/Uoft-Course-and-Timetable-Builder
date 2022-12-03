@@ -103,7 +103,7 @@ public class SignUpTabFragment extends Fragment {
                         }
 
                         User user = new User(isStudent, new ArrayList<String>());
-                        String keyid = mDatabase.push().getKey();
+                        String keyid = fAuth.getInstance().getCurrentUser().getUid();
                         mDatabase.child(keyid).setValue(user);
 
                         if (isStudent){

@@ -13,10 +13,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class LoginTabFragment extends Fragment {
 
@@ -24,13 +29,18 @@ public class LoginTabFragment extends Fragment {
     EditText Email, Pass;
     String email, pass;
     FirebaseAuth fAuth;
+    FirebaseDatabase database;
+    DatabaseReference mDatabase;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.loginpage_fragment, container, false);
+
         fAuth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
+        mDatabase = database.getReference("Users");
         Email = root.findViewById(R.id.username);
         Pass = root.findViewById(R.id.password);
         loginbtn = root.findViewById(R.id.login);
@@ -53,8 +63,22 @@ public class LoginTabFragment extends Fragment {
                 fAuth.signInWithEmailAndPassword(email, pass).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
+                        String currentuser = fAuth.getInstance().getCurrentUser().getUid();
 
-                        startActivity(new Intent(getActivity(), LoginActivity.class));
+                        mDatabase.child(currentuser).child("student").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DataSnapshot> task) {
+
+                                boolean isStudent = task.getResult().getValue(Boolean.class);
+                                if (isStudent){
+                                    startActivity(new Intent(getActivity(), StudentWelcomeActivity.class));
+                                }
+                                else {
+                                    startActivity(new Intent(getActivity(), AdminWelcomeActivity.class));
+                                }
+                            }
+                        });
+                        //startActivity(new Intent(getActivity(), LoginActivity.class));
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
