@@ -69,6 +69,8 @@ public class AdminAddCourseActivity extends AppCompatActivity {
             }
         });
 
+
+
         ItemClickSupport.addTo(rvs).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
@@ -103,62 +105,107 @@ public class AdminAddCourseActivity extends AppCompatActivity {
 
             }
         });
+
+
+
         binding.adminAddCourseBtn.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 code = binding.adminAddCourseCode.getText().toString().toUpperCase();
                 name = binding.adminAddCourseName.getText().toString();
-//                fall = binding.fallSwitch.isChecked();
-//                winter = binding.winterSwitch.isChecked();
-//                summer = binding.summerSwitch.isChecked();
                 offerings = new ArrayList<Boolean>();
-                offerings.add(0, Boolean.valueOf(binding.winterSwitch.isChecked()));
-                offerings.add(1, Boolean.valueOf(binding.summerSwitch.isChecked()));
-                offerings.add(2, Boolean.valueOf(binding.fallSwitch.isChecked()));
+                offerings.add(0, binding.winterSwitch.isChecked());
+                offerings.add(1, binding.summerSwitch.isChecked());
+                offerings.add(2, binding.fallSwitch.isChecked());
                 prereqs = new ArrayList<String>();
                 int i = 0;
                 while (prereq_search.get(i).getSelected()){
                     prereqs.add(prereq_search.get(i).getCode());
                     i++;
                 }
-
-
-                if (!code.isEmpty() && !name.isEmpty() && (offerings.get(0)||offerings.get(1)||offerings.get(2))){
-                    Course course = new Course(name, code, offerings, prereqs);
-
-
-                    ref = database.getReference("AdminCourses");
-                    ref.child(code).setValue(course).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-
-                            binding.adminAddCourseName.setText("");
-                            binding.adminAddCourseCode.setText("");
-                            binding.fallSwitch.setChecked(false);
-                            binding.winterSwitch.setChecked(false);
-                            binding.summerSwitch.setChecked(false);
-                            int i = 0;
-                            while (prereq_search.get(i).getSelected()){
-                                prereq_search.get(i).setSelected(false);
-                                i++;
+                ///////////////////////////////////////////////////////////////////////////////////////////
+                ref = database.getReference("AdminCourses");
+                ref.child(code).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        if (task.isSuccessful()){
+                            if (code.isEmpty() || name.isEmpty()){
+                                Toast.makeText(AdminAddCourseActivity.this, "You Must Complete all Fields", Toast.LENGTH_SHORT).show();
                             }
-                            filterList(binding.searchView.getQuery().toString());
-                            CourseSearchItemAdapter searchAdapter = new CourseSearchItemAdapter(context, courseFilter);
-                            rvs.setAdapter((searchAdapter));
-                            Toast.makeText(AdminAddCourseActivity.this, "Successfully Added Course", Toast.LENGTH_SHORT).show();
+                            else if (!(offerings.get(0)||offerings.get(1)||offerings.get(2))){
+                                Toast.makeText(AdminAddCourseActivity.this, "You Must Choose At Least 1 Offering", Toast.LENGTH_SHORT).show();
+                            }
+                            else if (task.getResult().exists()){
+                                Toast.makeText(AdminAddCourseActivity.this, "The Course: " + code + " already exists", Toast.LENGTH_SHORT).show();
+                            }
+                            else {
+                                Course course = new Course(name, code, offerings, prereqs);
+                                ref.child(code).setValue(course).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        binding.adminAddCourseName.setText("");
+                                        binding.adminAddCourseCode.setText("");
+                                        binding.fallSwitch.setChecked(false);
+                                        binding.winterSwitch.setChecked(false);
+                                        binding.summerSwitch.setChecked(false);
+                                        int i = 0;
+                                        while (prereq_search.get(i).getSelected()){
+                                            prereq_search.get(i).setSelected(false);
+                                            i++;
+                                        }
+                                        filterList(binding.searchView.getQuery().toString());
+                                        CourseSearchItemAdapter searchAdapter = new CourseSearchItemAdapter(context, courseFilter);
+                                        rvs.setAdapter((searchAdapter));
+                                        Toast.makeText(AdminAddCourseActivity.this, "Successfully Added Course: " + code, Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
                         }
-                    });
+                    }
+                });
 
-                }
-                else if (!code.isEmpty() && !name.isEmpty() && !(offerings.get(0)||offerings.get(1)||offerings.get(2))){
-                    Toast.makeText(AdminAddCourseActivity.this, "You Must Choose At Least 1 Offering", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    Toast.makeText(AdminAddCourseActivity.this, "You Must Fill all Fields", Toast.LENGTH_SHORT).show();
-                }
+//
+//                if (!code.isEmpty() && !name.isEmpty() && (offerings.get(0)||offerings.get(1)||offerings.get(2))){
+//                    Course course = new Course(name, code, offerings, prereqs);
+//
+//
+//                    ref = database.getReference("AdminCourses");
+//                    ref.child(code).setValue(course).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                        @Override
+//                        public void onComplete(@NonNull Task<Void> task) {
+//
+//                            binding.adminAddCourseName.setText("");
+//                            binding.adminAddCourseCode.setText("");
+//                            binding.fallSwitch.setChecked(false);
+//                            binding.winterSwitch.setChecked(false);
+//                            binding.summerSwitch.setChecked(false);
+//                            int i = 0;
+//                            while (prereq_search.get(i).getSelected()){
+//                                prereq_search.get(i).setSelected(false);
+//                                i++;
+//                            }
+//                            filterList(binding.searchView.getQuery().toString());
+//                            CourseSearchItemAdapter searchAdapter = new CourseSearchItemAdapter(context, courseFilter);
+//                            rvs.setAdapter((searchAdapter));
+//                            Toast.makeText(AdminAddCourseActivity.this, "Successfully Added Course: " + code, Toast.LENGTH_SHORT).show();
+//                        }
+//                    });
+//
+//                }
+//                else if (!code.isEmpty() && !name.isEmpty() && !(offerings.get(0)||offerings.get(1)||offerings.get(2))){
+//                    Toast.makeText(AdminAddCourseActivity.this, "You Must Choose At Least 1 Offering", Toast.LENGTH_SHORT).show();
+//                }
+//                else{
+//                    Toast.makeText(AdminAddCourseActivity.this, "You Must Fill all Fields", Toast.LENGTH_SHORT).show();
+//                }
             }
         }));
+
+
+
+
+
         ref = database.getReference("AdminCourses");
         ref.orderByKey().addChildEventListener(new ChildEventListener() {
             @Override
@@ -201,6 +248,9 @@ public class AdminAddCourseActivity extends AppCompatActivity {
             }
         });
     }
+
+
+
     public void filterList(String text){
         courseFilter = new ArrayList<CourseSearchItem>();
         for (CourseSearchItem course:prereq_search){
