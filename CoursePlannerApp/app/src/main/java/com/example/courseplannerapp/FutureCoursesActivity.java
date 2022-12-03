@@ -57,6 +57,8 @@ public class FutureCoursesActivity extends AppCompatActivity {
 
     RecyclerView rvSearch;
 
+    Button generate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -133,6 +135,7 @@ public class FutureCoursesActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 selectRef.setValue(coursesSelected);
+                openGeneratedTimelinePage();
             }
         });
 
@@ -265,6 +268,11 @@ public class FutureCoursesActivity extends AppCompatActivity {
 
     private void openTakenTimelinePage () {
         Intent intent = new Intent(this, TakenTimelineActivity.class);
+        startActivity(intent);
+    }
+
+    private void openGeneratedTimelinePage() {
+        Intent intent = new Intent(this, GeneratedTimelineActivity.class);
         startActivity(intent);
     }
 
