@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.MenuItem;
@@ -45,22 +46,29 @@ public class FutureCoursesActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNav;
 
-    FirebaseDatabase db = FirebaseDatabase.getInstance();;
-    DatabaseReference selectRef = db.getReference("vedat/coursesSelected");
-    DatabaseReference courseRef = db.getReference("CoursesTestVedat");
+    Context context;
+    SharedPreferences sp;
+    String user;
+    FirebaseDatabase db = FirebaseDatabase.getInstance();
+    DatabaseReference selectRef;
+    DatabaseReference courseRef = db.getReference("Courses");
+
     ArrayList<CourseSearchItem> coursesAll;
     ArrayList<String> coursesSelected;
-
     ArrayList<CourseSearchItem> coursesShown;
 
-    Context context;
-
     RecyclerView rvSearch;
+
+    Button generate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_future_courses);
+        context = this.getApplicationContext();
+        sp = getSharedPreferences("save", MODE_PRIVATE);
+        user = sp.getString("UID", "defaultUser");
+        selectRef = db.getReference("Users/" + user + "/coursesSelected");
 
         bottomNav = findViewById(R.id.bottom_navigation_view);
         bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -81,7 +89,6 @@ public class FutureCoursesActivity extends AppCompatActivity {
             }
         });
 
-        context = this.getApplicationContext();
         coursesAll = new ArrayList<CourseSearchItem>();
         coursesSelected = new ArrayList<String>();
 
@@ -133,6 +140,7 @@ public class FutureCoursesActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 selectRef.setValue(coursesSelected);
+                openGeneratedTimelinePage();
             }
         });
 
@@ -265,6 +273,11 @@ public class FutureCoursesActivity extends AppCompatActivity {
 
     private void openTakenTimelinePage () {
         Intent intent = new Intent(this, TakenTimelineActivity.class);
+        startActivity(intent);
+    }
+
+    private void openGeneratedTimelinePage() {
+        Intent intent = new Intent(this, GeneratedTimelineActivity.class);
         startActivity(intent);
     }
 

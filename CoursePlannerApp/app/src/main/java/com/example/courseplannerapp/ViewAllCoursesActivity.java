@@ -68,7 +68,7 @@ public class ViewAllCoursesActivity extends AppCompatActivity {
         });
 
         mDatabase = FirebaseDatabase.getInstance();
-        mReferenceCourses = mDatabase.getReference("CoursesTestVedat");
+        mReferenceCourses = mDatabase.getReference("Courses");
 
         RecyclerView recyclerView = findViewById(R.id.viewAllCoursesRecycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));

@@ -24,6 +24,7 @@ import android.widget.SearchView;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.internal.zabk;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -45,9 +46,11 @@ public class EditCourseActivity extends AppCompatActivity {
     HashMap<String, Course> courses = new HashMap();
     ArrayList<CourseSearchItem> courseSearchItems = new ArrayList<>();
     ArrayList<CourseSearchItem> courseFilter = new ArrayList<>();
+    List<String> userId = new ArrayList<>();
 
     FirebaseDatabase mDatabase;
     DatabaseReference mReferenceCourses;
+    DatabaseReference mStudentRef;
 
     EditText courseEditName, courseEditCode;
     Switch switchFall, switchSummer, swichWinter;
@@ -110,6 +113,7 @@ public class EditCourseActivity extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance();
         mReferenceCourses = mDatabase.getReference("Courses");
+        mStudentRef = mDatabase.getReference("Users");
 
 //        Chain aysnc for loading course data
         mReferenceCourses.child(incomingCourseCode).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
@@ -323,6 +327,51 @@ public class EditCourseActivity extends AppCompatActivity {
                             break;
                         }
                     }
+            }
+        });
+
+        
+
+        mStudentRef.orderByKey().addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                GenericTypeIndicator<HashMap<String, Object>> userCourses = new GenericTypeIndicator<HashMap<String, Object>>() {};
+                HashMap<String, Object> userMap = snapshot.getValue(userCourses);
+
+                List<String> coursesTaken = (List<String>) (userMap.get("taken_list"));
+                if(coursesTaken != null && coursesTaken.contains(editCourse)){
+                    coursesTaken.remove(editCourse);
+                    coursesTaken.add(newCourse);
+                    mStudentRef.child(snapshot.getKey()).child("taken_list").setValue(coursesTaken);
+                }
+
+                List<String> selectedCourses = (List<String>) (userMap.get("coursesSelected"));
+                if(selectedCourses != null && selectedCourses.contains(editCourse)){
+                    selectedCourses.remove(editCourse);
+                    selectedCourses.add(newCourse);
+                    mStudentRef.child(snapshot.getKey()).child("coursesSelected").setValue(selectedCourses);
+                }
+
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
 
