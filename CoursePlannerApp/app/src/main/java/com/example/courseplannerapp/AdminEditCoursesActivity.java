@@ -94,7 +94,6 @@ public class AdminEditCoursesActivity extends AppCompatActivity{
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                 if(position != RecyclerView.NO_POSITION){
 
-//                    editor.putString("courseCode", editableCourses.get(position).code);
                     Intent intent = new Intent(context, EditCourseActivity.class);
                     intent.putExtra("courseCode", editableCourses.get(position).code);
                     startActivity(intent);
