@@ -13,6 +13,14 @@
         android:theme="@style/Theme.CoursePlannerApp"
         tools:targetApi="31">
         <activity
+            android:name=".AdminSettingsActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <activity
             android:name=".EditCourseActivity"
             android:exported="false">
             <meta-data
@@ -22,7 +30,7 @@
         <activity
             android:name=".AdminEditCoursesActivity"
             android:exported="false">
-            <meta-data
+        <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
@@ -48,7 +56,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".AdminWelcomeActivity"
+            android:name=".HomepageActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -97,6 +105,7 @@
         <activity
             android:name=".StudentWelcomeActivity"
             android:exported="false">
+
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -109,7 +118,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".HomepageActivity"
+            android:name=".AdminWelcomeActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
