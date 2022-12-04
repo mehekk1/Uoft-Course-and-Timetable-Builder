@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.MenuItem;
@@ -45,15 +46,16 @@ public class FutureCoursesActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNav;
 
-    FirebaseDatabase db = FirebaseDatabase.getInstance();;
-    DatabaseReference selectRef = db.getReference("vedat/coursesSelected");
+    Context context;
+    SharedPreferences sp;
+    String user;
+    FirebaseDatabase db = FirebaseDatabase.getInstance();
+    DatabaseReference selectRef;
     DatabaseReference courseRef = db.getReference("CoursesTestVedat");
+
     ArrayList<CourseSearchItem> coursesAll;
     ArrayList<String> coursesSelected;
-
     ArrayList<CourseSearchItem> coursesShown;
-
-    Context context;
 
     RecyclerView rvSearch;
 
@@ -63,6 +65,10 @@ public class FutureCoursesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_future_courses);
+        context = this.getApplicationContext();
+        sp = getSharedPreferences("save", MODE_PRIVATE);
+        user = sp.getString("UID", "");
+        selectRef = db.getReference("Users/" + user + "/coursesSelected");
 
         bottomNav = findViewById(R.id.bottom_navigation_view);
         bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -83,7 +89,6 @@ public class FutureCoursesActivity extends AppCompatActivity {
             }
         });
 
-        context = this.getApplicationContext();
         coursesAll = new ArrayList<CourseSearchItem>();
         coursesSelected = new ArrayList<String>();
 
