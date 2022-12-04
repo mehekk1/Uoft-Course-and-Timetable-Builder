@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
+	android:background="@color/activity_background"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	tools:context=".TakenTimelineActivity">
@@ -26,7 +27,7 @@
 		android:layout_height="88dp"
 		android:layout_marginTop="16dp"
 		android:fontFamily="@font/montserrat_bold"
-		android:text="Welcome to your taken courses page!"
+		android:text="Welcome to your Taken Courses Page"
 		android:textAlignment="center"
 		android:textColor="#1C375B"
 		android:textSize="34sp"
@@ -42,7 +43,8 @@
 		android:layout_marginStart="8dp"
 		android:layout_marginTop="8dp"
 		android:fontFamily="@font/montserrat_bold"
-		android:text="Enter a course code to make changes:"
+		android:gravity="center"
+		android:text="Enter a course code to make changes"
 		android:textColor="@color/black"
 		android:textSize="18sp"
 		android:textStyle="bold"
@@ -54,9 +56,11 @@
 		android:id="@+id/button_first"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
+		android:layout_marginTop="12dp"
 		android:backgroundTint="#1C375B"
 		android:onClick="addCourse"
 		android:text="ADD COURSE"
+		app:cornerRadius="30sp"
 		app:layout_constraintEnd_toStartOf="@id/button_second"
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toBottomOf="@id/course_text" />
@@ -65,33 +69,39 @@
 		android:id="@+id/button_second"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
+		android:layout_marginTop="12dp"
 		android:backgroundTint="#1C375B"
 		android:onClick="addCourse"
 		android:text="Remove course"
+		app:cornerRadius="30sp"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toEndOf="@id/button_first"
 		app:layout_constraintTop_toBottomOf="@id/course_text" />
 
 	<EditText
 		android:id="@+id/course_text"
-		android:layout_width="match_parent"
-		android:layout_height="48dp"
+		android:layout_width="376dp"
+		android:layout_height="42dp"
+		android:layout_marginTop="12dp"
+		android:background="@drawable/input"
+		android:gravity="center"
 		android:hint="Enter Course Code"
 		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintHorizontal_bias="1.0"
+		app:layout_constraintHorizontal_bias="0.542"
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 	<ScrollView
 		android:id="@+id/scrollView1"
-		android:layout_width="380dp"
-		android:layout_height="440dp"
+		android:layout_width="362dp"
+		android:layout_height="398dp"
 		android:layout_alignParentLeft="true"
 		android:layout_marginStart="16dp"
-		android:layout_marginTop="8dp"
+		android:layout_marginTop="12dp"
 		android:layout_marginEnd="16dp"
-		android:background="@drawable/stroke_bg"
+		android:background="@drawable/textfield_styling"
 		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintHorizontal_bias="0.588"
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toBottomOf="@+id/textView2">
 
@@ -110,12 +120,12 @@
 				android:orientation="vertical">
 
 				<TableLayout
-					android:layout_marginTop="10dp"
-					android:layout_marginBottom="10dp"
 					android:id="@+id/table_main"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:layout_centerHorizontal="true"></TableLayout>
+					android:layout_centerHorizontal="true"
+					android:layout_marginTop="10dp"
+					android:layout_marginBottom="10dp"></TableLayout>
 			</RelativeLayout>
 		</HorizontalScrollView>
 	</ScrollView>
@@ -124,11 +134,11 @@
 		android:id="@+id/textView2"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_marginTop="4dp"
+		android:layout_marginTop="8dp"
 		android:fontFamily="@font/montserrat_bold"
-		android:text="Here are the courses you have taken!"
+		android:text="Here are your previous courses!"
 		android:textColor="#1C375B"
-		android:textSize="22sp"
+		android:textSize="18sp"
 		android:textStyle="bold"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"

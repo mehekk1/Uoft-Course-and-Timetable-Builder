@@ -124,8 +124,7 @@ public class AdminAddCourseActivity extends AppCompatActivity {
                     prereqs.add(prereq_search.get(i).getCode());
                     i++;
                 }
-                ///////////////////////////////////////////////////////////////////////////////////////////
-                ref = database.getReference("AdminCourses");
+                ref = database.getReference("Courses");
                 ref.child(code).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -164,41 +163,6 @@ public class AdminAddCourseActivity extends AppCompatActivity {
                         }
                     }
                 });
-
-//
-//                if (!code.isEmpty() && !name.isEmpty() && (offerings.get(0)||offerings.get(1)||offerings.get(2))){
-//                    Course course = new Course(name, code, offerings, prereqs);
-//
-//
-//                    ref = database.getReference("AdminCourses");
-//                    ref.child(code).setValue(course).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                        @Override
-//                        public void onComplete(@NonNull Task<Void> task) {
-//
-//                            binding.adminAddCourseName.setText("");
-//                            binding.adminAddCourseCode.setText("");
-//                            binding.fallSwitch.setChecked(false);
-//                            binding.winterSwitch.setChecked(false);
-//                            binding.summerSwitch.setChecked(false);
-//                            int i = 0;
-//                            while (prereq_search.get(i).getSelected()){
-//                                prereq_search.get(i).setSelected(false);
-//                                i++;
-//                            }
-//                            filterList(binding.searchView.getQuery().toString());
-//                            CourseSearchItemAdapter searchAdapter = new CourseSearchItemAdapter(context, courseFilter);
-//                            rvs.setAdapter((searchAdapter));
-//                            Toast.makeText(AdminAddCourseActivity.this, "Successfully Added Course: " + code, Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
-//
-//                }
-//                else if (!code.isEmpty() && !name.isEmpty() && !(offerings.get(0)||offerings.get(1)||offerings.get(2))){
-//                    Toast.makeText(AdminAddCourseActivity.this, "You Must Choose At Least 1 Offering", Toast.LENGTH_SHORT).show();
-//                }
-//                else{
-//                    Toast.makeText(AdminAddCourseActivity.this, "You Must Fill all Fields", Toast.LENGTH_SHORT).show();
-//                }
             }
         }));
 
@@ -206,7 +170,7 @@ public class AdminAddCourseActivity extends AppCompatActivity {
 
 
 
-        ref = database.getReference("AdminCourses");
+        ref = database.getReference("Courses");
         ref.orderByKey().addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {

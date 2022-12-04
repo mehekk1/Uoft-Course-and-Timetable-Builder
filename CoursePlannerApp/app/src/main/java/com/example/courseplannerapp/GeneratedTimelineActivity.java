@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -24,12 +25,14 @@ import java.util.List;
 
 public class GeneratedTimelineActivity extends AppCompatActivity {
 
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference coursesRef = database.getReference("CoursesTestVedat");
-    DatabaseReference userRef = database.getReference("vedat");
-    DatabaseReference takenRef = userRef.child("taken_list");
-    DatabaseReference selectedRef = userRef.child("coursesSelected");
     Context context;
+    SharedPreferences sp;
+    String user;
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference coursesRef = database.getReference("Courses");
+    DatabaseReference userRef;
+    DatabaseReference takenRef;
+    DatabaseReference selectedRef;
 
     ArrayList<String> selected = new ArrayList<String>();
     ArrayList<String> taken = new ArrayList<String>();
@@ -54,7 +57,13 @@ public class GeneratedTimelineActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_generated_timeline);
+
         context = this.getApplicationContext();
+        sp = getSharedPreferences("save", MODE_PRIVATE);
+        user = sp.getString("UID", "defaultUser");
+        userRef = database.getReference("Users/" + user);
+        takenRef = userRef.child("taken_list");
+        selectedRef = userRef.child("coursesSelected");
 
         takenRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
