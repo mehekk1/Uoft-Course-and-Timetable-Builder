@@ -124,7 +124,7 @@ public class AdminAddCourseActivity extends AppCompatActivity {
                     prereqs.add(prereq_search.get(i).getCode());
                     i++;
                 }
-                ref = database.getReference("AdminCourses");
+                ref = database.getReference("Courses");
                 ref.child(code).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -170,7 +170,7 @@ public class AdminAddCourseActivity extends AppCompatActivity {
 
 
 
-        ref = database.getReference("AdminCourses");
+        ref = database.getReference("Courses");
         ref.orderByKey().addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
