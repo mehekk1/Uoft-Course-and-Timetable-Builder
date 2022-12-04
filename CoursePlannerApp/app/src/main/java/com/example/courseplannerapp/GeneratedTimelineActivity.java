@@ -29,9 +29,9 @@ public class GeneratedTimelineActivity extends AppCompatActivity {
     SharedPreferences sp;
     String user;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference coursesRef = database.getReference("CoursesTestVedat");
-    DatabaseReference takenRef = database.getReference("vedat/taken_list");
+    DatabaseReference coursesRef = database.getReference("Courses");
     DatabaseReference userRef;
+    DatabaseReference takenRef;
     DatabaseReference selectedRef;
 
     ArrayList<String> selected = new ArrayList<String>();
@@ -62,6 +62,7 @@ public class GeneratedTimelineActivity extends AppCompatActivity {
         sp = getSharedPreferences("save", MODE_PRIVATE);
         user = sp.getString("UID", "defaultUser");
         userRef = database.getReference("Users/" + user);
+        takenRef = userRef.child("taken_list");
         selectedRef = userRef.child("coursesSelected");
 
         takenRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {

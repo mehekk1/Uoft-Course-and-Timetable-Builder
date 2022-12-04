@@ -67,24 +67,24 @@ public class GenerateTimelineAdapter extends RecyclerView.Adapter<GenerateTimeli
         if(curCoursesToTake.size() == 1) {
             holder.courses.get(0).setText(curCoursesToTake.get(0));
             constraintSet.connect(holder.courses.get(0).getId(), ConstraintSet.TOP, R.id.parent_layout, ConstraintSet.TOP);
-            constraintSet.setMargin(holder.courses.get(0).getId(), ConstraintSet.TOP, 8);
+            constraintSet.setMargin(holder.courses.get(0).getId(), ConstraintSet.TOP, 24);
             constraintSet.connect(holder.courses.get(0).getId(), ConstraintSet.BOTTOM, R.id.parent_layout, ConstraintSet.BOTTOM);
-            constraintSet.setMargin(holder.courses.get(0).getId(), ConstraintSet.BOTTOM, 8);
+            constraintSet.setMargin(holder.courses.get(0).getId(), ConstraintSet.BOTTOM, 30);
             constraintSet.connect(holder.courses.get(0).getId(), ConstraintSet.END, R.id.parent_layout, ConstraintSet.END);
-            constraintSet.setMargin(holder.courses.get(0).getId(), ConstraintSet.END, 92);
+            constraintSet.setMargin(holder.courses.get(0).getId(), ConstraintSet.END, 150);
         }
         else {
             int i = 0;
             while(i < curCoursesToTake.size()) {
                 if(i == 0) {
                     constraintSet.connect(holder.courses.get(i).getId(), ConstraintSet.TOP, R.id.parent_layout, ConstraintSet.TOP);
-                    constraintSet.setMargin(holder.courses.get(i).getId(), ConstraintSet.TOP, 8);
+                    constraintSet.setMargin(holder.courses.get(i).getId(), ConstraintSet.TOP, 24);
                     constraintSet.connect(holder.courses.get(i).getId(), ConstraintSet.BOTTOM, holder.courses.get(i+1).getId(), ConstraintSet.TOP);
                 }
                 else if(i == curCoursesToTake.size()-1) {
                     constraintSet.connect(holder.courses.get(i).getId(), ConstraintSet.TOP, holder.courses.get(i-1).getId(), ConstraintSet.BOTTOM);
                     constraintSet.connect(holder.courses.get(i).getId(), ConstraintSet.BOTTOM, R.id.parent_layout, ConstraintSet.BOTTOM);
-                    constraintSet.setMargin(holder.courses.get(i).getId(), ConstraintSet.BOTTOM, 8);
+                    constraintSet.setMargin(holder.courses.get(i).getId(), ConstraintSet.BOTTOM, 30);
                 }
                 else {
 
@@ -93,7 +93,7 @@ public class GenerateTimelineAdapter extends RecyclerView.Adapter<GenerateTimeli
                 }
                 holder.courses.get(i).setText(curCoursesToTake.get(i));
                 constraintSet.connect(holder.courses.get(i).getId(), ConstraintSet.END, R.id.parent_layout, ConstraintSet.END);
-                constraintSet.setMargin(holder.courses.get(i).getId(), ConstraintSet.END, 92);
+                constraintSet.setMargin(holder.courses.get(i).getId(), ConstraintSet.END, 150);
                 i++;
             }
         }

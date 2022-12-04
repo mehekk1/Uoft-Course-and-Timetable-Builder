@@ -51,7 +51,7 @@ public class FutureCoursesActivity extends AppCompatActivity {
     String user;
     FirebaseDatabase db = FirebaseDatabase.getInstance();
     DatabaseReference selectRef;
-    DatabaseReference courseRef = db.getReference("CoursesTestVedat");
+    DatabaseReference courseRef = db.getReference("Courses");
 
     ArrayList<CourseSearchItem> coursesAll;
     ArrayList<String> coursesSelected;
