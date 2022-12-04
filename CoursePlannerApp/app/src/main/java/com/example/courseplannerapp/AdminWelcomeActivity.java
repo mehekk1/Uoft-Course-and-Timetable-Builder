@@ -77,7 +77,7 @@ public class AdminWelcomeActivity extends AppCompatActivity {
         libraryAdminCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("Remove");
+                openEditCoursesPage();
             }
         });
 

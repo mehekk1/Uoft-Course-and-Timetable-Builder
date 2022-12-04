@@ -23,17 +23,17 @@
 
     <TextView
         android:id="@+id/welcome_user_text"
-        android:layout_width="239dp"
-        android:layout_height="69dp"
+        android:layout_width="194dp"
+        android:layout_height="66dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="-3dp"
         android:layout_marginTop="8dp"
-        android:width="175sp"
+        android:width="120sp"
         android:height="200sp"
         android:fontFamily="@font/inter_semibold"
-        android:text="@string/welcome_page_user_header_msg"
+        android:text="@string/welcome_page_user_header_admin_msg"
         android:textColor="#000000"
         android:textSize="25sp" />
 
