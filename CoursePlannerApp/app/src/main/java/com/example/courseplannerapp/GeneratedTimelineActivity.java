@@ -60,7 +60,7 @@ public class GeneratedTimelineActivity extends AppCompatActivity {
 
         context = this.getApplicationContext();
         sp = getSharedPreferences("save", MODE_PRIVATE);
-        user = sp.getString("UID", "");
+        user = sp.getString("UID", "defaultUser");
         userRef = database.getReference("Users/" + user);
         selectedRef = userRef.child("coursesSelected");
 

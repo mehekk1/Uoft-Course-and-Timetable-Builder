@@ -67,7 +67,7 @@ public class FutureCoursesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_future_courses);
         context = this.getApplicationContext();
         sp = getSharedPreferences("save", MODE_PRIVATE);
-        user = sp.getString("UID", "");
+        user = sp.getString("UID", "defaultUser");
         selectRef = db.getReference("Users/" + user + "/coursesSelected");
 
         bottomNav = findViewById(R.id.bottom_navigation_view);
