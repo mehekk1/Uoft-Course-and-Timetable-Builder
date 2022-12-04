@@ -2,11 +2,13 @@ package com.example.courseplannerapp;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -30,6 +32,7 @@ import com.google.firebase.database.GenericTypeIndicator;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class EditCourseActivity extends AppCompatActivity {
 
@@ -42,7 +45,7 @@ public class EditCourseActivity extends AppCompatActivity {
 
     EditText courseEditName, courseEditCode;
     Switch switchFall, switchSummer, swichWinter;
-    Button editBtn;
+    Button editBtn, removeBtn;
     RecyclerView recyclerView;
     SearchView searchView;
 
@@ -68,6 +71,7 @@ public class EditCourseActivity extends AppCompatActivity {
         swichWinter = findViewById(R.id.edit_winter_switch);
         editBtn = findViewById(R.id.confirm_edit_btn);
         searchView = findViewById(R.id.edit_search_bar);
+        removeBtn = findViewById(R.id.confirm_remove_btn);
 
 
         Intent incomingIntent = getIntent();
@@ -172,6 +176,7 @@ public class EditCourseActivity extends AppCompatActivity {
                         i++;
                     }
                     mReferenceCourses.child(incomingCourseCode).child("prereqs").setValue(preReqs);
+                    openAdminEditPage();
 
                 }
                 else{
@@ -200,9 +205,9 @@ public class EditCourseActivity extends AppCompatActivity {
                         mReferenceCourses.child(newCourse.getCode()).setValue(newCourse);
                         mReferenceCourses.child(incomingCourseCode).removeValue();
 
-                        for(String currCourse : courses.keySet()){
-                            if(currCourse.contains(incomingCourseCode)){
-                                editCoursePreReq(currCourse, incomingCourseCode, newCourseCode);
+                        for(Map.Entry<String, Course> entry : courses.entrySet()){
+                            if(entry.getValue().getPrereqs() != null && entry.getValue().getPrereqs().contains(incomingCourseCode)){
+                                editCoursePreReq(entry.getKey(), incomingCourseCode, newCourseCode);
                             }
                         }
 
@@ -212,6 +217,27 @@ public class EditCourseActivity extends AppCompatActivity {
 
             }
         });
+
+
+//        removeBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                AlertDialog.Builder alertDialogBuilder =  new AlertDialog.Builder(context);
+//
+//                alertDialogBuilder.setTitle("Alert Dialog");
+//
+//                alertDialogBuilder.setMessage("Confirm to exit")
+//                        .setCancelable(false)
+//                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//
+//                            }
+//                        })
+//            }
+//        });
+
+
 
     }
 
@@ -268,20 +294,24 @@ public class EditCourseActivity extends AppCompatActivity {
                 Course checker;
                 DataSnapshot dataSnapshot = task.getResult();
                 checker = dataSnapshot.getValue(Course.class);
-                ArrayList<String> newPreReqs = new ArrayList<>();
-                newPreReqs = (ArrayList<String>) checker.getPrereqs();
 
-                for(int i = 0; i < newPreReqs.size(); i++){
-                    if(checker.getPrereqs().get(i).equals(editCourse)){
-                        checker.getPrereqs().set(i, newCourse);
-                        mReferenceCourses.child(checkCourse).child("prereqs").setValue(checker.getPrereqs());
-                        break;
+
+                    for(int i = 0; i < checker.getPrereqs().size(); i++){
+                        if(checker.getPrereqs().get(i) != null && checker.getPrereqs().get(i).equals(editCourse)){
+                            checker.getPrereqs().set(i, newCourse);
+                            mReferenceCourses.child(checkCourse).child("prereqs").setValue(checker.getPrereqs());
+                            openAdminEditPage();
+                            break;
+                        }
                     }
-                }
-
             }
         });
 
+    }
+
+    public void openAdminEditPage(){
+        Intent intent = new Intent(this, AdminEditCoursesActivity.class);
+        startActivity(intent);
     }
 
 }
