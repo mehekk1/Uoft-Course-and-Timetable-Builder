@@ -4,6 +4,7 @@ import static com.example.courseplannerapp.R.color.black;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -43,6 +44,7 @@ public class TakenTimelineActivity extends AppCompatActivity {
     ArrayList<String> courses;
     Button b;
     Button b2;
+    SharedPreferences sp;
     EditText e;
     Context context;
     String student;
@@ -54,12 +56,13 @@ public class TakenTimelineActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_taken_timeline);
         context = this.getApplicationContext();
+        sp = getSharedPreferences("save", MODE_PRIVATE);
         b = findViewById(R.id.button_first);
         b2 = findViewById(R.id.button_second);
         e = findViewById(R.id.course_text);
         db = FirebaseDatabase.getInstance();
         courses = new ArrayList<String>();
-        student = "charlse";
+        student = sp.getString("UID", "defaultUser");
         init();
         bottomNav = findViewById(R.id.bottom_view);
         bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -83,7 +86,7 @@ public class TakenTimelineActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 course = e.getText().toString().toUpperCase();
-                reference = db.getReference("Students");
+                reference = db.getReference("Users");
                 sec_ref = db.getReference("Courses");
                 reference.child(student).child("taken_list").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                     @Override
@@ -122,7 +125,7 @@ public class TakenTimelineActivity extends AppCompatActivity {
             public void onClick(View view) {
                 db = FirebaseDatabase.getInstance();
                 course = e.getText().toString().toUpperCase();
-                reference = db.getReference("Students");
+                reference = db.getReference("Users");
                 reference.child(student).child("taken_list").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -145,12 +148,14 @@ public class TakenTimelineActivity extends AppCompatActivity {
                 });
             }
         });
-        reference = db.getReference("Students");
+        reference = db.getReference("Users");
         reference.child(student).child("taken_list").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 GenericTypeIndicator<ArrayList<String>> lol = new GenericTypeIndicator<ArrayList<String>>(){};
                 courses = task.getResult().getValue(lol);
+                if(courses==null)
+                    courses = new ArrayList<String>();
                 init();
             }
         });
