@@ -49,6 +49,7 @@ public class EditCourseActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     SearchView searchView;
 
+
     Course course;
 
     Boolean courseInList;
@@ -218,24 +219,12 @@ public class EditCourseActivity extends AppCompatActivity {
             }
         });
 
-
-//        removeBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                AlertDialog.Builder alertDialogBuilder =  new AlertDialog.Builder(context);
-//
-//                alertDialogBuilder.setTitle("Alert Dialog");
-//
-//                alertDialogBuilder.setMessage("Confirm to exit")
-//                        .setCancelable(false)
-//                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialogInterface, int i) {
-//
-//                            }
-//                        })
-//            }
-//        });
+        removeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openDialog(courses, incomingCourseCode);
+            }
+        });
 
 
 
@@ -309,9 +298,16 @@ public class EditCourseActivity extends AppCompatActivity {
 
     }
 
+
     public void openAdminEditPage(){
         Intent intent = new Intent(this, AdminEditCoursesActivity.class);
         startActivity(intent);
     }
+
+    public void openDialog(HashMap<String, Course> courses, String deleteCourse){
+        EditDialog exDialog = new EditDialog(courses, deleteCourse, context);
+        exDialog.show(getSupportFragmentManager(), "ex Dialog");
+    }
+
 
 }
