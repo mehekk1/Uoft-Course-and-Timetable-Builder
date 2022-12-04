@@ -30,6 +30,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 
 import java.util.ArrayList;
 
@@ -58,7 +59,7 @@ public class TakenTimelineActivity extends AppCompatActivity {
         e = findViewById(R.id.course_text);
         db = FirebaseDatabase.getInstance();
         courses = new ArrayList<String>();
-        student = "charles";
+        student = "charlse";
         init();
         bottomNav = findViewById(R.id.bottom_view);
         bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -84,14 +85,14 @@ public class TakenTimelineActivity extends AppCompatActivity {
                 course = e.getText().toString().toUpperCase();
                 reference = db.getReference("Students");
                 sec_ref = db.getReference("Courses");
-                reference.child(student).child("taken_list").child(course).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                reference.child(student).child("taken_list").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DataSnapshot> task) {
                         if(task.isSuccessful()){
                             if(e.getText().toString().isEmpty()){
                                 Toast.makeText(context, course + "Please enter a course code", Toast.LENGTH_SHORT).show();
                             }
-                            else if (task.getResult().exists()){
+                            else if (courses.contains(course)){
                                 Toast.makeText(context, course + " already exists", Toast.LENGTH_SHORT).show();
                             }
                             else {
@@ -99,7 +100,9 @@ public class TakenTimelineActivity extends AppCompatActivity {
                                     @Override
                                     public void onComplete(@NonNull Task<DataSnapshot> task2) {
                                         if (task2.getResult().exists()){
-                                            reference.child(student).child("taken_list").child(course).setValue(course);
+                                            courses.add(course);
+                                            init();
+                                            reference.child(student).child("taken_list").setValue(courses);
                                             Toast.makeText(context, course+ " Added", Toast.LENGTH_SHORT).show();
                                         }
                                         else
@@ -120,15 +123,17 @@ public class TakenTimelineActivity extends AppCompatActivity {
                 db = FirebaseDatabase.getInstance();
                 course = e.getText().toString().toUpperCase();
                 reference = db.getReference("Students");
-                reference.child(student).child("taken_list").child(course).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                reference.child(student).child("taken_list").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DataSnapshot> task) {
                         if (task.isSuccessful()) {
                             if(e.getText().toString().isEmpty()){
                                 Toast.makeText(context, course + "Please enter a course code", Toast.LENGTH_SHORT).show();
                             }
-                            else if (task.getResult().exists()) {
-                                reference.child(student).child("taken_list").child(course).removeValue();
+                            else if (courses.contains(course)) {
+                                courses.remove(course);
+                                init();
+                                reference.child(student).child("taken_list").setValue(courses);
                                 Toast.makeText(context, course + " Removed", Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(context, course + " Not In List", Toast.LENGTH_SHORT).show();
@@ -141,34 +146,15 @@ public class TakenTimelineActivity extends AppCompatActivity {
             }
         });
         reference = db.getReference("Students");
-        reference.child(student).child("taken_list").orderByKey().addChildEventListener(new ChildEventListener() {
+        reference.child(student).child("taken_list").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                courses.add(snapshot.getValue().toString());
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                GenericTypeIndicator<ArrayList<String>> lol = new GenericTypeIndicator<ArrayList<String>>(){};
+                courses = task.getResult().getValue(lol);
                 init();
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-                courses.remove(snapshot.getValue().toString());
-                init();
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
+
     }
 
     public void init(){

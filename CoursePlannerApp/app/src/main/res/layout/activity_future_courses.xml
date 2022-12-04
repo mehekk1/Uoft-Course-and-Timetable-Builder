@@ -52,11 +52,11 @@
 		app:layout_constraintTop_toBottomOf="@+id/search_items_view" />
 
 	<Button
-		android:id="@+id/future_add_button"
+		android:id="@+id/future_generate_button"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:text="@string/future_generate_text"
-		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_view"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toBottomOf="@+id/added_courses_view" />

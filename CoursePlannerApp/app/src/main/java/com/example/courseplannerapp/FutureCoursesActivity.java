@@ -8,10 +8,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -20,6 +23,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.database.ChildEventListener;
@@ -27,31 +31,44 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 
 import java.sql.Array;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 public class FutureCoursesActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNav;
 
-    FirebaseDatabase db = FirebaseDatabase.getInstance();;
-    DatabaseReference selectRef = db.getReference("vedat/coursesSelected");
-    DatabaseReference courseRef = db.getReference("CoursesTestVedat");
+    Context context;
+    SharedPreferences sp;
+    String user;
+    FirebaseDatabase db = FirebaseDatabase.getInstance();
+    DatabaseReference selectRef;
+    DatabaseReference courseRef = db.getReference("Courses");
+
     ArrayList<CourseSearchItem> coursesAll;
     ArrayList<String> coursesSelected;
-
     ArrayList<CourseSearchItem> coursesShown;
-
-    Context context;
 
     RecyclerView rvSearch;
 
+    Button generate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_future_courses);
+        context = this.getApplicationContext();
+        sp = getSharedPreferences("save", MODE_PRIVATE);
+        user = sp.getString("UID", "defaultUser");
+        selectRef = db.getReference("Users/" + user + "/coursesSelected");
 
         bottomNav = findViewById(R.id.bottom_navigation_view);
         bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -72,10 +89,29 @@ public class FutureCoursesActivity extends AppCompatActivity {
             }
         });
 
-
-        context = this.getApplicationContext();
         coursesAll = new ArrayList<CourseSearchItem>();
         coursesSelected = new ArrayList<String>();
+
+        //Set coursesSelected
+        selectRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if(task.isSuccessful()) {
+                    GenericTypeIndicator<ArrayList<String>> listType = new GenericTypeIndicator<ArrayList<String>>() {};
+                    coursesSelected = task.getResult().getValue(listType);
+                    if(coursesSelected == null) {
+                        coursesSelected = new ArrayList<String>();
+                    }
+                    for(String code : coursesSelected) {
+                        coursesAll.add(new CourseSearchItem(code, true));
+                    }
+                }
+
+                initAdded();
+                //Get rest of fill out rest of data
+                restOfDatabase();
+            }
+        });
 
         rvSearch = findViewById(R.id.search_items_view);
         CourseSearchItemAdapter searchAdapter = new CourseSearchItemAdapter(context, coursesAll);
@@ -99,7 +135,14 @@ public class FutureCoursesActivity extends AppCompatActivity {
             }
         });
 
-        initAdded();
+        Button generate = findViewById(R.id.future_generate_button);
+        generate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectRef.setValue(coursesSelected);
+                openGeneratedTimelinePage();
+            }
+        });
 
         ItemClickSupport.addTo(rvSearch).setOnItemClickListener(
                 new ItemClickSupport.OnItemClickListener() {
@@ -108,46 +151,55 @@ public class FutureCoursesActivity extends AppCompatActivity {
                         searchView.clearFocus();
                         if (position != RecyclerView.NO_POSITION) {
                             CourseSearchItem course = coursesShown.get(position);
-                            String courseCode;
-                            courseCode = course.getCode();
+                            String code = course.getCode();
+                            boolean selected = course.getSelected();
 
-                            if (course.getSelected() == false) {
-                                //Add to selected data
-                                selectRef.child(courseCode).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<DataSnapshot> task) {
-                                        if (task.isSuccessful()) {
-                                            selectRef.child(courseCode).setValue(courseCode);
-                                        } else {
-                                            Toast.makeText(context, "An error has occurred", Toast.LENGTH_SHORT).show();
-                                        }
+                            if (!selected) {
+                                //Change type in all courses
+                                //Remove from all courses
+                                for(int i = 0; i < coursesAll.size(); i++) {
+                                    if(coursesAll.get(i).getCode() == code) {
+                                        coursesAll.remove(i);
                                     }
-                                });
+                                }
+                                //Re-add to all courses
+                                coursesAll.add(coursesSelected.size(), new CourseSearchItem(code, true));
 
+                                //Add to selected list
+                                coursesSelected.add(code);
                             }
                             else {
-                                //Remove from selected data
-                                selectRef.child(courseCode).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<DataSnapshot> task) {
-                                        if (task.isSuccessful()) {
-                                            selectRef.child(courseCode).removeValue();
-                                        } else {
-                                            Toast.makeText(context, "An error has occurred", Toast.LENGTH_SHORT).show();
-                                        }
+                                //Remove from selected list
+                                coursesSelected.remove(code);
+
+                                //Change type in all courses
+                                //Remove from all courses
+                                for(int i = 0; i < coursesAll.size(); i++) {
+                                    if(coursesAll.get(i).getCode() == code) {
+                                        coursesAll.remove(i);
                                     }
-                                });
+                                }
+                                //Re-add to all courses
+                                coursesAll.add(coursesSelected.size(), new CourseSearchItem(code, false));
                             }
+                            filterList(((SearchView)findViewById(R.id.future_search_bar)).getQuery().toString());
+                            CourseSearchItemAdapter searchAdapter = new CourseSearchItemAdapter(context, coursesShown);
+                            rvSearch.setAdapter(searchAdapter);
+                            initAdded();
                         }
                     }
                 }
         );
+    }
 
+    public void restOfDatabase() {
         courseRef.orderByKey().addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 Course course = snapshot.getValue(Course.class);
-                coursesAll.add(coursesSelected.size(), new CourseSearchItem(course.getCode(), false));
+                if(!coursesSelected.contains(course.getCode())) {
+                    coursesAll.add(new CourseSearchItem(course.getCode(), false));
+                }
 
                 filterList(((SearchView)findViewById(R.id.future_search_bar)).getQuery().toString());
                 CourseSearchItemAdapter searchAdapter = new CourseSearchItemAdapter(context, coursesShown);
@@ -181,65 +233,6 @@ public class FutureCoursesActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {}
-        });
-
-        selectRef.orderByKey().addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                //Remove from coursesList
-                for(int i = 0; i < coursesAll.size(); i++) {
-                    CourseSearchItem currentCourse = coursesAll.get(i);
-                    if(currentCourse.getCode().equals(snapshot.getValue().toString())) {
-                        coursesAll.remove(i);
-                        break;
-                    }
-                }
-                //Re-add to coursesAll end of selected as selected
-                coursesAll.add(coursesSelected.size(), new CourseSearchItem(snapshot.getValue().toString(), true));
-
-                filterList(((SearchView)findViewById(R.id.future_search_bar)).getQuery().toString());
-                CourseSearchItemAdapter searchAdapter = new CourseSearchItemAdapter(context, coursesShown);
-                rvSearch.setAdapter(searchAdapter);
-
-                coursesSelected.add(snapshot.getValue().toString());
-                initAdded();
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-                //Remove from coursesList
-                for(int i = 0; i < coursesAll.size(); i++) {
-                    CourseSearchItem currentCourse = coursesAll.get(i);
-                    if(currentCourse.getCode().equals(snapshot.getValue().toString())) {
-                        coursesAll.remove(i);
-                        break;
-                    }
-                }
-                //Re-add to coursesAll end of selected as not selected
-                coursesAll.add(coursesSelected.size()-1, new CourseSearchItem(snapshot.getValue().toString(), false));
-
-                filterList(((SearchView)findViewById(R.id.future_search_bar)).getQuery().toString());
-                CourseSearchItemAdapter searchAdapter = new CourseSearchItemAdapter(context, coursesShown);
-                rvSearch.setAdapter(searchAdapter);
-
-                coursesSelected.remove(snapshot.getValue().toString());
-                initAdded();
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
         });
     }
 
@@ -280,6 +273,11 @@ public class FutureCoursesActivity extends AppCompatActivity {
 
     private void openTakenTimelinePage () {
         Intent intent = new Intent(this, TakenTimelineActivity.class);
+        startActivity(intent);
+    }
+
+    private void openGeneratedTimelinePage() {
+        Intent intent = new Intent(this, GeneratedTimelineActivity.class);
         startActivity(intent);
     }
 
