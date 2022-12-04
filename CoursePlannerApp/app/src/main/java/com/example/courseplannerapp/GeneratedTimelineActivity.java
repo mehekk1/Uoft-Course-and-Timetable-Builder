@@ -9,11 +9,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -53,6 +56,9 @@ public class GeneratedTimelineActivity extends AppCompatActivity {
 
     Button backToSelectCourses;
 
+    private BottomNavigationView bottomNav;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +70,26 @@ public class GeneratedTimelineActivity extends AppCompatActivity {
         userRef = database.getReference("Users/" + user);
         takenRef = userRef.child("taken_list");
         selectedRef = userRef.child("coursesSelected");
+
+        bottomNav = findViewById(R.id.bottom_navigation_view);
+        bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                switch (id) {
+                    case R.id.nav_home:
+                        openHomePage();
+                        break;
+                    case R.id.nav_timeline:
+                        openTimelinePage();
+                        break;
+                    case R.id.nav_add_menu:
+                        openTakenTimelinePage();
+                        break;
+                }
+                return true;
+            }
+        });
 
         takenRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
@@ -215,4 +241,21 @@ public class GeneratedTimelineActivity extends AppCompatActivity {
         Intent intent = new Intent(this, FutureCoursesActivity.class);
         startActivity(intent);
     }
+
+    private void openTimelinePage () {
+        Intent intent = new Intent(this, FutureCoursesActivity.class);
+        startActivity(intent);
+    }
+
+    private void openTakenTimelinePage () {
+        Intent intent = new Intent(this, TakenTimelineActivity.class);
+        startActivity(intent);
+    }
+
+    private void openHomePage () {
+        Intent intent = new Intent(this, StudentWelcomeActivity.class);
+        startActivity(intent);
+    }
+
+
 }

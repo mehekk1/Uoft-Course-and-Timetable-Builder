@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Toast;
@@ -16,6 +18,8 @@ import android.widget.Toast;
 import com.example.courseplannerapp.databinding.ActivityAdminAddCourseBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -38,6 +42,7 @@ public class AdminAddCourseActivity extends AppCompatActivity {
     RecyclerView rvs;
     Context context;
     ArrayList<CourseSearchItem> courseFilter;
+    private BottomNavigationView bottomAdminNav;
 
 
     @Override
@@ -52,6 +57,26 @@ public class AdminAddCourseActivity extends AppCompatActivity {
         CourseSearchItemAdapter searchAdapter = new CourseSearchItemAdapter(context, prereq_search);
         rvs.setAdapter((searchAdapter));
         rvs.setLayoutManager(new LinearLayoutManager(this));
+
+        bottomAdminNav = findViewById(R.id.bottom_navigation_view);
+        bottomAdminNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                switch (id) {
+                    case R.id.nav_home:
+                        openWelcomePage();
+                        break;
+                    case R.id.nav_timeline:
+                        openAdminAddCoursesPage();
+                        break;
+                    case R.id.nav_add_menu:
+                        openAdminEditPage();
+                        break;
+                }
+                return true;
+            }
+        });
 
         filterList("");
         SearchView sv = binding.searchView;
@@ -224,5 +249,20 @@ public class AdminAddCourseActivity extends AppCompatActivity {
         }
         CourseSearchItemAdapter searchAdapter = new CourseSearchItemAdapter(context, courseFilter);
         rvs.setAdapter((searchAdapter));
+    }
+
+    private void openWelcomePage(){
+        Intent intent = new Intent(this, AdminWelcomeActivity.class);
+        startActivity(intent);
+    }
+
+    private void openAdminAddCoursesPage(){
+        Intent intent = new Intent(this, AdminAddCourseActivity.class);
+        startActivity(intent);
+    }
+
+    public void openAdminEditPage(){
+        Intent intent = new Intent(this, AdminEditCoursesActivity.class);
+        startActivity(intent);
     }
 }

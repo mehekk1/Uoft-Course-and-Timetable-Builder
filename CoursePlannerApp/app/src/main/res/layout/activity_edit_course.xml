@@ -144,12 +144,13 @@
         android:background="@drawable/input"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
-        app:iconifiedByDefault="false"
+        android:queryHint="Edit Prerequisites"
+        android:iconifiedByDefault="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_winter_switch"
-        app:queryHint="Edit Prerequisites" />
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/edit_recycle_search"
@@ -175,12 +176,13 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        app:srcCompat="@drawable/uoft"
+        android:layout_width="73dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-         />
+        app:srcCompat="@drawable/uoft" />
     />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
