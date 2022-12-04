@@ -33,7 +33,7 @@ public class EditDialog extends AppCompatDialogFragment {
         this.incomingCourseCode = incomingCourseCode;
         this.context = context;
         mDatabase = FirebaseDatabase.getInstance();
-        mReferenceCourses = mDatabase.getReference("CoursesTestVedat");
+        mReferenceCourses = mDatabase.getReference("Courses");
     }
 
 

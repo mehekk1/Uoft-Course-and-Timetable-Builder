@@ -11,9 +11,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SearchView;
@@ -22,6 +26,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -48,7 +54,7 @@ public class EditCourseActivity extends AppCompatActivity {
     Button editBtn, removeBtn;
     RecyclerView recyclerView;
     SearchView searchView;
-
+    private BottomNavigationView bottomAdminNav;
 
     Course course;
 
@@ -62,6 +68,11 @@ public class EditCourseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_course);
         context = getApplicationContext();
 
+        Window window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        int colorCodeDark = Color.parseColor("#FF000000");
+        window.setStatusBarColor(colorCodeDark);
+
         courseInList = false;
         codeInList = false;
 
@@ -73,13 +84,32 @@ public class EditCourseActivity extends AppCompatActivity {
         editBtn = findViewById(R.id.confirm_edit_btn);
         searchView = findViewById(R.id.edit_search_bar);
         removeBtn = findViewById(R.id.confirm_remove_btn);
+        bottomAdminNav = findViewById(R.id.bottom_navigation_view);
+        bottomAdminNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                switch (id) {
+                    case R.id.nav_home:
+                        openWelcomePage();
+                        break;
+                    case R.id.nav_timeline:
+                        openAdminAddCoursesPage();
+                        break;
+                    case R.id.nav_add_menu:
+                        openAdminEditPage();
+                        break;
+                }
+                return true;
+            }
+        });
 
 
         Intent incomingIntent = getIntent();
         String incomingCourseCode = incomingIntent.getStringExtra("courseCode");
 
         mDatabase = FirebaseDatabase.getInstance();
-        mReferenceCourses = mDatabase.getReference("CoursesTestVedat");
+        mReferenceCourses = mDatabase.getReference("Courses");
 
 //        Chain aysnc for loading course data
         mReferenceCourses.child(incomingCourseCode).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
@@ -309,5 +339,14 @@ public class EditCourseActivity extends AppCompatActivity {
         exDialog.show(getSupportFragmentManager(), "ex Dialog");
     }
 
+    private void openWelcomePage(){
+        Intent intent = new Intent(this, AdminWelcomeActivity.class);
+        startActivity(intent);
+    }
+
+    private void openAdminAddCoursesPage(){
+        Intent intent = new Intent(this, AdminAddCourseActivity.class);
+        startActivity(intent);
+    }
 
 }

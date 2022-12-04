@@ -81,7 +81,7 @@ public class AdminEditCoursesActivity extends AppCompatActivity{
         window.setStatusBarColor(colorCodeDark);
 
         mDatabase = FirebaseDatabase.getInstance();
-        mReferenceCourses = mDatabase.getReference("CoursesTestVedat");
+        mReferenceCourses = mDatabase.getReference("Courses");
 
         RecyclerView recyclerView = findViewById(R.id.adminEditRecyclerView);
         AdminEditCoursesAdapterRecyclerView adapter = new AdminEditCoursesAdapterRecyclerView(this, editableCourses);
