@@ -8,8 +8,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.CompoundButton;
 import android.widget.Toast;
 
@@ -40,12 +43,17 @@ public class AdminAddCourseActivity extends AppCompatActivity {
     ArrayList<CourseSearchItem> courseFilter;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityAdminAddCourseBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         context = this.getApplicationContext();
+        Window window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        int colorCodeDark = Color.parseColor("#FF000000");
+        window.setStatusBarColor(colorCodeDark);
         rvs = binding.searchRecycle;
         database = FirebaseDatabase.getInstance();
         prereq_search = new ArrayList<CourseSearchItem>();
