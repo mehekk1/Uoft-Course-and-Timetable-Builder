@@ -57,7 +57,7 @@
     <string name="admin_add_course_code">Course Code</string>
     <string name="admin_add_course_name">Course Title</string>
     <string name="admin_add_course_subheading">Enter Course Information Below</string>
-    <string name="admin_add_when_offered">When is this course offered?</string>
+    <string name="admin_add_when_offered">A colored switch represents when the course is offered</string>
     <string name="admin_add_winter_switch">Winter</string>
     <string name="admin_add_fall_switch">Fall</string>
     <string name="admin_add_summer_switch">Summer</string>

@@ -98,7 +98,7 @@ public class AdminWelcomeActivity extends AppCompatActivity {
         settingsAdminCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Open Settings
+                openStatsPage();
             }
         });
 
@@ -134,6 +134,11 @@ public class AdminWelcomeActivity extends AppCompatActivity {
 
     private void goToLoginPage(){
         Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
+
+    private void openStatsPage(){
+        Intent intent = new Intent(this, AdminStatsActivity.class);
         startActivity(intent);
     }
 

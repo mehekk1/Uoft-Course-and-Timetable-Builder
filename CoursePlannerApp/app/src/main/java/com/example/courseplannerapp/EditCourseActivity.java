@@ -261,7 +261,6 @@ public class EditCourseActivity extends AppCompatActivity {
         });
 
 
-
     }
 
     public void createCoursesList(){
