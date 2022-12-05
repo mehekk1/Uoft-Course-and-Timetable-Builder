@@ -233,7 +233,7 @@
                     android:id="@+id/welcome_page_home_settings_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/welcome_page_card_settings"
+                    android:text="STATISTICS"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 

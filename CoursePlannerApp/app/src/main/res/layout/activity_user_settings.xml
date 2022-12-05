@@ -7,32 +7,10 @@
     android:background="@drawable/settings_background"
     tools:context=".UserSettingsActivity">
 
-    <TextView
-        android:id="@+id/settings_password_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:fontFamily="@font/montserrat"
-        android:text="@string/settings_password_text_desc_db"
-        android:textColor="@color/white"
-        android:textSize="19sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settings_username_description" />
-
-    <ImageView
-        android:id="@+id/settings_page_user_icon"
-        android:layout_width="382dp"
-        android:layout_height="242dp"
-        android:layout_marginTop="108dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_person_settings_icon" />
 
     <TextView
-        android:id="@+id/settings_page_user_name"
-        android:layout_width="wrap_content"
+        android:id="@+id/settings_taken_courses"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/montserrat_bold"
@@ -40,39 +18,49 @@
         android:textColor="@color/white"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settings_page_user_icon" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <Button
         android:id="@+id/settings_page_go_back"
         android:layout_width="192dp"
         android:layout_height="59dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginBottom="68dp"
         android:width="150sp"
         android:backgroundTint="#FFFFFF"
         android:fontFamily="@font/montserrat_bold"
         android:text="@string/settings_page_go_back_home"
         android:textColor="@color/uoft_dark"
         app:cornerRadius="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/settings_page_user_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/settings_username_description"
-        android:layout_width="wrap_content"
+        android:id="@+id/settings_selected_courses"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:fontFamily="@font/montserrat"
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/montserrat_bold"
         android:text="@string/settings_page_username_desc_db"
         android:textColor="@color/white"
-        android:textSize="19sp"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settings_taken_courses" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="397dp"
+        android:layout_height="351dp"
+        android:layout_marginTop="28dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settings_page_user_name" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_person_settings_icon" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
