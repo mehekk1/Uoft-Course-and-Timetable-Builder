@@ -30,7 +30,7 @@ public class LoginTabFragment extends Fragment {
     Button loginbtn;
     EditText Email, Pass;
     String email, pass;
-    PresenterListener presenterListener;
+    Presenter presenter;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -41,7 +41,8 @@ public class LoginTabFragment extends Fragment {
         loginbtn = root.findViewById(R.id.login);
         Email = root.findViewById(R.id.username);
         Pass = root.findViewById(R.id.password);
-        presenterListener = new Presenter();
+
+        presenter = new Presenter(getActivity());
 
         loginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,14 +58,12 @@ public class LoginTabFragment extends Fragment {
         email = Email.getText().toString();
         pass = Pass.getText().toString();
 
-        if(email.isEmpty()){ // condition if full name field is empty,
-            Email.setError("This field cannot be empty."); // this error message will be shown.
+        if(presenter.ButtonError(Email, email)){ // condition if full name field is empty,
             return;
         }
-        if(pass.isEmpty()){ // condition if full name field is empty,
-            Pass.setError("This field cannot be empty."); // this error message will be shown.
+        if(presenter.ButtonError(Pass, pass)){ // condition if full name field is empty,
             return;
         }
-        presenterListener.Login(getActivity(), email, pass);
+        presenter.Login(email, pass);
     }
 }
