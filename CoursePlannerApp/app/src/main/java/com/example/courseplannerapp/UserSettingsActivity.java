@@ -57,8 +57,13 @@ public class UserSettingsActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 GenericTypeIndicator<ArrayList<String>> takenCourses = new GenericTypeIndicator<ArrayList<String>>(){};
-                courses = task.getResult().getValue(takenCourses);
-                takenCoursesStats.setText("You have taken this many courses so far: " + courses.size());
+                if (task.getResult().exists()){
+                    courses = task.getResult().getValue(takenCourses);
+                    takenCoursesStats.setText("You have taken this many courses so far: " + courses.size());
+                }
+                else{
+                    takenCoursesStats.setText("You have taken this many courses so far: 0");
+                }
                 takenCoursesStats.setGravity(Gravity.CENTER);
             }
         });
@@ -67,8 +72,14 @@ public class UserSettingsActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 GenericTypeIndicator<ArrayList<String>> takenCourses = new GenericTypeIndicator<ArrayList<String>>(){};
-                selectedCourses = task.getResult().getValue(takenCourses);
-                selectedCoursesStats.setText("You have selected this many courses currently: " + selectedCourses.size());
+                if (task.getResult().exists()){
+                    selectedCourses = task.getResult().getValue(takenCourses);
+                    selectedCoursesStats.setText("You have selected this many future courses: " + selectedCourses.size());
+                }
+                else{
+                    selectedCoursesStats.setText("You have selected this many future courses: 0");
+                }
+
                 selectedCoursesStats.setGravity(Gravity.CENTER);
             }
         });

@@ -28,12 +28,11 @@
         android:id="@+id/edit_course_edit_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:fontFamily="@font/inter_semibold"
-        android:text="@string/admin_edit_page_factos"
+        android:text="@string/admin_edit_page_factors"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_course_title" />
 
@@ -96,24 +95,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_course_edit_desc" />
 
-    <Switch
-        android:id="@+id/edit_summer_switch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:fontFamily="@font/montserrat_bold"
-        android:minHeight="48dp"
-        android:text="@string/admin_add_summer_switch"
-        android:textColor="@color/white"
-        android:theme="@style/Theme.MyTheme"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/course_switch_txt" />
 
     <Switch
         android:id="@+id/edit_winter_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/montserrat_bold"
         android:minHeight="48dp"
         android:text="@string/admin_add_winter_switch"
@@ -122,12 +110,12 @@
         app:layout_constraintStart_toEndOf="@id/edit_summer_switch"
         app:layout_constraintTop_toBottomOf="@+id/course_switch_txt" />
 
-
     <Switch
         android:id="@+id/edit_fall_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/montserrat_bold"
         android:minHeight="48dp"
         android:text="@string/admin_add_fall_switch"
@@ -136,11 +124,25 @@
         app:layout_constraintStart_toEndOf="@id/edit_winter_switch"
         app:layout_constraintTop_toBottomOf="@+id/course_switch_txt" />
 
+    <Switch
+        android:id="@+id/edit_summer_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:minHeight="48dp"
+        android:text="@string/admin_add_summer_switch"
+        android:textColor="@color/white"
+        android:theme="@style/Theme.MyTheme"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/course_switch_txt" />
+
     <SearchView
         android:id="@+id/edit_search_bar"
         android:layout_width="240dp"
         android:layout_height="46dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/input"
         android:iconifiedByDefault="false"
         android:queryHint="Edit Prerequisites"
@@ -187,10 +189,12 @@
         android:id="@+id/course_switch_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/admin_add_when_offered"
+        android:layout_marginTop="24dp"
         android:fontFamily="@font/inter_semibold"
+        android:text="@string/admin_add_when_offered"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.484"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_course_name_txt" />
     />

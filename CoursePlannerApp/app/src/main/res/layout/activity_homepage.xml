@@ -67,8 +67,8 @@
 
 	<Button
 		android:id="@+id/home_login_btn"
-		android:layout_width="161dp"
-		android:layout_height="55dp"
+		android:layout_width="149dp"
+		android:layout_height="49dp"
 		android:layout_marginTop="41dp"
 		android:width="150sp"
 		android:backgroundTint="#1C375B"
