@@ -41,7 +41,8 @@ public class LoginTabFragment extends Fragment {
         loginbtn = root.findViewById(R.id.login);
         Email = root.findViewById(R.id.username);
         Pass = root.findViewById(R.id.password);
-        presenter = new Presenter(getActivity(), new Model(presenter));
+
+        presenter = new Presenter(getActivity());
 
         loginbtn.setOnClickListener(new View.OnClickListener() {
             @Override

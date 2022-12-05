@@ -22,11 +22,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class Presenter {
-    Activity activity;
+    Activity view;
     Model model;
-    public Presenter(Activity activity, Model model){
-        this.activity = activity;
-        this.model = model;
+    public Presenter(Activity view){
+        this.view = view;
+        this.model = new Model(this);
     }
 
     public void Login(String email, String password){
@@ -35,7 +35,7 @@ public class Presenter {
     public void addUserSharedPref(String CurrentUser){
 
         SharedPreferences sp;
-        sp = activity.getSharedPreferences("save", Context.MODE_PRIVATE);
+        sp = view.getSharedPreferences("save", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.putString("UID",CurrentUser);
         editor.apply();
@@ -43,14 +43,14 @@ public class Presenter {
     }
     public void Success(boolean isStudent){
         if (isStudent){
-            activity.startActivity(new Intent(activity, StudentWelcomeActivity.class));
+            view.startActivity(new Intent(view, StudentWelcomeActivity.class));
         }
         else {
-            activity.startActivity(new Intent(activity, AdminWelcomeActivity.class));
+            view.startActivity(new Intent(view, AdminWelcomeActivity.class));
         }
     }
     public void Failure(Exception e){
-        Toast.makeText(activity, e.getMessage(), Toast.LENGTH_LONG).show();
+        Toast.makeText(view, e.getMessage(), Toast.LENGTH_LONG).show();
     }
     public boolean ButtonError(EditText editText, String text){
 
