@@ -4,41 +4,195 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EditCourseActivity">
+    tools:context=".EditCourseActivity"
+    android:background="@drawable/admin_edit_background"
+    >
 
-    <ImageView
-        android:id="@+id/editR_course_uoft_logo"
-        android:layout_width="300dp"
-        android:layout_height="270dp"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/windowBackground"
+        app:backgroundTint="@color/black"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/uoft_logo_black" />
+        app:menu="@menu/bottom_admin_nav">
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+
+    <TextView
+        android:id="@+id/edit_course_edit_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/inter_semibold"
+        android:text="@string/admin_edit_page_factos"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_course_title" />
+
+    <Button
+        android:id="@+id/confirm_edit_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="@color/white"
+        android:text="@string/confirm_edit"
+        android:textColor="@color/black"
+        app:cornerRadius="10dp"
+        android:fontFamily="@font/inter_medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.137"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_recycle_search" />
+
+    <Button
+        android:id="@+id/confirm_remove_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="40dp"
+        android:backgroundTint="@color/white"
+        android:text="@string/remove_course"
+        android:textColor="@color/black"
+        android:fontFamily="@font/inter_medium"
+        app:cornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_recycle_search" />
 
     <EditText
         android:id="@+id/edit_course_name_txt"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/input"
         android:ems="10"
+        android:gravity="center"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:text="Introduction to Computer Science"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editR_course_uoft_logo" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_course_code_txt" />
 
     <EditText
         android:id="@+id/edit_course_code_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/input"
         android:ems="10"
+        android:gravity="center"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:text="CSCA08"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.529"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_course_edit_desc" />
+
+    <Switch
+        android:id="@+id/edit_summer_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:minHeight="48dp"
+        android:text="@string/admin_add_summer_switch"
+        android:textColor="@color/white"
+        android:theme="@style/Theme.MyTheme"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/course_switch_txt" />
+
+    <Switch
+        android:id="@+id/edit_winter_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:minHeight="48dp"
+        android:text="@string/admin_add_winter_switch"
+        android:textColor="@color/white"
+        android:theme="@style/Theme.MyTheme"
+        app:layout_constraintStart_toEndOf="@id/edit_summer_switch"
+        app:layout_constraintTop_toBottomOf="@+id/course_switch_txt" />
+
+
+    <Switch
+        android:id="@+id/edit_fall_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:minHeight="48dp"
+        android:text="@string/admin_add_fall_switch"
+        android:textColor="@color/white"
+        android:theme="@style/Theme.MyTheme"
+        app:layout_constraintStart_toEndOf="@id/edit_winter_switch"
+        app:layout_constraintTop_toBottomOf="@+id/course_switch_txt" />
+
+    <SearchView
+        android:id="@+id/edit_search_bar"
+        android:layout_width="240dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/input"
+        android:iconifiedByDefault="false"
+        android:queryHint="Edit Prerequisites"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_winter_switch" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/edit_recycle_search"
+        android:layout_width="209dp"
+        android:layout_height="153dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_search_bar" />
+
+    <TextView
+        android:id="@+id/edit_course_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="104dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="@string/edit_course_e"
+        android:textColor="@color/white"
+        android:textSize="36dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="73dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/uoft" />
+
+    <TextView
+        android:id="@+id/course_switch_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/admin_add_when_offered"
+        android:fontFamily="@font/inter_semibold"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_course_name_txt" />
+    />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,8 +8,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -40,13 +42,20 @@ public class AdminEditCoursesActivity extends AppCompatActivity{
     Context context;
     private BottomNavigationView bottomAdminNav;
 
+//    private SharedPreferences sharedPreferences;
+//    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_edit_courses);
+
         context = this.getApplicationContext();
+
         bottomAdminNav = findViewById(R.id.bottom_navigation_view);
+
+//        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+//        editor = sharedPreferences.edit();
 
         bottomAdminNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -72,7 +81,7 @@ public class AdminEditCoursesActivity extends AppCompatActivity{
         window.setStatusBarColor(colorCodeDark);
 
         mDatabase = FirebaseDatabase.getInstance();
-        mReferenceCourses = mDatabase.getReference("CoursesTestVedat");
+        mReferenceCourses = mDatabase.getReference("Courses");
 
         RecyclerView recyclerView = findViewById(R.id.adminEditRecyclerView);
         AdminEditCoursesAdapterRecyclerView adapter = new AdminEditCoursesAdapterRecyclerView(this, editableCourses);
@@ -84,7 +93,10 @@ public class AdminEditCoursesActivity extends AppCompatActivity{
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                 if(position != RecyclerView.NO_POSITION){
-                    openEditPage();
+
+                    Intent intent = new Intent(context, EditCourseActivity.class);
+                    intent.putExtra("courseCode", editableCourses.get(position).code);
+                    startActivity(intent);
                 }
             }
         });
@@ -134,9 +146,9 @@ public class AdminEditCoursesActivity extends AppCompatActivity{
         startActivity(intent);
     }
 
-    public void openEditPage(){
-        Intent intent = new Intent(this, EditCourseActivity.class);
-        startActivity(intent);
-    }
+//    public void openEditPage(){
+//        Intent intent = new Intent(this, EditCourseActivity.class);
+//        startActivity(intent);
+//    }
 
 }
