@@ -22,47 +22,46 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class Presenter {
-    Activity view;
+    LoginTabFragment view;
     Model model;
-    public Presenter(Activity view){
+    public Presenter(LoginTabFragment view){
         this.view = view;
         this.model = new Model(this);
     }
 
-    public void Login(String email, String password){
-        model.Login(email,password);
+    public void Login() {
+        String email = view.getEmail();
+        if(email == null || email.equals("")) {
+            view.Email.setError("This field cannot be empty."); // this error message will be shown.
+            return;
+        }
+        String pass = view.getPass();
+        if(pass == null || pass.equals("")) {
+            view.Pass.setError("This field cannot be empty."); // this error message will be shown.
+            return;
+        }
+        model.Login(email, pass);
     }
+
     public void addUserSharedPref(String CurrentUser){
 
         SharedPreferences sp;
-        sp = view.getSharedPreferences("save", Context.MODE_PRIVATE);
+        sp = view.getActivity().getSharedPreferences("save", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.putString("UID",CurrentUser);
         editor.apply();
-
     }
+
     public void Success(boolean isStudent){
         if (isStudent){
-            view.startActivity(new Intent(view, StudentWelcomeActivity.class));
+            view.getActivity().startActivity(new Intent(view.getActivity(), StudentWelcomeActivity.class));
         }
         else {
-            view.startActivity(new Intent(view, AdminWelcomeActivity.class));
+            view.getActivity().startActivity(new Intent(view.getActivity(), AdminWelcomeActivity.class));
         }
     }
     public void Failure(Exception e){
-        Toast.makeText(view, e.getMessage(), Toast.LENGTH_LONG).show();
+        Toast.makeText(view.getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
     }
-    public boolean ButtonError(EditText editText, String text){
-
-        if(text.isEmpty()){ // condition if full name field is empty,
-            editText.setError("This field cannot be empty."); // this error message will be shown.
-            return true;
-        }
-        return false;
-    }
-
-
-
-
 }
 

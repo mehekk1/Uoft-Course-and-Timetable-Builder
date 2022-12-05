@@ -42,28 +42,22 @@ public class LoginTabFragment extends Fragment {
         Email = root.findViewById(R.id.username);
         Pass = root.findViewById(R.id.password);
 
-        presenter = new Presenter(getActivity());
+        presenter = new Presenter(this);
 
         loginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                validateInfo();
+                presenter.Login();
             }
         });
         return root;
     }
 
-    public void validateInfo(){
+    public String getEmail() {
+        return Email.getText().toString();
+    }
 
-        email = Email.getText().toString();
-        pass = Pass.getText().toString();
-
-        if(presenter.ButtonError(Email, email)){ // condition if full name field is empty,
-            return;
-        }
-        if(presenter.ButtonError(Pass, pass)){ // condition if full name field is empty,
-            return;
-        }
-        presenter.Login(email, pass);
+    public String getPass() {
+        return Pass.getText().toString();
     }
 }
