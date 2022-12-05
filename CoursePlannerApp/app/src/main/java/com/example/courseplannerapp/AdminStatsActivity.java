@@ -66,9 +66,15 @@ public class AdminStatsActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 GenericTypeIndicator<HashMap<String, Object>> userCourses = new GenericTypeIndicator<HashMap<String, Object>>() {};
-                allCoursesDatabase = task.getResult().getValue(userCourses);
 
-                allCourses.setText("" + allCoursesDatabase.size());
+                if (task.getResult().exists()){
+                    allCoursesDatabase = task.getResult().getValue(userCourses);
+                    allCourses.setText("" + allCoursesDatabase.size());
+                }
+                else{
+                    allCourses.setText("0");
+                }
+
                 allCourses.setGravity(Gravity.CENTER);
             }
         });
