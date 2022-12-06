@@ -50,6 +50,7 @@ public class ExampleUnitTest {
 
     @Test
     public void shouldShowPasswordErrorMessageIfEmpty() throws Exception {
+        when(view.getEmail()).thenReturn("student@gmail.com");
         when(view.getPass()).thenReturn("");
         presenter.Login();
 
@@ -57,16 +58,26 @@ public class ExampleUnitTest {
     }
 
     @Test
-    public void testPresenter() {
+    public void invalidLogin() {
+        //View when then's
+
+    }
+
+    @Test
+    public void testStudentLogin() {
         //View when then's
         when(view.getEmail()).thenReturn("student@gmail.com");
         when(view.getPass()).thenReturn("password");
 
-        verify(view).loginSuccess(true);
+        verify(view).startStudentActivity();
     }
 
-//    @Test
-//    public void addition_isCorrect() {
-//        assertEquals(4, 2 + 2);
-//    }
+    @Test
+    public void testAdminLogin() {
+        //View when then's
+        when(view.getEmail()).thenReturn("admin@gmail.com");
+        when(view.getPass()).thenReturn("password");
+
+        verify(view).startStudentActivity();
+    }
 }

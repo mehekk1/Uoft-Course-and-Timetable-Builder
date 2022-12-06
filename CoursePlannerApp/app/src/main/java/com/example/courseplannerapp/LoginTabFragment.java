@@ -29,8 +29,8 @@ public class LoginTabFragment extends Fragment {
 
     Button loginbtn;
     EditText Email, Pass;
-    String email, pass;
     Presenter presenter;
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -71,12 +71,11 @@ public class LoginTabFragment extends Fragment {
         return;
     }
 
-    public void loginSuccess(boolean isStudent) {
-        if (isStudent){
-            startActivity(new Intent(getActivity(), StudentWelcomeActivity.class));
-        }
-        else {
-            startActivity(new Intent(getActivity(), AdminWelcomeActivity.class));
-        }
+    public void startStudentActivity() {
+        startActivity(new Intent(getActivity(), StudentWelcomeActivity.class));
+    }
+
+    public void startAdminActivity() {
+        startActivity(new Intent(getActivity(), AdminWelcomeActivity.class));
     }
 }

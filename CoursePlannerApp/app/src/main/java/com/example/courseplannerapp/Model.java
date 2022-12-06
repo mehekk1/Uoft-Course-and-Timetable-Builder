@@ -59,9 +59,6 @@ public class Model {
                         presenter.Failure(e);
                     }
                 });
-
         return true;
     }
-
-
 }

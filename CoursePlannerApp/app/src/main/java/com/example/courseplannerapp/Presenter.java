@@ -33,10 +33,12 @@ public class Presenter {
         String email = view.getEmail();
         if(email == null || email.equals("")) {
             view.usernameError();
+            return;
         }
         String pass = view.getPass();
         if(pass == null || pass.equals("")) {
             view.passwordError();
+            return;
         }
         model.Login(email, pass);
     }
@@ -49,7 +51,12 @@ public class Presenter {
         editor.putString("UID",CurrentUser);
         editor.apply();
 
-        view.loginSuccess(isStudent);
+        if(isStudent) {
+            view.startStudentActivity();
+        }
+        else {
+            view.startAdminActivity();
+        }
     }
 
     public void Failure(Exception e){
