@@ -42,7 +42,18 @@ public class ExampleUnitTest {
 
     @Test
     public void shouldShowUsernameErrorMessageIfEmpty() throws Exception {
+        when(view.getEmail()).thenReturn("");
+        presenter.Login();
 
+        verify(view).usernameError();
+    }
+
+    @Test
+    public void shouldShowPasswordErrorMessageIfEmpty() throws Exception {
+        when(view.getPass()).thenReturn("");
+        presenter.Login();
+
+        verify(view).passwordError();
     }
 
     @Test
