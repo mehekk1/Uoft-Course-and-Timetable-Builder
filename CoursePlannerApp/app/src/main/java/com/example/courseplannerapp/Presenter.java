@@ -32,34 +32,26 @@ public class Presenter {
     public void Login() {
         String email = view.getEmail();
         if(email == null || email.equals("")) {
-            view.Email.setError("This field cannot be empty."); // this error message will be shown.
-            return;
+            view.usernameError();
         }
         String pass = view.getPass();
         if(pass == null || pass.equals("")) {
-            view.Pass.setError("This field cannot be empty."); // this error message will be shown.
-            return;
+            view.passwordError();
         }
         model.Login(email, pass);
     }
 
-    public void addUserSharedPref(String CurrentUser){
+    public void Success(String CurrentUser, boolean isStudent){
 
         SharedPreferences sp;
         sp = view.getActivity().getSharedPreferences("save", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.putString("UID",CurrentUser);
         editor.apply();
+
+        view.loginSuccess(isStudent);
     }
 
-    public void Success(boolean isStudent){
-        if (isStudent){
-            view.getActivity().startActivity(new Intent(view.getActivity(), StudentWelcomeActivity.class));
-        }
-        else {
-            view.getActivity().startActivity(new Intent(view.getActivity(), AdminWelcomeActivity.class));
-        }
-    }
     public void Failure(Exception e){
         Toast.makeText(view.getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
     }

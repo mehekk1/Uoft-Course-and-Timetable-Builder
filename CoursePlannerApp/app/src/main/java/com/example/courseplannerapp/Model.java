@@ -24,16 +24,18 @@ public class Model {
     FirebaseAuth fAuth;
     FirebaseDatabase database;
     DatabaseReference mDatabase;
+    String currentUser;
 
     public Model(Presenter presenter){
         this.presenter = presenter;
     }
 
-    public void Login(String email, String pass) {
+    public boolean Login(String email, String pass) {
 
         database = FirebaseDatabase.getInstance();
         mDatabase = database.getReference("Users");
         fAuth = FirebaseAuth.getInstance();
+
 
 
         fAuth.signInWithEmailAndPassword(email, pass)
@@ -41,14 +43,13 @@ public class Model {
 
                     @Override
                     public void onSuccess(AuthResult authResult) {
-                        String CurrentUser = fAuth.getInstance().getCurrentUser().getUid();
+                        currentUser = fAuth.getInstance().getCurrentUser().getUid();
 
-                        mDatabase.child(CurrentUser).child("student").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                        mDatabase.child(currentUser).child("student").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DataSnapshot> task) {
-                                presenter.addUserSharedPref(CurrentUser);
                                 boolean isStudent = task.getResult().getValue(Boolean.class);
-                                presenter.Success(isStudent);
+                                presenter.Success(currentUser, isStudent);
                             }
                         });
                     }
@@ -58,6 +59,8 @@ public class Model {
                         presenter.Failure(e);
                     }
                 });
+
+        return true;
     }
 
 

@@ -1,13 +1,23 @@
 package com.example.courseplannerapp;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Spy;
+import org.mockito.invocation.InvocationOnMock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.stubbing.Answer;
 
 import static org.junit.Assert.*;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.doCallRealMethod;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import java.util.Arrays;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -18,10 +28,22 @@ import static org.mockito.Mockito.when;
 public class ExampleUnitTest {
 
     @Mock
-    LoginTabFragment view;
+    Model model;
 
     @Mock
-    Model model;
+    LoginTabFragment view;
+
+    Presenter presenter;
+
+    @Before
+    public void setUp() throws Exception {
+        presenter = new Presenter(view);
+    }
+
+    @Test
+    public void shouldShowUsernameErrorMessageIfEmpty() throws Exception {
+
+    }
 
     @Test
     public void testPresenter() {
@@ -29,12 +51,7 @@ public class ExampleUnitTest {
         when(view.getEmail()).thenReturn("student@gmail.com");
         when(view.getPass()).thenReturn("password");
 
-        Presenter presenter = new Presenter(view);
-
-        //Model when then's
-        doCallRealMethod().when(model).Login("student@gmail.com", "password");
-
-        
+        verify(view).loginSuccess(true);
     }
 
 //    @Test

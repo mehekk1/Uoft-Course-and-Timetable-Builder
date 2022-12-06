@@ -60,4 +60,23 @@ public class LoginTabFragment extends Fragment {
     public String getPass() {
         return Pass.getText().toString();
     }
+
+    public void usernameError() {
+        Email.setError("This field cannot be empty."); // this error message will be shown.
+        return;
+    }
+
+    public void passwordError() {
+        Pass.setError("This field cannot be empty."); // this error message will be shown.
+        return;
+    }
+
+    public void loginSuccess(boolean isStudent) {
+        if (isStudent){
+            startActivity(new Intent(getActivity(), StudentWelcomeActivity.class));
+        }
+        else {
+            startActivity(new Intent(getActivity(), AdminWelcomeActivity.class));
+        }
+    }
 }
