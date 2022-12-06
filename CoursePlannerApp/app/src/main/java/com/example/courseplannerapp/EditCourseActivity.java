@@ -189,67 +189,71 @@ public class EditCourseActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(!(swichWinter.isChecked() || switchFall.isChecked() || switchSummer.isChecked())){
-                    Toast.makeText(context, "Must have atleast one offering", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Must have at least one offering", Toast.LENGTH_SHORT).show();
                 }
-                String newCourseName = courseEditName.getText().toString();
-                String newCourseCode = courseEditCode.getText().toString();
+                else {
+                    String newCourseName = courseEditName.getText().toString();
+                    String newCourseCode = courseEditCode.getText().toString();
 
-                if(incomingCourseCode.equals(newCourseCode)){
-
-                    mReferenceCourses.child(incomingCourseCode).child("name").setValue(newCourseName);
-
-                    ArrayList<Boolean> offerings = new ArrayList<>();
-                    offerings.add(swichWinter.isChecked());
-                    offerings.add(switchSummer.isChecked());
-                    offerings.add(switchFall.isChecked());
-                    mReferenceCourses.child(incomingCourseCode).child("offerings").setValue(offerings);
-
-                    ArrayList<String> preReqs = new ArrayList<>();
-                    int i = 0;
-                    while(courseSearchItems.get(i).getSelected()){
-                        preReqs.add(courseSearchItems.get(i).getCode());
-                        i++;
+                    if(newCourseCode.isEmpty() || newCourseName.isEmpty()) {
+                        Toast.makeText(context, "Must fill out all fields", Toast.LENGTH_SHORT).show();
                     }
-                    mReferenceCourses.child(incomingCourseCode).child("prereqs").setValue(preReqs);
-                    openAdminEditPage();
+                    else {
+                        if(incomingCourseCode.equals(newCourseCode)){
 
-                }
-                else{
-                    if(courses.keySet().contains(newCourseCode)){
-                        Toast.makeText(context, "Course code name already exists", Toast.LENGTH_SHORT).show();
-                    }
-                    else{
-                        Course newCourse = new Course();
-                        newCourse.setName(courseEditName.getText().toString());
-                        newCourse.setCode(newCourseCode);
+                            mReferenceCourses.child(incomingCourseCode).child("name").setValue(newCourseName);
 
-                        ArrayList<Boolean> offerings = new ArrayList<>();
-                        offerings.add(swichWinter.isChecked());
-                        offerings.add(switchSummer.isChecked());
-                        offerings.add(switchFall.isChecked());
-                        newCourse.setOfferings(offerings);
+                            ArrayList<Boolean> offerings = new ArrayList<>();
+                            offerings.add(swichWinter.isChecked());
+                            offerings.add(switchSummer.isChecked());
+                            offerings.add(switchFall.isChecked());
+                            mReferenceCourses.child(incomingCourseCode).child("offerings").setValue(offerings);
 
-                        ArrayList<String> preReqs = new ArrayList<>();
-                        int i = 0;
-                        while(courseSearchItems.get(i).getSelected()){
-                            preReqs.add(courseSearchItems.get(i).getCode());
-                            i++;
+                            ArrayList<String> preReqs = new ArrayList<>();
+                            int i = 0;
+                            while(courseSearchItems.get(i).getSelected()){
+                                preReqs.add(courseSearchItems.get(i).getCode());
+                                i++;
+                            }
+                            mReferenceCourses.child(incomingCourseCode).child("prereqs").setValue(preReqs);
+                            openAdminEditPage();
                         }
-                        newCourse.setPrereqs(preReqs);
+                        else{
+                            if(courses.keySet().contains(newCourseCode)){
+                                Toast.makeText(context, "Course code name already exists", Toast.LENGTH_SHORT).show();
+                            }
+                            else{
+                                Course newCourse = new Course();
+                                newCourse.setName(courseEditName.getText().toString());
+                                newCourse.setCode(newCourseCode);
 
-                        mReferenceCourses.child(newCourse.getCode()).setValue(newCourse);
-                        mReferenceCourses.child(incomingCourseCode).removeValue();
+                                ArrayList<Boolean> offerings = new ArrayList<>();
+                                offerings.add(swichWinter.isChecked());
+                                offerings.add(switchSummer.isChecked());
+                                offerings.add(switchFall.isChecked());
+                                newCourse.setOfferings(offerings);
 
-                        for(Map.Entry<String, Course> entry : courses.entrySet()){
-                            if(entry.getValue().getPrereqs() != null && entry.getValue().getPrereqs().contains(incomingCourseCode)){
-                                editCoursePreReq(entry.getKey(), incomingCourseCode, newCourseCode);
+                                ArrayList<String> preReqs = new ArrayList<>();
+                                int i = 0;
+                                while(courseSearchItems.get(i).getSelected()){
+                                    preReqs.add(courseSearchItems.get(i).getCode());
+                                    i++;
+                                }
+                                newCourse.setPrereqs(preReqs);
+
+                                mReferenceCourses.child(newCourse.getCode()).setValue(newCourse);
+                                mReferenceCourses.child(incomingCourseCode).removeValue();
+
+                                for(Map.Entry<String, Course> entry : courses.entrySet()){
+                                    if(entry.getValue().getPrereqs() != null && entry.getValue().getPrereqs().contains(incomingCourseCode)){
+                                        editCoursePreReq(entry.getKey(), incomingCourseCode, newCourseCode);
+                                    }
+                                }
+                                openAdminEditPage();
                             }
                         }
-
-
                     }
                 }
-
             }
         });
 

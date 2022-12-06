@@ -18,6 +18,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+
 public class Model {
 
     Presenter presenter;
@@ -25,17 +27,17 @@ public class Model {
     FirebaseDatabase database;
     DatabaseReference mDatabase;
     String currentUser;
+    boolean isStudent;
 
     public Model(Presenter presenter){
         this.presenter = presenter;
     }
 
-    public boolean Login(String email, String pass) {
+    public void Login(String email, String pass) {
 
         database = FirebaseDatabase.getInstance();
         mDatabase = database.getReference("Users");
         fAuth = FirebaseAuth.getInstance();
-
 
 
         fAuth.signInWithEmailAndPassword(email, pass)
@@ -48,7 +50,7 @@ public class Model {
                         mDatabase.child(currentUser).child("student").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DataSnapshot> task) {
-                                boolean isStudent = task.getResult().getValue(Boolean.class);
+                                isStudent = task.getResult().getValue(Boolean.class);
                                 presenter.Success(currentUser, isStudent);
                             }
                         });
@@ -59,6 +61,5 @@ public class Model {
                         presenter.Failure(e);
                     }
                 });
-        return true;
     }
 }

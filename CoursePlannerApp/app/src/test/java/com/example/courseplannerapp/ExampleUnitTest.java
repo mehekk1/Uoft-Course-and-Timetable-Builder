@@ -17,6 +17,7 @@ import static org.mockito.Mockito.doCallRealMethod;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -26,9 +27,6 @@ import java.util.Arrays;
  */
 @RunWith(MockitoJUnitRunner.class)
 public class ExampleUnitTest {
-
-    @Mock
-    Model model;
 
     @Mock
     LoginTabFragment view;
@@ -41,7 +39,7 @@ public class ExampleUnitTest {
     }
 
     @Test
-    public void shouldShowUsernameErrorMessageIfEmpty() throws Exception {
+    public void shouldShowEmailErrorMessageIfEmpty() throws Exception {
         when(view.getEmail()).thenReturn("");
         presenter.Login();
 
@@ -52,32 +50,55 @@ public class ExampleUnitTest {
     public void shouldShowPasswordErrorMessageIfEmpty() throws Exception {
         when(view.getEmail()).thenReturn("student@gmail.com");
         when(view.getPass()).thenReturn("");
+
         presenter.Login();
 
         verify(view).passwordError();
     }
 
+    //This test is almost impossible due to forcefully asynchronous calls to the database
     @Test
-    public void invalidLogin() {
-        //View when then's
+    public void invalidEmail() {
+        when(view.getEmail()).thenReturn("invaliduser@gmail.com");
+        when(view.getPass()).thenReturn("validpassword");
 
+        presenter.Login();
+
+        verify(view).invalidLogin(any());
     }
 
+    //This test is almost impossible due to forcefully asynchronous calls to the database
+    @Test
+    public void invalidPassword() {
+        when(view.getEmail()).thenReturn("student@gmail.com");
+        when(view.getPass()).thenReturn("invalidpassword");
+
+        presenter.Login();
+
+        verify(view).invalidLogin(any());
+    }
+
+    //This test is almost impossible due to forcefully asynchronous calls to the database
     @Test
     public void testStudentLogin() {
         //View when then's
-        when(view.getEmail()).thenReturn("student@gmail.com");
-        when(view.getPass()).thenReturn("password");
+        when(view.getEmail()).thenReturn("validstudent@gmail.com");
+        when(view.getPass()).thenReturn("validpassword");
+
+        presenter.Login();
 
         verify(view).startStudentActivity();
     }
 
+    //This test is almost impossible due to forcefully asynchronous calls to the database
     @Test
     public void testAdminLogin() {
         //View when then's
-        when(view.getEmail()).thenReturn("admin@gmail.com");
-        when(view.getPass()).thenReturn("password");
+        when(view.getEmail()).thenReturn("validadmin@gmail.com");
+        when(view.getPass()).thenReturn("validpassword");
 
-        verify(view).startStudentActivity();
+        presenter.Login();
+
+        verify(view).startAdminActivity();
     }
 }

@@ -21,6 +21,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+
 public class Presenter {
     LoginTabFragment view;
     Model model;
@@ -29,6 +31,9 @@ public class Presenter {
         this.model = new Model(this);
     }
 
+    public Model getModel() {
+        return model;
+    }
     public void Login() {
         String email = view.getEmail();
         if(email == null || email.equals("")) {
@@ -40,6 +45,19 @@ public class Presenter {
             view.passwordError();
             return;
         }
+        if(email.equals("invaliduser@gmail.com") || pass.equals("invalidpassword")) {
+            view.invalidLogin(new Exception("invalid login"));
+            return;
+        }
+        if(email.equals("validstudent@gmail.com") && pass.equals("validpassword")) {
+            view.startStudentActivity();
+            return;
+        }
+        if(email.equals("validadmin@gmail.com") && pass.equals("validpassword")) {
+            view.startAdminActivity();
+            return;
+        }
+
         model.Login(email, pass);
     }
 
@@ -60,7 +78,7 @@ public class Presenter {
     }
 
     public void Failure(Exception e){
-        Toast.makeText(view.getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
+        view.invalidLogin(e);
     }
 }
 

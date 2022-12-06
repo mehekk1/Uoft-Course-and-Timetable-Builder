@@ -7,17 +7,22 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class EditDialog extends AppCompatDialogFragment {
@@ -27,6 +32,7 @@ public class EditDialog extends AppCompatDialogFragment {
     Context context;
     FirebaseDatabase mDatabase;
     DatabaseReference mReferenceCourses;
+    DatabaseReference mStudentRef;
 
     public EditDialog(HashMap<String, Course> courses, String incomingCourseCode, Context context){
         this.courses = courses;
@@ -34,6 +40,7 @@ public class EditDialog extends AppCompatDialogFragment {
         this.context = context;
         mDatabase = FirebaseDatabase.getInstance();
         mReferenceCourses = mDatabase.getReference("Courses");
+        mStudentRef = mDatabase.getReference("Users");
     }
 
 
@@ -49,6 +56,7 @@ public class EditDialog extends AppCompatDialogFragment {
                             if(entry.getValue().getPrereqs() != null && entry.getValue().getPrereqs().contains(incomingCourseCode)){
                                 removeCourse(entry.getKey(), incomingCourseCode);
                             }
+                            removeUserCourse(incomingCourseCode);
                         }
                         mReferenceCourses.child(incomingCourseCode).removeValue();
                         openAdminEditPage();
@@ -88,7 +96,49 @@ public class EditDialog extends AppCompatDialogFragment {
 
             }
         });
+    }
 
+    public void removeUserCourse(String deleteCourse) {
+        mStudentRef.orderByKey().addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                GenericTypeIndicator<HashMap<String, Object>> userCourses = new GenericTypeIndicator<HashMap<String, Object>>() {};
+                HashMap<String, Object> userMap = snapshot.getValue(userCourses);
+
+                List<String> coursesTaken = (List<String>) (userMap.get("taken_list"));
+                if(coursesTaken != null && coursesTaken.contains(deleteCourse)){
+                    coursesTaken.remove(deleteCourse);
+                    mStudentRef.child(snapshot.getKey()).child("taken_list").setValue(coursesTaken);
+                }
+
+                List<String> selectedCourses = (List<String>) (userMap.get("coursesSelected"));
+                if(selectedCourses != null && selectedCourses.contains(deleteCourse)){
+                    selectedCourses.remove(deleteCourse);
+                    mStudentRef.child(snapshot.getKey()).child("coursesSelected").setValue(selectedCourses);
+                }
+
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     public void openAdminEditPage(){

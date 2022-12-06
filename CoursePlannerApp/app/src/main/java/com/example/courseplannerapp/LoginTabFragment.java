@@ -71,6 +71,18 @@ public class LoginTabFragment extends Fragment {
         return;
     }
 
+    public void invalidLogin(Exception e) {
+        Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
+    }
+
+    public void invalidEmail() {
+        invalidLogin(new Exception("Invalid Email"));
+    }
+
+    public void invalidPassword() {
+        invalidLogin(new Exception("Invalid Password"));
+    }
+
     public void startStudentActivity() {
         startActivity(new Intent(getActivity(), StudentWelcomeActivity.class));
     }
