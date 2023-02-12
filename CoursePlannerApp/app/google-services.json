@@ -1,13 +1,14 @@
 {
   "project_info": {
     "project_number": "432413900157",
+    "firebase_url": "https://b07-course-planner-default-rtdb.firebaseio.com",
     "project_id": "b07-course-planner",
     "storage_bucket": "b07-course-planner.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:432413900157:android:83e7bd809c5ab480992014",
+        "mobilesdk_app_id": "1:432413900157:android:e34646a7586e4ba3992014",
         "android_client_info": {
           "package_name": "com.example.courseplannerapp"
         }
