@@ -15,3 +15,6 @@ UofT administrators have the capability to create courses and include necessary 
 ```
 git clone https://github.com/AshwinM1523/Uoft-Course-and-Timetable-Builder.git
 ```
+
+## Preview
+![utsc_course_planner](https://github.com/AshwinM1523/Uoft-Course-and-Timetable-Builder/assets/77364512/3d3e0930-9d0c-4489-864f-bf27485aec4e)
